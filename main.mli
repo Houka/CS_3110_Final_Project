@@ -7,10 +7,10 @@
  *)
 
 (* Returns true if the last user input was a keypress *)
-val get_keypressed : unit -> bool
+val getKeypressed : unit -> bool
 
 (* Returns the char representing the key of the last user keypress *)
-val get_key : unit -> char
+val getKey : unit -> char
 
 
 
