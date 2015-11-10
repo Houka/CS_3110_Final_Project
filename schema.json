@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/",
+  "type": "object",
+  "properties": {
+    "units": {
+      "id": "units",
+      "type": "object",
+      "properties": {
+        "enemy": {
+          "id": "enemy",
+          "type": "array",
+          "items": {
+            "id": "0",
+            "type": "object",
+            "properties": {
+              "name": {
+                "id": "name",
+                "type": "string"
+              },
+              "hp": {
+                "id": "hp",
+                "type": "integer"
+              },
+              "attack": {
+                "id": "attack",
+                "type": "integer"
+              },
+              "defense": {
+                "id": "defense",
+                "type": "integer"
+              },
+              "move": {
+                "id": "move",
+                "type": "integer"
+              },
+              "range": {
+                "id": "range",
+                "type": "integer"
+              },
+              "weapon": {
+                "id": "weapon",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "hp",
+              "attack",
+              "defense",
+              "move",
+              "range",
+              "weapon",
+              "x",
+              "y",
+              "attack_bonus",
+              "def_bonus"
+            ]
+          },
+          "required": [
+            "0"
+          ]
+        },
+        "ally": {
+          "id": "ally",
+          "type": "array",
+          "items": {
+            "id": "0",
+            "type": "object",
+            "properties": {
+              "name": {
+                "id": "name",
+                "type": "string"
+              },
+              "hp": {
+                "id": "hp",
+                "type": "string"
+              },
+              "attack": {
+                "id": "attack",
+                "type": "string"
+              },
+              "defense": {
+                "id": "defense",
+                "type": "string"
+              },
+              "move": {
+                "id": "move",
+                "type": "string"
+              },
+              "range": {
+                "id": "range",
+                "type": "string"
+              },
+              "weapon": {
+                "id": "weapon",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "enemy",
+        "ally"
+      ]
+    },
+    "terrain": {
+      "id": "terrain",
+      "type": "array",
+      "items": {
+        "id": "0",
+        "type": "object",
+        "properties": {
+          "name": {
+            "id": "name",
+            "type": "string"
+          },
+          "x": {
+            "id": "x",
+            "type": "integer"
+          },
+          "y": {
+            "id": "y",
+            "type": "integer"
+          },
+          "attack_bonus": {
+            "id": "attack_bonus",
+            "type": "integer"
+          },
+          "def_bonus": {
+            "id": "def_bonus",
+            "type": "integer"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "units",
+    "terrain"
+  ]
+}
