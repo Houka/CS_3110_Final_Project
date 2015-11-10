@@ -1,3 +1,5 @@
+(* testing separation of modules *)
+
 open Graphics
 
 let draw () =
