@@ -2,6 +2,12 @@ open Graphics
 
 (* GUI using Graphics *)
 
+(* GUI variables *)
+let width = 550
+let height = 400
+let scale = 2
+let title = "OCaml Fire Emblem"
+
 (* Variables that store info *)
 let key_status = ref (false, ' ')
 
@@ -32,8 +38,8 @@ let rec update () =
 let main () =
   (* init gui window *)
   open_graph "";
-  resize_window 640 320;
-  set_window_title "OCaml Fire Emblem";
+  resize_window (width*scale) (height*scale);
+  set_window_title title;
 
   (* enter main game loop *)
   update ()
