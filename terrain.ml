@@ -1,22 +1,10 @@
-open Sprite
-
-(*
- * The Terrain Module.
- *   - Gets terrain data from JsonParser and converts it into an easier to work
- *      with interface by storing the data in abstract data structures.
- *)
-
-(* Contains all the stats a terrain has/needs. Info from JSON. *)
-type stats = {name:string; atkBonus:int; defBonus:int; img: image;
+type stats = {name:string; atkBonus:int; defBonus:int; img: Images.t;
               x: int; y: int}
-(* Type of the terrain tells which units can travel through it.*)
-type terrain = Null | Sea of init_stats | Plain of init_stats
-              | Mountain of init_stats | City of init_stats
-              | Forest of init_stats
 
+type terrain = Null | Sea of stats | Plain of stats
+              | Mountain of stats | City of stats
+              | Forest of stats
 
-(* [getTerrain name (x,y)] returns an arbitrary terrain that is of the name [name]
- *  Also sets the terrain pos ([x],[y])
- *  (i.e. getUnit "archer" will get an archer, whose stats are found in the JSON)
- *)
-val getTerrain : string -> (int*int) -> terrain
+let get_terrain (classnum:int) (name: string) (x,y) : terrain = failwith "TODO"
+
+let move_terrain (terrain: terrain) (x,y) : terrain = failwith "TODO"

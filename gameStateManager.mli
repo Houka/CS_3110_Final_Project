@@ -1,4 +1,5 @@
 open Feunit
+open Terrain
 
 (*
  * The GameStateManager Module.
@@ -12,11 +13,17 @@ open Feunit
  *   - Keeps track of turn
  *)
 
-(* Returns the list of all current units on current level *)
-val get_units : unit -> feunit list
+(* Returns a pointer to the list of all current units on current level *)
+val get_units : unit -> feunit list ref
 
-(* Returns the name of the current state of the game (i.e. returns "menu") *)
+(* Returns a pointer to the list of all terrains on current level *)
+val get_terrains : unit -> terrain list ref
+
+(* geter and setter for
+ * the name of the current state of the game (i.e. returns "menu")
+*)
 val get_current_state : unit -> string
+val set_current_state : string -> unit
 
 (* The main update loop for this class.
  *  This will handle all the management logic and delegate when something needs

@@ -7,10 +7,10 @@
 (* The types of actions a unit can be instructed to do. *)
 type action = Stay | Move | Attack
 (* Contains all the stats a typical unit has/needs. Info from JSON. *)
-type stats = {name:string; maxHp:int; actions: action list; atkPoints:int;
-                    defPoint:int; atkRange:int; movRange:int; img: Images.t;
-                    hp:int; atkBonus:int; defBonus:int; atkRangeBonus:int;
-                    movRangeBonus:int; x:int; y:int}
+type stats = { name: string; maxHp: int; actions: action list;
+              atkPoints: int; defPoint: int; atkRange: int; movRange: int;
+              hp: int; atkBonus: int; defBonus: int; atkRangeBonus: int;
+              movRangeBonus: int; x: int; y: int; img: Images.t }
 (* Represents a fire emblem unit *)
 type feunit = Null | Ally of stats | Enemy of stats
 
@@ -18,7 +18,7 @@ type feunit = Null | Ally of stats | Enemy of stats
  *  and sets its init_stats.name to [name]. Unit begin at pos ([x],[y])
  *  (i.e. getUnit "archer" will get an archer, whose stats are found in the JSON)
  *)
-val get_unit : string -> string -> (int*int) -> feunit
+val get_unit : int -> string -> (int*int) -> feunit
 
 (* [moveUnit unit (x, y)] gives you an updated feunit where their x and y pos are
  *  now [x] and [y]

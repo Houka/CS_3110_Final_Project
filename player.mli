@@ -8,15 +8,14 @@ open Terrain
  *)
 
 (* The properties of a player's cursor *)
-type cursor = {mutable x: float; mutable y: float; mutable color: string}
+type cursor = {x: int; y: int; color: int}
 
 (* Draws to the GUI the player's own cursor *)
 val draw : unit -> unit
 
 (* Returns a new game state by moving a unit *)
-val update : unit -> (feunit list, terrain list)
+val update : feunit list ref -> terrain list ref -> unit
 
-(* finds player units to move*)
-val find_player_units: feunit list -> feunit list
-
+(* gets the cursor *)
+val get_cursor : unit -> cursor
 

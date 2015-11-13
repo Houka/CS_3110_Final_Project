@@ -3,14 +3,14 @@ open Graphics
 (* GUI using Graphics *)
 
 (* Variables that store info *)
-let key_status = (ref false, ref '')
+let key_status = ref (false, ' ')
 
 let update_key_status status =
-  key_status := (ref status.keypressed, ref status.key)
+  key_status := (status.keypressed, status.key)
 
 (* Getter functions *)
-let get_keypressed () = !(fst key_status)
-let get_key () = !(snd key_status)
+let get_keypressed () = fst (!key_status)
+let get_key () = snd(!key_status)
 
 (* Main Game loop that updates all subsequent components *)
 let rec update () =
@@ -24,7 +24,8 @@ let rec update () =
 
           (* game and keyboard input updates *)
           update_key_status input;
-          Game.update x;
+          GameStateManager.update ();
+          GameStateManager.draw ();
           update ()
 
 (* Initializes the GUI and goes into main game loop *)

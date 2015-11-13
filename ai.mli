@@ -10,7 +10,4 @@ open Terrain
  *)
 
 (* Returns a new game state by moving a unit *)
-val update : unit -> (feunit list, terrain list)
-
-(* finds enemy units to move*)
-val find_enemy_units: feunit list -> feunit list
+val update : feunit list ref -> terrain list ref -> unit
