@@ -13,10 +13,10 @@ open Feunit
  *)
 
 (* Returns the list of all current units on current level *)
-val getUnits : unit -> feunit list
+val get_units : unit -> feunit list
 
 (* Returns the name of the current state of the game (i.e. returns "menu") *)
-val getCurrentState : unit -> string
+val get_current_state : unit -> string
 
 (* The main update loop for this class.
  *  This will handle all the management logic and delegate when something needs

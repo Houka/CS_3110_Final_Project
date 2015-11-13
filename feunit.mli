@@ -18,23 +18,23 @@ type feunit = Null | Ally of stats | Enemy of stats
  *  and sets its init_stats.name to [name]. Unit begin at pos ([x],[y])
  *  (i.e. getUnit "archer" will get an archer, whose stats are found in the JSON)
  *)
-val getUnit : string -> string -> (int*int) -> feunit
+val get_unit : string -> string -> (int*int) -> feunit
 
 (* [moveUnit unit (x, y)] gives you an updated feunit where their x and y pos are
  *  now [x] and [y]
  *)
-val moveUnit : feunit -> int*int -> feunit
+val move_unit : feunit -> int*int -> feunit
 
 (* self explanatory functions *)
-val addAtkBonus : feunit -> int -> feunit
-val addDefBonus : feunit -> int -> feunit
-val addMovBonus : feunit -> int -> feunit
-val addRangeBonus : feunit -> int -> feunit
-val addHp : feunit -> int -> feunit (* note: can add negatives, duh *)
+val add_atk_bonus : feunit -> int -> feunit
+val add_def_bonus : feunit -> int -> feunit
+val add_mov_bonus : feunit -> int -> feunit
+val add_range_bonus : feunit -> int -> feunit
+val add_hp : feunit -> int -> feunit (* note: can add negatives, duh *)
 
 (* getters *)
-val getTotalAtk : feunit -> int
-val getTotalDef : feunit -> int
-val getTotalMov : feunit -> int
-val getTotalRange : feunit -> int
-val getPercentHp : feunit -> int (* hp/maxHp * 100 *)
+val get_total_atk : feunit -> int
+val get_total_def : feunit -> int
+val get_total_mov : feunit -> int
+val get_total_range : feunit -> int
+val get_percent_hp : feunit -> int (* hp/maxHp * 100 *)
