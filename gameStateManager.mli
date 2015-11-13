@@ -9,6 +9,7 @@ open Feunit
  *   - Takes in filtered data from the JSON and uses it to initialize
  *      the current Game State (i.e. a level is created, drawn, and updated)
  *   - Basically oversees who/what gets to update and who gets to draw
+ *   - Keeps track of turn
  *)
 
 (* Returns the list of all current units on current level *)
