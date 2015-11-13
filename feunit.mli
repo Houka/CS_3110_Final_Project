@@ -1,5 +1,3 @@
-open Sprite
-
 (*
  * The Feunit Module.
  *   - Gets unit data from JsonParser and converts them into an easier to work
@@ -10,7 +8,7 @@ open Sprite
 type action = Stay | Move | Attack
 (* Contains all the stats a typical unit has/needs. Info from JSON. *)
 type stats = {name:string; maxHp:int; actions: action list; atkPoints:int;
-                    defPoint:int; atkRange:int; movRange:int; img: image;
+                    defPoint:int; atkRange:int; movRange:int; img: Images.t;
                     hp:int; atkBonus:int; defBonus:int; atkRangeBonus:int;
                     movRangeBonus:int; x:int; y:int}
 (* Represents a fire emblem unit *)
@@ -22,10 +20,10 @@ type feunit = Null | Ally of stats | Enemy of stats
  *)
 val getUnit : string -> string -> (int*int) -> feunit
 
-(* [moveUnit unit x y] gives you an updated feunit where their x and y pos are
+(* [moveUnit unit (x, y)] gives you an updated feunit where their x and y pos are
  *  now [x] and [y]
  *)
-val moveUnit : feunit -> int -> int -> feunit
+val moveUnit : feunit -> int*int -> feunit
 
 (* self explanatory functions *)
 val addAtkBonus : feunit -> int -> feunit
@@ -40,4 +38,3 @@ val getTotalDef : feunit -> int
 val getTotalMov : feunit -> int
 val getTotalRange : feunit -> int
 val getPercentHp : feunit -> int (* hp/maxHp * 100 *)
-
