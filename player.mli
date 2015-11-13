@@ -8,8 +8,11 @@ open Terrain
  *   - Controls the player units and draws the cursor
  *)
 
+(* The properties of a player's cursor *)
+type cursor = {mutable x: float; mutable y: float; mutable color: string}
+
 (* Draws to the GUI the player's own cursor *)
-val draw : feunit -> unit
+val draw : unit -> unit
 
 (* Returns a new game state by moving a unit *)
 val update : unit -> unit list list -> terrain list list ->
