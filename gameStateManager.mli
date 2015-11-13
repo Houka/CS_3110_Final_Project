@@ -29,3 +29,4 @@ val update : unit -> unit
  *  when they can draw. Handles who draws to which layer in the screen.
  *)
 val draw : unit -> unit
+
