@@ -10,13 +10,13 @@ open Terrain
  *)
 
 (* Draws to the GUI all necessary stats on the given unit *)
-val drawUnitStats : feunit -> unit
+val draw_unit_stats : feunit -> unit
 
 (* Draws to the GUI all necessary stats on the given terrain *)
-val drawTerrainStats : terrain -> unit
+val draw_terrain_stats : terrain -> unit
 
 (* Draws to the GUI the level stats (i.e lvl title) *)
-val drawLevelStats: level -> unit
+val draw_level_stats: level -> unit
 
 (* Draws a display string on the top lvl og the GUI *)
-val drawString: string -> unit
+val draw_string: string -> unit

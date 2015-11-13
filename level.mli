@@ -10,4 +10,4 @@ type level = {name: string; unitMatix: feunit list list;
               terrainMatrix: terrain list list}
 
 (*returns the corresponding level based on string input*)
-val getLevel: string -> level
+val get_level: string -> level

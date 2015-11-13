@@ -9,7 +9,7 @@
  *  [filename].
  *  Precondition: [filename] points to a .png file
  *)
-val getImage: string -> Images.t
+val get_image: string -> Images.t
 
 (* [resize img w h] returns an altered image of [img] that has width [w] and
  *   height [h]

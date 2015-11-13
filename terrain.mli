@@ -17,9 +17,9 @@ type terrain = Null | Sea of init_stats | Plain of init_stats
  *  Also sets the terrain pos ([x],[y])
  *  (i.e. getUnit "archer" will get an archer, whose stats are found in the JSON)
  *)
-val getTerrain : string -> (int*int) -> terrain
+val get_terrain : string -> (int*int) -> terrain
 
 (* [moveTerrain name x y] returns back the updated terrain where its x and y
  * values to [x] and [y] respectively.
 *)
-val moveTerrain : terrain -> (int*int) -> terrain
+val move_terrain : terrain -> (int*int) -> terrain

@@ -8,14 +8,14 @@ open Yojson.Basic.Util
  *)
 
 (* Returns the matrix of unit locations *)
-val getUnitMatrix : unit -> int list list
+val get_unit_matrix : unit -> int list list
 
 (* Returns the matrix of terrain locations *)
-val getTerrainMatrix : unit -> int list list
+val get_terrain_matrix : unit -> int list list
 
 (* Getter funtions that parses the json file into their repective forms and
  *  returns a list of all the items
   *)
-val getAllUnitData : unit -> feunit list
-val getAllTerrainData : unit -> terrain list
-val getAllLevelData : unit -> level list
+val get_all_unit_data : unit -> feunit list
+val get_all_terrain_data : unit -> terrain list
+val get_all_level_data : unit -> level list
