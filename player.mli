@@ -14,7 +14,7 @@ type cursor = {x: int; y: int; color: int}
 val draw : unit -> unit
 
 (* Returns a new game state by moving a unit *)
-val update : feunit list ref -> terrain list ref -> unit
+val update : (bool*char) -> feunit list ref -> terrain list ref -> unit
 
 (* gets the cursor *)
 val get_cursor : unit -> cursor

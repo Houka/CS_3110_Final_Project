@@ -19,4 +19,4 @@ val draw_terrain_stats : terrain -> unit
 val draw_level_stats: level -> unit
 
 (* Draws a display string on the top lvl og the GUI *)
-val draw_string: string -> unit
+val draw_string: string -> int*int -> unit

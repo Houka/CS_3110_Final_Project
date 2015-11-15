@@ -21,7 +21,11 @@ let get_current_state () : string = !currentState
 
 let set_current_state (statename : string) : unit = currentState := statename
 
-let update () : unit = failwith "TODO"
+let update (keypressed,key) : unit =
+  (* testing *)
+  Player.update (keypressed,key) (get_units ()) (get_terrains ())
 
-let draw () : unit = failwith "TODO"
+let draw () : unit =
+  (* testing *)
+  Player.draw()
 

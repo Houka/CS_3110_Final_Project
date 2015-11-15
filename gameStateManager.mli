@@ -27,9 +27,9 @@ val set_current_state : string -> unit
 
 (* The main update loop for this class.
  *  This will handle all the management logic and delegate when something needs
- *  to be updated. Mainly called by main.ml
+ *  to be updated. Mainly called by main.ml which passes it the keypresses
  *)
-val update : unit -> unit
+val update : (bool*char) -> unit
 
 (* The main drawing function.
  *  This will handle all the delegation of who can draw onto the screen and
