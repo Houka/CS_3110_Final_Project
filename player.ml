@@ -9,7 +9,7 @@ let player_cursor = ref {x=0;y=0;color=0xFF0000}
 let selected = ref false
 
 (* player constants *)
-let side = 100
+let side = 50
 
 (* finds player units to move*)
 let find_player_units (units:feunit list) : feunit list = failwith "TODO"
