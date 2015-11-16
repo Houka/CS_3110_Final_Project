@@ -5,7 +5,7 @@ open Graphics
 (* GUI variables *)
 let width = 550
 let height = 400
-let scale = 2
+let scale = 1
 let title = "OCaml Fire Emblem"
 
 (* Main Game loop that updates all subsequent components *)
