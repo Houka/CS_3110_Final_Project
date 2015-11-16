@@ -10,4 +10,4 @@ open Terrain
  *)
 
 (* Returns a new game state by moving a unit *)
-val update : feunit list ref -> terrain list ref -> unit
+val update : feunit array -> terrain array -> unit

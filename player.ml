@@ -17,7 +17,9 @@ let find_player_units (units:feunit list) : feunit list = failwith "TODO"
 let get_cursor () : cursor = !player_cursor
 
 (* how to handle updating the units and terrain when we enter select mode *)
-let select (units :feunit list ref) (terrains: terrain list ref) : unit =
+(*Draws a box containing vertical list of options, draw rectangles draw string
+*)
+let select (units :feunit array) (terrains: terrain array) : unit =
   selected := true;
   failwith "TODO"
 
@@ -31,7 +33,7 @@ let draw () : unit =
   set_color 0xFF0000;
   fill_rect ((get_cursor()).x) ((get_cursor()).y) (side) (side)
 
-let update (keypressed,key) (units :feunit list ref) (terrains: terrain list ref) : unit =
+let update (keypressed,key) (units :feunit array) (terrains: terrain array) : unit =
   let cursor = get_cursor() in
   (* updating player cursor *)
   match (keypressed,key) with

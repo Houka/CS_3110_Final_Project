@@ -3,8 +3,8 @@ open Terrain
 
 (* mutable var to keep track of level state *)
 let currentState = ref "menu"
-let currentUnits = ref []
-let currentTerrains = ref []
+let currentUnits = [||]
+let currentTerrains = [||]
 
 (* Takes in a [levelname] then gets that level's data from the Level module,
  *  constructs the level by assigning currentState with [levelname],
@@ -14,8 +14,8 @@ let currentTerrains = ref []
  *)
 let construct_level (levelname: string) : unit = failwith "TODO"
 
-let get_units () : feunit list ref = currentUnits
-let get_terrains () : terrain list ref = currentTerrains
+let get_units () : feunit array = currentUnits
+let get_terrains () : terrain array = currentTerrains
 
 let get_current_state () : string = !currentState
 

@@ -14,10 +14,10 @@ open Terrain
  *)
 
 (* Returns a pointer to the list of all current units on current level *)
-val get_units : unit -> feunit list ref
+val get_units : unit -> feunit array
 
 (* Returns a pointer to the list of all terrains on current level *)
-val get_terrains : unit -> terrain list ref
+val get_terrains : unit -> terrain array
 
 (* geter and setter for
  * the name of the current state of the game (i.e. returns "menu")
