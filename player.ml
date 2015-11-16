@@ -17,7 +17,7 @@ let find_player_units (units:feunit list) : feunit list = failwith "TODO"
 let get_cursor () : cursor = !player_cursor
 
 (* how to handle updating the units and terrain when we enter select mode *)
-let selected (units :feunit list ref) (terrains: terrain list ref) : unit =
+let select (units :feunit list ref) (terrains: terrain list ref) : unit =
   selected := true;
   failwith "TODO"
 
@@ -47,7 +47,7 @@ let update (keypressed,key) (units :feunit list ref) (terrains: terrain list ref
   | (true,'d') ->
     let side = if cursor.x + side >= size_x () then 0 else side in
     player_cursor := {x=(cursor.x + side);y=cursor.y;color=0xFFFFFF}
-  | (true,'j') -> selected units terrains
+  | (true,'j') -> select units terrains
   | (true,'k') -> deselect ()
   | _ -> ()
 
