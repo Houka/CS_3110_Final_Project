@@ -3,7 +3,7 @@ type action = Stay | Move | Attack
 type stats = { name: string; maxHp: int; actions: action list;
               atkPoints: int; defPoint: int; atkRange: int; movRange: int;
               hp: int; atkBonus: int; defBonus: int; atkRangeBonus: int;
-              movRangeBonus: int; x: int; y: int; img: Images.t }
+              movRangeBonus: int; x: int; y: int; img: Images.t; endturn: bool }
 
 type feunit = Null | Ally of stats | Enemy of stats
 
