@@ -55,22 +55,26 @@ let extract_level_types (): string list =
   |> filter_member "type"
   |> filter_string
 
-let get_all_terrain_data () =
-  (* let names = extract_terrain_names() in
+let get_all_terrain_data () : (int*terrain_info) list=
+  let names = extract_terrain_names() in
   let classes = extract_terrain_classes() in
   let atkBonus = extract_terrain_atkBonuses () in
   let defBonus = extract_terrain_defBonuses () in
   let images = extract_terrain_images() in
-  let rec make_list a b c d e: (int*terrain) list=
-  match a,b,c,d,e with
-    | [], [], [], [], [] -> []
-    | h1::t1, h2::t2, h3::t3, h4::t4, h5::t5 ->
-      (h2,{name = h1; atkBonus = h3; defBonus = h4; img= h5})
-              :: make_list t1 t2 t3 t4 t5
+  let types = extract_level_types() in
+  let rec make_list a b c d e f: (int*terrain_info) list=
+  match a,b,c,d,e,f with
+    | [], [], [], [], [], [] -> []
+    | h1::t1, h2::t2, h3::t3, h4::t4, h5::t5, h6::t6->
+      (h2,{name = h1; atkBonus = h3; defBonus = h4; img= h5; terrain_type = h6})
+              :: make_list t1 t2 t3 t4 t5 t6
     | _ -> failwith "Invalid json"
-  in make_list names classes atkBonus defBonus images *)
-failwith "TODO"
+  in make_list names classes atkBonus defBonus images types
 
+(*test getting terrain from examples.json*)
+let _ = let data = get_all_terrain_data () in
+        assert (data = [(1, {name = "grass"; atkBonus = 1; defBonus = 1;
+                            img = "grass.jpg"; terrain_type = "plain"})])
 
 
 (*below are the functions used for getting level data*)

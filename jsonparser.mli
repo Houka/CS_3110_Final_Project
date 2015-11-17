@@ -9,7 +9,8 @@ open Yojson.Basic.Util
 
 (* Getter funtions that parses the json file into their repective forms and
  *  returns a list of all the items.
- * (ex: get_all_unit_data returns a feunit list that has all the units the game will use)
+ * (ex: get_all_unit_data returns an assoc list matching unit data to
+ *  class number)
   *)
 
 type terrain_info

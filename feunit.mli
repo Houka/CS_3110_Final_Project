@@ -8,9 +8,10 @@
 type action = Stay | Move | Attack
 (* Contains all the stats a typical unit has/needs. Info from JSON. *)
 type stats = { name: string; maxHp: int; actions: action list;
-              atkPoints: int; defPoint: int; atkRange: int; movRange: int;
+              atk: int; def: int; atkRange: int; movRange: int;
               hp: int; atkBonus: int; defBonus: int; atkRangeBonus: int;
-              movRangeBonus: int; x: int; y: int; img: Images.t; endturn: bool}
+              movRangeBonus: int; weapon:string; x: int; y: int; img: Images.t;
+              endturn: bool}
 (* Represents a fire emblem unit *)
 type feunit = Null | Ally of stats | Enemy of stats
 
