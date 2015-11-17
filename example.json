@@ -41,7 +41,7 @@
         "weapon": "null",
         "image": "null.png"
     },
-    {   "name":"swordsmen",
+    {   "name":"swordsman",
         "class": 1,
         "hp": 100,
         "attack": 5,
@@ -49,17 +49,7 @@
         "move": 3,
         "range": 1,
         "weapon": "sword",
-        "image": "swordsmen.png"
-    },
-    {   "name":"ninja",
-        "class": 2,
-        "hp": 100,
-        "attack": 5,
-        "defense": 10,
-        "move": 3,
-        "range": 1,
-        "weapon": "sword",
-        "image": "ninja.png"
+        "image": "swordsman.png"
     }
   ]
 }
