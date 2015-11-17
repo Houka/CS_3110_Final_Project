@@ -1,8 +1,8 @@
 open Feunit
 open Terrain
 
-type level = {name: string; unitMatix: feunit list list;
-              terrainMatrix: terrain list list}
+type level = {name: string; unit_matrix: int list list;
+              terrain_matrix: int list list}
 
 let get_level (name:string) : level = failwith "TODO"
 

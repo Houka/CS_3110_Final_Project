@@ -6,8 +6,8 @@ open Terrain
  *)
 
 (*stores locations and status of each unit and terrain*)
-type level = {name: string; unitMatix: feunit list list;
-              terrainMatrix: terrain list list}
+type level = {name: string; unit_matrix: int list list;
+              terrain_matrix: int list list}
 
 (*returns the corresponding level based on string input*)
 val get_level: string -> level

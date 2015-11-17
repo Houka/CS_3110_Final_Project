@@ -12,17 +12,20 @@
       "terrain_matrix":
         [ [0,0,0,0],
           [0,0,0,0],
-          [0,0,0,0],
+          [0,0,1,0],
           [0,0,0,0]
         ]
     }
   ],
 
 //these are examples please rename to correlate to types in terrain.ml
-  "terrains": [
-    {   "name":"null",
-        "class" : 0,
-        "stuff": 0
+  "terrain": [
+    {   "name":"grass",
+        "class" : 1,
+        "atkBonus": 1,
+        "defBonus":1,
+        "img": "grass.jpg",
+        "type": "Plain"
     }
   ],
 
@@ -57,6 +60,6 @@
         "range": 1,
         "weapon": "sword",
         "image": "ninja.png"
-    },
+    }
   ]
 }
