@@ -9,7 +9,7 @@ let json =
   let name = List.nth a 1 in*)
 let json = Yojson.Basic.from_file "example.json"
 
-type terrain_info = {name:string; atkBonus:int;    defBonus: int;
+type terrain_info = {name:string; atkBonus:int; defBonus: int;
                       terrain_type:string; img: string}
 
 type feunit_info = { name: string; maxHp: int; actions: action list;
@@ -48,6 +48,11 @@ let extract_terrain_defBonuses (): int list =
 let extract_terrain_images (): string list =
   extract_terrain ()
   |> filter_member "img"
+  |> filter_string
+
+let extract_level_types (): string list =
+  extract_terrain ()
+  |> filter_member "type"
   |> filter_string
 
 let get_all_terrain_data () =

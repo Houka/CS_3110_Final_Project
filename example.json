@@ -25,7 +25,7 @@
         "atkBonus": 1,
         "defBonus":1,
         "img": "grass.jpg",
-        "type": "Plain"
+        "type": "plain"
     }
   ],
 
