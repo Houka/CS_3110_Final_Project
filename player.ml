@@ -33,10 +33,10 @@ let draw () : unit =
   set_color 0xFF0000;
   fill_rect ((get_cursor()).x) ((get_cursor()).y) (side) (side)
 
-let update (keypressed,key) (units :feunit array) (terrains: terrain array) : unit =
+let update (units :feunit array) (terrains: terrain array) : unit =
   let cursor = get_cursor() in
   (* updating player cursor *)
-  match (keypressed,key) with
+  match (InputManager.get_keypressed (),InputManager.get_key ()) with
   | (true,'w') ->
     let side = if cursor.y + side >= size_y () then 0 else side in
     player_cursor := {x=cursor.x;y=(cursor.y + side);color=0xFFFFFF}

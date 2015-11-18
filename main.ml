@@ -17,9 +17,11 @@ let rec update () =
             close_graph ()
   | x -> Printf.printf "Keypressed: %c\n" x;
           flush_all ();
+          (* keyboard input updates *)
+          InputManager.set_keypressed input.keypressed input.key;
 
-          (* game and keyboard input passes *)
-          GameStateManager.update (input.keypressed,input.key);
+          (* game updates *)
+          GameStateManager.update ();
           GameStateManager.draw ();
           update ()
 

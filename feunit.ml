@@ -1,9 +1,7 @@
-type action = Stay | Move | Attack
-
-type stats = { name: string; maxHp: int; actions: action list;
+type stats = { name: string; maxHp: int;
               atk: int; def: int; atkRange: int; movRange: int;
               hp: int; atkBonus: int; defBonus: int; atkRangeBonus: int;
-              movRangeBonus: int; weapon: string; x: int; y: int;
+              movRangeBonus: int; weapon: string;
               img: Images.t; endturn: bool }
 
 type feunit = Null | Ally of stats | Enemy of stats

@@ -13,12 +13,6 @@ open Terrain
  *   - Keeps track of turn
  *)
 
-(* Returns a pointer to the list of all current units on current level *)
-val get_units : unit -> feunit array
-
-(* Returns a pointer to the list of all terrains on current level *)
-val get_terrains : unit -> terrain array
-
 (* geter and setter for
  * the name of the current state of the game (i.e. returns "menu")
 *)
@@ -29,7 +23,7 @@ val set_current_state : string -> unit
  *  This will handle all the management logic and delegate when something needs
  *  to be updated. Mainly called by main.ml which passes it the keypresses
  *)
-val update : (bool*char) -> unit
+val update : unit -> unit
 
 (* The main drawing function.
  *  This will handle all the delegation of who can draw onto the screen and

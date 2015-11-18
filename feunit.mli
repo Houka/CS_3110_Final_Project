@@ -4,13 +4,11 @@
  *      with interface by storing the data in abstract data structures.
  *)
 
-(* The types of actions a unit can be instructed to do. *)
-type action = Stay | Move | Attack
 (* Contains all the stats a typical unit has/needs. Info from JSON. *)
-type stats = { name: string; maxHp: int; actions: action list;
+type stats = { name: string; maxHp: int;
               atk: int; def: int; atkRange: int; movRange: int;
               hp: int; atkBonus: int; defBonus: int; atkRangeBonus: int;
-              movRangeBonus: int; weapon:string; x: int; y: int; img: Images.t;
+              movRangeBonus: int; weapon:string; img: Images.t;
               endturn: bool}
 (* Represents a fire emblem unit *)
 type feunit = Null | Ally of stats | Enemy of stats
