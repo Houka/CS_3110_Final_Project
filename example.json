@@ -2,6 +2,7 @@
   "levels": [
     {
       "name" : "level1",
+      "next" : "null",
       "units_matrix":
         [ [0,0,0,0],
           [0,1,0,0],
@@ -14,6 +15,17 @@
           [0,0,0,0],
           [0,0,1,0],
           [0,0,0,0]
+        ]
+    },
+    {
+      "name" : "null",
+      "next" : "null",
+      "units_matrix":
+        [ []
+        ],
+
+      "terrain_matrix":
+        [ []
         ]
     }
   ],
