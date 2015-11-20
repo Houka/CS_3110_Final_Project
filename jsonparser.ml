@@ -1,6 +1,4 @@
-open Feunit
-open Terrain
-open Level
+
 open Yojson.Basic.Util
 
 (*should be changed later to accept user input with the following code:
@@ -14,7 +12,8 @@ type terrain_info = {name:string; atkBonus:int; defBonus: int;
 
 type feunit_info = { name: string; maxHp: int; atk: int; def: int;
                     movRange: int; atkRange: int; weapon: string; img: string }
-
+type level_info = {name: string; unit_matrix: int list list;
+              terrain_matrix: int list list}
 
 (*in this section the functions are used for getting unit data*)
 
@@ -185,11 +184,11 @@ let extract_level_terrain (): int list list list =
   |> List.map filter_list
   |> List.map (List.map filter_int)
 
-let get_all_level_data (): level list =
+let get_all_level_data (): level_info list =
   let names = extract_level_names() in
   let units = extract_level_units() in
   let terrain = extract_level_terrain() in
-  let rec make_list a b c : level list=
+  let rec make_list a b c : level_info list=
   match a,b,c with
     | [], [], [] -> []
     | h1::t1, h2::t2, h3::t3 ->
