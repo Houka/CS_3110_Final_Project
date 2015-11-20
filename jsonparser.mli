@@ -22,3 +22,6 @@ val get_all_unit_data : unit -> (int*feunit_info) list
 (*returns association list matching class to stats for terrain*)
 val get_all_terrain_data : unit -> (int*terrain_info) list
 val get_all_level_data : unit -> level_info list
+
+(* returns all the images used by the json file *)
+val get_images : unit -> string list

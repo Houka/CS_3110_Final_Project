@@ -1,8 +1,15 @@
 # CS 3110 Final Project
 ## OCaml Fire Emblem
 - Install dependencies: `opam install camlimages`
-- To compile: `cs3110 compile -p camlimages,pa_ounit,graphics main`
+- To compile: `cs3110 compile -p camlimages.all,pa_ounit,graphics,yojson,async -t main`
 - To run: `cs3110 run main`
+
+## Dependencies:
+- Graphics
+- Yojson
+- Async
+- Camlimages.all
+- Pa_ounit
 
 ## Members:
 - Changxu Lu

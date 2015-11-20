@@ -1,20 +1,26 @@
+open Async.Std
+
 type image = OImages.oimage
 
+let images = ref (Ivar.create ())
+
 let load_image (filename:string) : image =
-  let img = OImages.load filename [] in
+  let img = Printf.printf "loaded image: %s\n" filename; OImages.load filename [] in
   match OImages.tag img with
-  |  OImages.Rgb24 x -> img
+  | OImages.Rgb24 x -> img
   | OImages.Rgba32 x -> let img = x#to_rgb24 in img#coerce
   | _ -> failwith "unsupported format"
 
-(* loads all images into a mapping *)
-let images =
-  let imgs = Jsonparser.get_images () in
-  List.fold_left (fun a x -> (x,load_image x) :: a) [] imgs
-
+let loaded () : bool =
+  not (Ivar.is_empty !images)
 
 let get_image (filename: string) : image =
-  List.assoc filename images
+  if loaded () then
+    match Deferred.peek (Ivar.read !images) with
+    | None -> failwith "Something went wrong in images"
+    | Some e -> List.assoc filename e
+  else
+    failwith "No images loaded"
 
 let resize (img: image) (width: int) (height: int) : image =
   let img = OImages.rgb24 img in
@@ -32,3 +38,12 @@ let crop (img:image) (x,y) (height: int) (width: int) : image =
 let draw (img: image) (x,y) : unit =
   let img = img#image in
   Graphic_image.draw_image img x y;;
+
+(* loads all images into a mapping *)
+let init () =
+  upon (
+    return (
+      let imgs = Jsonparser.get_images () in
+      List.fold_left (fun a x -> (x,load_image x) :: a) [] imgs
+    ))
+    (fun a -> Ivar.fill !images a)

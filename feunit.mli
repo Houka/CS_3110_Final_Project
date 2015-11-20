@@ -11,18 +11,12 @@ type stats = { name: string; maxHp: int;
               movRangeBonus: int; weapon:string; img: Images.t;
               endturn: bool}
 (* Represents a fire emblem unit *)
-type feunit = Null | Ally of stats | Enemy of stats
+type feunit = Ally of stats | Enemy of stats
 
-(* [getUnit class name (x,y)] returns an arbitrary feunit that is of the class [class]
- *  and sets its init_stats.name to [name]. Unit begin at pos ([x],[y])
- *  (i.e. getUnit "archer" will get an archer, whose stats are found in the JSON)
+(* [get_unit class] returns an arbitrary feunit that is of the class [class].
+ *  (i.e. get_unit 1 will get an archer, if class 1 cooresponds to archer in the JSON)
  *)
-val get_unit : int -> string -> (int*int) -> feunit
-
-(* [moveUnit unit (x, y)] gives you an updated feunit where their x and y pos are
- *  now [x] and [y]
- *)
-val move_unit : feunit -> int*int -> feunit
+val get_unit : int -> feunit
 
 (* self explanatory functions *)
 val add_atk_bonus : feunit -> int -> feunit

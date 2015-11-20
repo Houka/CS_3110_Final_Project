@@ -9,6 +9,13 @@ open Level
  *      move that any player can do.
  *)
 
+(* gets whether or not this module has loaded its level contents *)
+val loaded: unit -> bool
+
+(* sets the contents that this module will be working with *)
+val set_units: feunit option array array -> unit
+val set_map: terrain option array array -> unit
+
 (* draws the screen after turns are applied *)
 val draw: unit -> unit
 
@@ -17,7 +24,7 @@ val draw: unit -> unit
  *  instructions. If the instuction provided is an invalid action (based on the
  *  game rules enforced here) then an exception will be thrown
 *)
-val update: (level* feunit list * terrain list) -> unit
+val update: unit -> unit
 
 (* [attack units terrains u1 u2] will enforce game machanics and rules as it
     applies an attack from [u1] to [u2]. It apply the attack on the units matrix.

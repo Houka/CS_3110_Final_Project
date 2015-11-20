@@ -196,6 +196,9 @@ let get_all_level_data (): level_info list =
     | _ -> failwith "Invalid json"
   in make_list names units terrain
 
+let get_images () : string list =
+  extract_terrain_images () @ extract_unit_image ()
+
 (*the code below is used to check the level data is correct*)
 (* let _ =
   let level_list = get_all_level_data () in

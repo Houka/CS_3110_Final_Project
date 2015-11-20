@@ -4,12 +4,9 @@ type stats = { name: string; maxHp: int;
               movRangeBonus: int; weapon: string;
               img: Images.t; endturn: bool }
 
-type feunit = Null | Ally of stats | Enemy of stats
+type feunit = Ally of stats | Enemy of stats
 
-let get_unit (classnum: int)  (name:string) (x,y) : feunit =
-  failwith "TODO"
-
-let move_unit (feunit: feunit) (x,y) : feunit =
+let get_unit (classnum: int) : feunit =
   failwith "TODO"
 
 let add_atk_bonus (feunit:feunit) (bonus:int) : feunit = failwith "TODO"
