@@ -56,7 +56,7 @@
     },
     {   "name":"swordsman",
         "class": 1,
-        "hp": 100,
+        "maxhp": 100,
         "attack": 5,
         "defense": 10,
         "move": 3,
