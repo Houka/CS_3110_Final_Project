@@ -10,9 +10,6 @@ type image
 (* initializes sprite by loading all needed images *)
 val init: unit -> unit
 
-(* gets whether or not this module has loaded its level contents *)
-val loaded: unit -> bool
-
 (* [load_image filename] returns the image associated with the file named
  *  [filename].The difference between get_image and load_image is that get_image
  *  gets an image from a preload list of images but load_image has to convert

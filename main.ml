@@ -44,6 +44,8 @@ let main () =
   (* inits *)
   print_string "loading in contents\n";
   Sprite.init ();
+  Sprite.(draw (get_image "images/grass.png") (0,0));
+
   GameStateManager.set_current_state "level1";
 
   (* loaded screen *)

@@ -2,7 +2,7 @@ open Async.Std
 
 type image = OImages.oimage
 
-let images = ref (Ivar.create ())
+let images = ref []
 
 let load_image (filename:string) : image =
   let img = Printf.printf "loaded image: %s\n" filename; OImages.load filename [] in
@@ -11,16 +11,8 @@ let load_image (filename:string) : image =
   | OImages.Rgba32 x -> let img = x#to_rgb24 in img#coerce
   | _ -> failwith "unsupported format"
 
-let loaded () : bool =
-  not (Ivar.is_empty !images)
-
 let get_image (filename: string) : image =
-  if loaded () then
-    match Deferred.peek (Ivar.read !images) with
-    | None -> failwith "Something went wrong in images"
-    | Some e -> List.assoc filename e
-  else
-    failwith "No images loaded"
+  List.assoc filename !images
 
 let resize (img: image) (width: int) (height: int) : image =
   let img = OImages.rgb24 img in
@@ -41,9 +33,5 @@ let draw (img: image) (x,y) : unit =
 
 (* loads all images into a mapping *)
 let init () =
-  upon (
-    return (
-      let imgs = Jsonparser.get_images () in
-      List.fold_left (fun a x -> (x,load_image x) :: a) [] imgs
-    ))
-    (fun a -> Ivar.fill !images a)
+  let imgs = Jsonparser.get_images () in
+  images := List.fold_left (fun a x -> (x,load_image x) :: a) [] imgs

@@ -13,7 +13,7 @@ let levelData = ref (Ivar.create ())
 let construct_terrain_matrix matrix =
   let traverse_rows a x =
     let nrow =
-      List.fold_left (fun a' x' -> Array.append a' [|Some (get_terrain x')|]) [||] x in
+      List.fold_left (fun a' x' -> Array.append a' [|(get_terrain x')|]) [||] x in
     Array.append a [|nrow|] in
   List.fold_left (traverse_rows) [||] matrix
 
@@ -21,7 +21,7 @@ let construct_feunit_matrix matrix =
   let traverse_rows a x =
     let nrow =
       List.fold_left (fun a' x' ->
-        let newunit = if x' = 0 then None else Some (get_unit x') in
+        let newunit = (get_unit x') in
         Array.append a' [|newunit|]
       ) [||] x in
     Array.append a [|nrow|] in

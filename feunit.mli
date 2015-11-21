@@ -11,7 +11,7 @@ type stats = { name: string; maxHp: int;
               mutable atkRangeBonus: int; mutable movRangeBonus: int;
               weapon: string; img: Sprite.image; endturn: bool }
 (* Represents a fire emblem unit *)
-type feunit = Ally of stats | Enemy of stats
+type feunit = Null | Ally of stats | Enemy of stats
 
 (* [get_unit class] returns an arbitrary feunit that is of the class [class].
  *  (i.e. get_unit 1 will get an archer, if class 1 cooresponds to archer in the JSON)

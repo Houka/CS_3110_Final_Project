@@ -13,8 +13,8 @@ open Level
 val loaded: unit -> bool
 
 (* sets the contents that this module will be working with *)
-val set_units: feunit option array array -> unit
-val set_map: terrain option array array -> unit
+val set_units: feunit array array -> unit
+val set_map: terrain array array -> unit
 
 (* draws the screen after turns are applied *)
 val draw: unit -> unit
