@@ -1,6 +1,9 @@
 
 open Yojson.Basic.Util
 
+(*Note: need to add -p yojson when compiling*)
+
+
 (*should be changed later to accept user input with the following code:
 let json =
   let a = Array.to_list Sys.argv in
@@ -12,8 +15,9 @@ type terrain_info = {name:string; atkBonus:int; defBonus: int;
 
 type feunit_info = { name: string; maxHp: int; atk: int; def: int;
                     movRange: int; atkRange: int; weapon: string; img: string }
+
 type level_info = {name: string; unit_matrix: int list list;
-              terrain_matrix: int list list}
+              terrain_matrix: int list list; next:string}
 
 (*in this section the functions are used for getting unit data*)
 
@@ -89,14 +93,14 @@ let get_all_unit_data (): (int*feunit_info) list =
     | _ -> failwith "Invalid json"
   in make_list names classes maxhp attack defense move ranges weapons images
 
-TEST_UNIT = let data = get_all_unit_data () in
+(* TEST_UNIT = let data = get_all_unit_data () in
             assert (data =
               [(0, {name = "null"; maxHp = 9999; atk = 0 ;
               def = 0; movRange = 1; atkRange = 0; weapon = "null";
               img = "null.png"});
             (1, {name = "swordsman"; maxHp = 100; atk = 5 ;
               def = 10; movRange = 3; atkRange = 1; weapon = "sword";
-              img = "swordsman.png"})] )
+              img = "swordsman.png"})] ) *)
 
 
 
@@ -153,9 +157,9 @@ let get_all_terrain_data () : (int*terrain_info) list=
   in make_list names classes atkBonus defBonus images types
 
 (*test getting terrain from examples.json*)
-TEST_UNIT = let data = get_all_terrain_data () in
+(* TEST_UNIT = let data = get_all_terrain_data () in
         assert (data = [(1, {name = "grass"; atkBonus = 1; defBonus = 1;
-                            img = "grass.jpg"; terrain_type = "plain"})])
+                            img = "grass.jpg"; terrain_type = "plain"})]) *)
 
 
 (*below are the functions used for getting level data*)
@@ -184,17 +188,26 @@ let extract_level_terrain (): int list list list =
   |> List.map filter_list
   |> List.map (List.map filter_int)
 
-let get_all_level_data (): level_info list =
+let extract_level_next (): string list =
+  [json]
+  |> filter_member "levels"
+  |> flatten
+  |> filter_member "next"
+  |> filter_string
+
+let get_all_level_data (): (string*level_info) list =
   let names = extract_level_names() in
   let units = extract_level_units() in
   let terrain = extract_level_terrain() in
-  let rec make_list a b c : level_info list=
-  match a,b,c with
-    | [], [], [] -> []
-    | h1::t1, h2::t2, h3::t3 ->
-      {name = h1; unit_matrix = h2; terrain_matrix = h3} :: make_list t1 t2 t3
+  let next = extract_level_next () in
+  let rec make_list a b c d : (string*level_info) list=
+  match a,b,c,d with
+    | [], [], [], [] -> []
+    | h1::t1, h2::t2, h3::t3, h4::t4->
+      (h1,{name = h1; unit_matrix = h2; terrain_matrix = h3;next = h4})
+       :: make_list t1 t2 t3 t4
     | _ -> failwith "Invalid json"
-  in make_list names units terrain
+  in make_list names units terrain next
 
 let get_images () : string list =
   extract_terrain_images () @ extract_unit_image ()

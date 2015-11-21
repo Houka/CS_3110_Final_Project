@@ -31,6 +31,7 @@
   ],
 
 //note: For terrain types = Impassable | Sea | Plain | Mountain | City | Forest
+//           (use lower case)
   "terrain": [
     {   "name":"grass",
         "class" : 1,

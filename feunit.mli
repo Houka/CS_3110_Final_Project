@@ -7,9 +7,9 @@
 (* Contains all the stats a typical unit has/needs. Info from JSON. *)
 type stats = { name: string; maxHp: int;
               atk: int; def: int; atkRange: int; movRange: int;
-              hp: int; atkBonus: int; defBonus: int; atkRangeBonus: int;
-              movRangeBonus: int; weapon:string; img: Images.t;
-              endturn: bool}
+              mutable hp: int; mutable atkBonus: int; mutable defBonus: int;
+              mutable atkRangeBonus: int; mutable movRangeBonus: int;
+              weapon: string; img: Sprite.image; endturn: bool }
 (* Represents a fire emblem unit *)
 type feunit = Ally of stats | Enemy of stats
 
@@ -19,11 +19,11 @@ type feunit = Ally of stats | Enemy of stats
 val get_unit : int -> feunit
 
 (* self explanatory functions *)
-val add_atk_bonus : feunit -> int -> feunit
-val add_def_bonus : feunit -> int -> feunit
-val add_mov_bonus : feunit -> int -> feunit
-val add_range_bonus : feunit -> int -> feunit
-val add_hp : feunit -> int -> feunit (* note: can add negatives, duh *)
+val set_atk_bonus : feunit -> int -> unit
+val set_def_bonus : feunit -> int -> unit
+val set_mov_bonus : feunit -> int -> unit
+val set_range_bonus : feunit -> int -> unit
+val add_hp : feunit -> int -> unit (* note: can add negatives, duh *)
 
 (* getters *)
 val get_total_atk : feunit -> int

@@ -11,17 +11,19 @@ open Yojson.Basic.Util
  *  class number)
   *)
 
-type terrain_info
-type feunit_info
+type terrain_info = {name:string; atkBonus:int; defBonus: int;
+                      terrain_type:string; img: string}
+type feunit_info = { name: string; maxHp: int; atk: int; def: int;
+                    movRange: int; atkRange: int; weapon: string; img: string }
 type level_info = {name: string; unit_matrix: int list list;
-              terrain_matrix: int list list}
+              terrain_matrix: int list list; next: string}
 
 (*returns association list matching class to stats for feunit*)
 val get_all_unit_data : unit -> (int*feunit_info) list
 
 (*returns association list matching class to stats for terrain*)
 val get_all_terrain_data : unit -> (int*terrain_info) list
-val get_all_level_data : unit -> level_info list
+val get_all_level_data : unit -> (string*level_info) list
 
 (* returns all the images used by the json file *)
 val get_images : unit -> string list

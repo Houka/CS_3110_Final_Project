@@ -7,7 +7,7 @@ open Terrain
 
 (*stores locations and status of each unit and terrain*)
 type level = {name: string; unit_matrix: int list list;
-              terrain_matrix: int list list}
+              terrain_matrix: int list list; next: string}
 
 (*returns the corresponding level based on string input*)
 val get_level: string -> level

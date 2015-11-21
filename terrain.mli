@@ -5,7 +5,7 @@
  *)
 
 (* Contains all the stats a terrain has/needs. Info from JSON. *)
-type stats = {name:string; atkBonus:int; defBonus:int; img: Images.t}
+type stats = {name:string; atkBonus:int; defBonus:int; img: Sprite.image}
 (* Type of the terrain tells which units can travel through it.*)
 type terrain = Impassable | Sea of stats | Plain of stats
               | Mountain of stats | City of stats
