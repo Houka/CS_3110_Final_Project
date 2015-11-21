@@ -13,9 +13,6 @@ open Terrain
  *   - Keeps track of turn
  *)
 
-(* gets whether or not this module has loaded its level contents *)
-val loaded: unit -> bool
-
 (* geter and setter for
  * the name of the current state of the game (i.e. returns "menu")
 *)

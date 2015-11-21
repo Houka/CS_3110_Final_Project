@@ -1,5 +1,6 @@
 open Feunit
 open Terrain
+open Constants
 (*
  * The Player module
  *   - Takes in keyboard input, FEUnits, and Game State Manager
@@ -14,7 +15,7 @@ type cursor = {x: int; y: int; color: int}
 val draw : unit -> unit
 
 (* Returns a new game state by moving a unit *)
-val update : feunit array -> terrain array -> unit
+val update : feunit list list -> terrain list list -> action list
 
 (* gets the cursor *)
 val get_cursor : unit -> cursor

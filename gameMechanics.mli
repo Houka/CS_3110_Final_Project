@@ -9,9 +9,6 @@ open Level
  *      move that any player can do.
  *)
 
-(* gets whether or not this module has loaded its level contents *)
-val loaded: unit -> bool
-
 (* sets the contents that this module will be working with *)
 val set_units: feunit array array -> unit
 val set_map: terrain array array -> unit

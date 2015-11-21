@@ -12,7 +12,11 @@ let load_image (filename:string) : image =
   | _ -> failwith "unsupported format"
 
 let get_image (filename: string) : image =
-  List.assoc filename !images
+  let rec search l =
+  match l with
+  | [] -> failwith "no image found"
+  | h::t -> if fst h = filename then snd h else search t in
+  search !images
 
 let resize (img: image) (width: int) (height: int) : image =
   let img = OImages.rgb24 img in
@@ -34,4 +38,4 @@ let draw (img: image) (x,y) : unit =
 (* loads all images into a mapping *)
 let init () =
   let imgs = Jsonparser.get_images () in
-  images := List.fold_left (fun a x -> (x,load_image x) :: a) [] imgs
+  images := List.map (fun a -> (a,load_image a)) imgs

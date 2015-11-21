@@ -10,24 +10,20 @@ let title = "OCaml Fire Emblem"
 
 (* Main Game loop that updates all subsequent components *)
 let rec update () =
-  if GameStateManager.loaded () then
-    let input = wait_next_event [Button_down; Button_up; Key_pressed] in
-    clear_graph();
-    match input.key with
-    | 'q' ->  (* quit qui *)
-              close_graph ()
-    | x -> Printf.printf "Keypressed: %c\n" x;
-            flush_all ();
-            (* keyboard input updates *)
-            InputManager.set_keypressed input.keypressed input.key;
+  let input = wait_next_event [Button_down; Button_up; Key_pressed] in
+  clear_graph();
+  match input.key with
+  | 'q' ->  (* quit qui *)
+            close_graph ()
+  | x -> Printf.printf "Keypressed: %c\n" x;
+          flush_all ();
+          (* keyboard input updates *)
+          InputManager.set_keypressed input.keypressed input.key;
 
-            (* game updates *)
-            GameStateManager.update ();
-            GameStateManager.draw ();
-            update ()
-  else
-    print_string "loading...\n";
-    update ()
+          (* game updates *)
+          GameStateManager.update ();
+          GameStateManager.draw ();
+          update ()
 
 (* Initializes the GUI and goes into main game loop *)
 let main () =
@@ -44,8 +40,6 @@ let main () =
   (* inits *)
   print_string "loading in contents\n";
   Sprite.init ();
-  Sprite.(draw (get_image "images/grass.png") (0,0));
-
   GameStateManager.set_current_state "level1";
 
   (* loaded screen *)

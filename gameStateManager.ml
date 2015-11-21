@@ -5,7 +5,6 @@ open Async.Std
 
 (* mutable var to keep track of level state *)
 let currentState = ref "menu"
-let levelData = ref (Ivar.create ())
 
 (* contructs unit and terrain matrices that shows the position of the unit
     or terrain in the map
@@ -35,12 +34,8 @@ let construct_feunit_matrix matrix =
  *)
 let set_level_data (levelname: string) : unit =
   let l = get_level levelname in
-  upon (return l) (fun a -> Ivar.fill !levelData a);
-  upon (return(construct_feunit_matrix l.unit_matrix)) (GameMechanics.set_units);
-  upon (return(construct_terrain_matrix l.terrain_matrix)) (GameMechanics.set_map)
-
-let loaded () : bool =
-  not (Ivar.is_empty !levelData) && GameMechanics.loaded ()
+  GameMechanics.set_units (construct_feunit_matrix l.unit_matrix);
+  GameMechanics.set_map (construct_terrain_matrix l.terrain_matrix)
 
 let get_current_state () : string = !currentState
 
@@ -49,10 +44,8 @@ let set_current_state (statename : string) : unit =
   set_level_data statename
 
 let update () : unit =
-  (* testing *)
   GameMechanics.update ()
 
 let draw () : unit =
-  (* testing *)
-  Player.draw()
+  GameMechanics.draw();
 

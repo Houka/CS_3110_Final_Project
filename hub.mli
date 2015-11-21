@@ -9,14 +9,14 @@ open Terrain
  *      in a meaningful way--such as a bar to represent current health)
  *)
 
-(* Draws to the GUI all necessary stats on the given unit *)
+(* Draws to the GUI all necessary stats on the given unit.
+ * If the unit is an Ally, the stats is displayed on left side
+ * If the unit is an Enemy, the stats is displayed on the right side
+*)
 val draw_unit_stats : feunit -> unit
 
 (* Draws to the GUI all necessary stats on the given terrain *)
 val draw_terrain_stats : terrain -> unit
-
-(* Draws to the GUI the level stats (i.e lvl title) *)
-val draw_level_stats: level -> unit
 
 (* Draws a display string on the top lvl og the GUI *)
 val draw_string: string -> int*int -> unit

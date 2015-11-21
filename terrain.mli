@@ -17,3 +17,6 @@ type terrain = Impassable | Sea of stats | Plain of stats
  *  Note: for terrain [class] is mapped to a terrain in the JSON
  *)
 val get_terrain : int -> terrain
+
+(* [draw t (x,y) w h] draws the terrain's image at (x,y) with width [w] and height [h] *)
+val draw : terrain -> (int*int) -> int -> int -> unit

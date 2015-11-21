@@ -9,21 +9,20 @@ type stats = { name: string; maxHp: int;
 type feunit = Null | Ally of stats | Enemy of stats
 
 let get_unit (classnum: int) : feunit =
-  let unit_list = get_all_unit_data () in
-  let info = List.assoc (abs classnum) unit_list in
+  if classnum = 0 then Null else
+    let unit_list = get_all_unit_data () in
+    let info = List.assoc (abs classnum) unit_list in
 
-  let unit_stats = {name = info.Jsonparser.name; maxHp = info.Jsonparser.maxHp;
-      atk = info.Jsonparser.atk; def = info.Jsonparser.def;
-      atkRange = info.Jsonparser.atkRange; movRange = info.Jsonparser.movRange;
-      hp = info.Jsonparser.maxHp; atkBonus = 0; defBonus = 0;
-      atkRangeBonus = 0; movRangeBonus = 0; weapon = info.Jsonparser.weapon;
-      img = Sprite.get_image info.Jsonparser.img; endturn = true} in
-
-  if classnum > 0
-  then Ally unit_stats
-  else if classnum < 0
-    then Enemy unit_stats
-    else Null
+    let unit_stats = {name = info.Jsonparser.name; maxHp = info.Jsonparser.maxHp;
+        atk = info.Jsonparser.atk; def = info.Jsonparser.def;
+        atkRange = info.Jsonparser.atkRange; movRange = info.Jsonparser.movRange;
+        hp = info.Jsonparser.maxHp; atkBonus = 0; defBonus = 0;
+        atkRangeBonus = 0; movRangeBonus = 0; weapon = info.Jsonparser.weapon;
+        img = Sprite.get_image info.Jsonparser.img; endturn = true} in
+    print_string "creating unit\n";
+    if classnum > 0
+    then Ally unit_stats
+    else Enemy unit_stats
 
 let set_atk_bonus (feunit:feunit) (bonus:int) : unit =
   match feunit with
@@ -85,3 +84,11 @@ let get_percent_hp (feunit:feunit) :int =
   | Ally stats
   | Enemy stats ->
       int_of_float ((float_of_int stats.hp) /. (float_of_int stats.maxHp))
+
+let draw u (x,y) w h : unit =
+   match u with
+  | Null -> ()
+  | Ally stats
+  | Enemy stats ->
+                  let img = stats.img in
+                  Sprite.(draw (resize img w h) (x,y))

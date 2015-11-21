@@ -31,3 +31,6 @@ val get_total_def : feunit -> int
 val get_total_mov : feunit -> int
 val get_total_range : feunit -> int
 val get_percent_hp : feunit -> int (* hp/maxHp * 100 *)
+
+(* [draw u (x,y) w h] draws the unit's image at (x,y) with width [w] and height [h] *)
+val draw : feunit -> (int*int) -> int -> int -> unit
