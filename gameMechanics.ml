@@ -1,7 +1,7 @@
 open Terrain
 open Feunit
 open Constants
-open Ai
+(* open Ai *)
 open Player
 
 let turn = ref 0
@@ -25,15 +25,15 @@ let set_map (map:terrain array array) : unit =
   currentTerrains := map;
   turn := 0
 
-(* converts an 'a array array to 'a list list *)
-let to_2d_list (matrix: 'a array array) : 'a list list =
+(* converts an 'a array array to 'a matrix *)
+let to_2d_list (matrix: 'a array array) : 'a matrix =
   let first_layer = Array.to_list matrix in
   List.map (fun a -> Array.to_list a) first_layer
 
 (* private getters *)
-let get_units () : feunit list list =
+let get_units () : feunit matrix =
   to_2d_list !currentUnits
-let get_map () : terrain list list =
+let get_map () : terrain matrix =
   to_2d_list !currentTerrains
 
 (* increments the turn counter *)
@@ -70,7 +70,7 @@ let update () : unit =
   let actions =
     if !turn mod 2 = 0
     then Player.update (get_units ()) (get_map ())
-    else Ai.update (get_units ()) (get_map ()) in
+    else failwith "TODO" (* Ai.update (get_units ()) (get_map ()) *) in
 
   inc_turn ();
   perform_actions actions

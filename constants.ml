@@ -1,9 +1,7 @@
-open Feunit
-
 (* Alloted actions that each Player can take *)
-type action = Wait of feunit * (int * int)
-              | Move of feunit * (int * int) * (int * int)
-              | Attack of feunit * (int * int) * feunit * (int * int)
+type action = Wait of (int * int)
+              | Move of (int * int) * (int * int)
+              | Attack of (int * int) * (int * int)
 
 (* 2 Dimensional Array type*)
 type 'a matrix = 'a list list

@@ -1,8 +1,9 @@
+open Constants
 open Jsonparser
 
 
-type level = {name: string; unit_matrix: int list list;
-              terrain_matrix: int list list; next:string}
+type level = {name: string; unit_matrix: int matrix;
+              terrain_matrix: int matrix; next:string}
 
 let level_list = Jsonparser.get_all_level_data()
 
@@ -18,6 +19,6 @@ let get_level (name:string) : level =
 
   level_info_to_list (List.assoc name level_list)
 
-let get_unit_matrix (lvl:level) : int list list = lvl.unit_matrix
+let get_unit_matrix (lvl:level) : int matrix = lvl.unit_matrix
 
-let get_terrain_matrix (lvl:level) : int list list =  lvl.terrain_matrix
+let get_terrain_matrix (lvl:level) : int matrix =  lvl.terrain_matrix

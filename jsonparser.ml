@@ -1,4 +1,4 @@
-
+open Constants
 open Yojson.Basic.Util
 
 (*Note: need to add -p yojson when compiling*)
@@ -16,8 +16,8 @@ type terrain_info = {name:string; atkBonus:int; defBonus: int;
 type feunit_info = { name: string; maxHp: int; atk: int; def: int;
                     movRange: int; atkRange: int; weapon: string; img: string }
 
-type level_info = {name: string; unit_matrix: int list list;
-              terrain_matrix: int list list; next:string}
+type level_info = {name: string; unit_matrix: int matrix;
+              terrain_matrix: int matrix; next:string}
 
 (*in this section the functions are used for getting unit data*)
 
@@ -170,7 +170,7 @@ let extract_level_names (): string list =
   |> filter_member "name"
   |> filter_string
 
-let extract_level_units (): int list list list =
+let extract_level_units (): int matrix list =
   [json]
   |> filter_member "levels"
   |> flatten
@@ -179,7 +179,7 @@ let extract_level_units (): int list list list =
   |> List.map filter_list
   |> List.map (List.map filter_int)
 
-let extract_level_terrain (): int list list list =
+let extract_level_terrain (): int matrix list =
   [json]
   |> filter_member "levels"
   |> flatten

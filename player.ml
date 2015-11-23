@@ -1,6 +1,7 @@
 open Feunit
 open Terrain
 open Graphics
+open Constants
 
 type cursor = {x: int; y: int; color: int}
 
@@ -16,7 +17,7 @@ let get_cursor () : cursor = !player_cursor
 (* how to handle updating the units and terrain when we enter select mode *)
 (*Draws a box containing vertical list of options, draw rectangles draw string
 *)
-let select_event (units :feunit list list) (terrains: terrain list list)
+let select_event (units :feunit matrix) (terrains: terrain matrix)
   : Constants.action list =
     match (InputManager.get_keypressed (),InputManager.get_key ()) with
     | (true,'j') -> failwith "TODO"
@@ -25,7 +26,7 @@ let select_event (units :feunit list list) (terrains: terrain list list)
 
 
 (* how to handle a deselect event *)
-let deselect_event (units :feunit list list) (terrains: terrain list list)
+let deselect_event (units :feunit matrix) (terrains: terrain matrix)
   : Constants.action list =
   let cursor = get_cursor() in
   (* updating player cursor *)
@@ -57,7 +58,7 @@ let draw () : unit =
   set_color 0xFF0000;
   fill_rect ((get_cursor()).x) ((get_cursor()).y) (Constants.gridSide) (Constants.gridSide)
 
-let update (units :feunit list list) (terrains: terrain list list)
+let update (units :feunit matrix) (terrains: terrain matrix)
   : Constants.action list =
   if !selected then
     select_event units terrains

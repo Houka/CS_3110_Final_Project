@@ -1,4 +1,4 @@
-
+open Constants
 open Yojson.Basic.Util
 (*
  * The Json Parser module
@@ -15,8 +15,8 @@ type terrain_info = {name:string; atkBonus:int; defBonus: int;
                       terrain_type:string; img: string}
 type feunit_info = { name: string; maxHp: int; atk: int; def: int;
                     movRange: int; atkRange: int; weapon: string; img: string }
-type level_info = {name: string; unit_matrix: int list list;
-              terrain_matrix: int list list; next: string}
+type level_info = {name: string; unit_matrix: int matrix;
+              terrain_matrix: int matrix; next: string}
 
 (*returns association list matching class to stats for feunit*)
 val get_all_unit_data : unit -> (int*feunit_info) list
