@@ -4,7 +4,8 @@ type stats = { name: string; maxHp: int;
               atk: int; def: int; atkRange: int; movRange: int;
               mutable hp: int; mutable atkBonus: int; mutable defBonus: int;
               mutable atkRangeBonus: int; mutable movRangeBonus: int;
-              weapon: string; img: Sprite.image; mutable endturn: bool }
+              weapon: string; img: Sprite.image; mutable endturn: bool;
+              mutable hasMoved : bool}
 
 type feunit = Null | Ally of stats | Enemy of stats
 
@@ -18,7 +19,8 @@ let get_unit (classnum: int) : feunit =
         atkRange = info.Jsonparser.atkRange; movRange = info.Jsonparser.movRange;
         hp = info.Jsonparser.maxHp; atkBonus = 0; defBonus = 0;
         atkRangeBonus = 0; movRangeBonus = 0; weapon = info.Jsonparser.weapon;
-        img = Sprite.get_image info.Jsonparser.img; endturn = true} in
+        img = Sprite.get_image info.Jsonparser.img; endturn = true;
+        hasMoved = true} in
     print_string "creating unit\n";
     if classnum > 0
     then Ally unit_stats
@@ -54,6 +56,12 @@ let set_endturn (feunit:feunit) (b:bool) : unit =
   | Null -> ()
   | Ally stats
   | Enemy stats -> stats.endturn <- b
+
+let set_hasMoved (feunit:feunit) (b:bool) : unit =
+  match feunit with
+  | Null -> ()
+  | Ally stats
+  | Enemy stats -> stats.hasMoved<- b
 
 let add_hp (feunit:feunit) (bonus:int) : unit =
   match feunit with
@@ -103,6 +111,12 @@ let get_endturn (feunit: feunit) : bool =
   | Null -> false
   | Ally stats
   | Enemy stats -> stats.endturn
+
+let get_hasMoved (feunit: feunit) : bool =
+  match feunit with
+  | Null -> false
+  | Ally stats
+  | Enemy stats -> stats.hasMoved
 
 let draw u (x,y) w h : unit =
    match u with
