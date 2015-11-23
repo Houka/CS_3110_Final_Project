@@ -58,8 +58,6 @@ let move (x1,y1) (x2,y2) : unit =
               set_atk_bonus unit1 (get_atkBonus terrain1);
               set_def_bonus unit1 (get_defBonus terrain1);
               set_hasMoved unit1 true
-
-
   else failwith "not a valid move" *)
 
   failwith "TODO"
