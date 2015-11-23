@@ -41,14 +41,13 @@ val update: unit -> unit
 val attack: feunit -> (int*int) -> feunit -> (int*int) -> unit
 
 (* [move units terrains u1 (x1,y1) (x2,y2))] apply the action of moving from
-    [u1]'s current position (x1,y1)to a position that (x1 + x2, y1 + y2).
-    In other words (x2,y2) are relative positions. Before it applies this
-    movement on the units matrix, it must check that it is a valid move.
+    [u1]'s current position (x1,y1)to a position (x2, y2). Before it applies
+    this movement on the units matrix, it must check that it is a valid move.
 
     A valid move is the following:
       - at that position, no other unit is there
       - at that position, the terrain is traversible by the unit
-      - moving to (x1+x2,y1+y2) is in the range of the unit's movement range
+      - moving to (x2,y2) is in the range of the unit's movement range
       - there is a terrain at that position
 *)
 val move: feunit -> int * int -> int*int -> unit
