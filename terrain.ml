@@ -24,6 +24,24 @@ let get_terrain (classnum:int) : terrain =
     | "forest" ->     Forest terrain_stats
     | _ -> failwith "Invalid terrain type in json"
 
+let get_atkBonus (terrain:terrain): int =
+  match terrain with
+  | Impassable -> 0
+  | Sea stats
+  | Plain stats
+  | Mountain stats
+  | City stats
+  | Forest stats -> stats.atkBonus
+
+let get_defBonus (terrain:terrain): int =
+  match terrain with
+  | Impassable -> 0
+  | Sea stats
+  | Plain stats
+  | Mountain stats
+  | City stats
+  | Forest stats -> stats.defBonus
+
 let draw t (x,y) w h : unit =
   match t with
   | Impassable -> Graphics.set_color 0x000000;

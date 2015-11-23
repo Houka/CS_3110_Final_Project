@@ -23,34 +23,37 @@ val draw: unit -> unit
 *)
 val update: unit -> unit
 
-(* [attack units terrains u1 (x1,y1) u2 (x2,y2)] will enforce game machanics and
-    rules as it applies an attack from [u1] at location (x1,y1) to [u2] at
+(* [attack (x1,y1) (x2,y2)] will enforce game machanics and
+    rules as it applies an attack from the unit at location (x1,y1) to the unit at
     location (x2,y2). It apply the attack on the units matrix.
-    If [u1] attacking [u2] is not allowed it will failwith exception else
+    If the attack is not allowed it will failwith exception else
     it will apply damage calculated from terrain bonuses and from [u1] to [u2]
     and apply that to the unit matrix.
 
     A valid attack is the following:
-      - [u2] is in the attack range of [u1]
-      - [u2] is an enemy of [u1]
+      - Units exist at (x1,y1) and (x2,y2)
+      - Unit at (x1,y1) has endturn = false
+      - Unit at (x2,y2) is in the attack range of unit at (x1,y1)
+      - Unit at (x2,y2) is an enemy of unit at (x1,y1)
 
     (ex: if a attacks b but b is not in attack range of a then exception is thrown)
-    (ex: if a attacks b and the rules allow this then Some c will be returned
-      where c is b but with lower hp)
- *)
-val attack: feunit -> (int*int) -> feunit -> (int*int) -> unit
 
-(* [move units terrains u1 (x1,y1) (x2,y2))] apply the action of moving from
-    [u1]'s current position (x1,y1)to a position (x2, y2). Before it applies
+ *)
+val attack_unit: (int*int) -> (int*int) -> unit
+
+(* [move (x1,y1) (x2,y2))] apply the action of moving from
+    a unit at (x1,y1)to a position (x2, y2). Before it applies
     this movement on the units matrix, it must check that it is a valid move.
 
     A valid move is the following:
+      - Unit exists at x1,y1
+      - Unit at (x1,y1) has endturn = false
       - at that position, no other unit is there
-      - at that position, the terrain is traversible by the unit
+      - at the path to that position, the terrain is traversible by the unit
       - moving to (x2,y2) is in the range of the unit's movement range
       - there is a terrain at that position
 *)
-val move: feunit -> int * int -> int*int -> unit
+val move: int * int -> int * int -> unit
 
 (* [wait u1] alters that unit in the matrix so its endturn attribute says it has finished
     its turn.
