@@ -78,8 +78,14 @@ let wait (x,y) : unit =
   let endturn = get_endturn u in
   if endturn then failwith "This unit's turn is over" else set_endturn u false
 
-let endturns s: unit =
-  let switch s (a:feunit) :unit =
+let end_turns (): unit =
+  let switch (a:feunit) :unit =
+  match a with
+      | Ally _ -> set_endturn a true; set_hasMoved a true
+      | Enemy _ -> set_endturn a true; set_hasMoved a true
+      | _ -> () in
+  Array.iter (fun a -> Array.iter (switch) a) !currentUnits
+  (* let switch s (a:feunit) :unit =
   match s with
   | "Ally" -> let () =
               match a with
@@ -91,26 +97,12 @@ let endturns s: unit =
               | _ -> ()
               in ()
   | _ -> () in
-  Array.iter (fun a -> Array.iter (switch s) a) !currentUnits
-
-let start_turns s :unit =
-  let switch s (a:feunit) :unit =
-  match s with
-  | "Ally" -> let () =
-              match a with
-              | Ally _ -> set_endturn a false; set_hasMoved a false
-              | _ -> ()
-              in ()
-  | "Enemy" -> let () = match a with
-              | Enemy _ -> set_endturn a false; set_hasMoved a false
-              | _ -> ()
-              in ()
-  | _ -> () in
-  Array.iter (fun a -> Array.iter (switch s) a) !currentUnits
+  Array.iter (fun a -> Array.iter (switch s) a) !currentUnits *)
 
 let set_units (feunits:feunit array array) : unit =
   currentUnits := feunits;
   turn := 0
+
 let set_map (map:terrain array array) : unit =
   currentTerrains := map;
   turn := 0
@@ -124,7 +116,7 @@ let inc_turn (): unit  = turn := !turn + 1
 let perform_actions (actions: action list) : unit =
   let perform_act action =
   match action with
-  | Endturn -> failwith "TODO"
+  | Endturn -> end_turns ()
   | Wait (x,y) -> wait (x,y)
   | Move ((x1,y1),(x2,y2)) -> move (x1,y1) (x2,y2)
   | Attack ((x1,y1),(x2,y2)) -> attack_unit (x1,y1) (x2,y2) in
@@ -147,6 +139,7 @@ let draw_unit () : unit =
       done
   done
 
+(*checks if the turn is over for "Ally" or "Enemy"*)
 let turn_over s : bool =
   let check s (a:feunit) :bool =
   match s with
@@ -179,11 +172,58 @@ let draw () : unit =
   Hub.draw_unit_stats highlightedUnit;
   Hub.draw_terrain_stats highlightedTerrain *)
 
-let update () : unit =
-  let actions =
-    if !turn mod 2 = 0
-    then Player.update (get_units ()) (get_map ())
-    else Ai.update (get_units ()) (get_map ()) in
+(*starts start_turns for "Ally" or "Enemy"*)
+let start_turns s :unit =
+  let switch s (a:feunit) :unit =
+  match s with
+  | "Ally" -> let () =
+              match a with
+              | Ally _ -> set_endturn a false; set_hasMoved a false
+              | _ -> ()
+              in ()
+  | "Enemy" -> let () = match a with
+              | Enemy _ -> set_endturn a false; set_hasMoved a false
+              | _ -> ()
+              in ()
+  | _ -> () in
+  Array.iter (fun a -> Array.iter (switch s) a) !currentUnits
 
-  (* inc_turn (); *)
-  perform_actions actions
+(*count allies*)
+let count_allies (): int =
+  let count = ref 0 in
+  let () = for y = 0 to (Array.length !currentUnits)-1 do
+                for x = 0 to (Array.length !currentUnits.(0))-1 do
+                  match (!currentUnits.(y).(x)) with
+                  | Ally _ -> incr count
+                  | _ -> ()
+                done
+            done in
+  !count
+
+(*count enemies*)
+let count_enemies (): int =
+  let count = ref 0 in
+  let () = for y = 0 to (Array.length !currentUnits)-1 do
+                for x = 0 to (Array.length !currentUnits.(0))-1 do
+                  match (!currentUnits.(y).(x)) with
+                  | Enemy _ -> incr count
+                  | _ -> ()
+                done
+            done in
+  !count
+
+let rec update () : unit =
+  if count_allies () = 0 then print_string "Enemies win." else
+  if count_enemies () = 0 then print_string "You win!" else
+  (*if turn is even it is Player's turn; if it is odd it is enemy turn*)
+  if !turn mod 2 = 0
+    then if not (turn_over "Ally")
+           then
+             let actions = Player.update (get_units ()) (get_map ())
+             in perform_actions actions; draw () ;update()
+           else ((start_turns "Enemy"); (inc_turn ()); update ())
+    else if not (turn_over "Enemy")
+           then
+             let actions = Ai.update (get_units ()) (get_map ()) in
+             perform_actions actions; draw ();update()
+           else start_turns "Ally"; inc_turn (); update ()

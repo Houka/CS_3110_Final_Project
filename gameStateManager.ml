@@ -72,5 +72,5 @@ let update () : unit =
   GameMechanics.update ()
 
 let draw () : unit =
-  GameMechanics.draw();
+  GameMechanics.draw()
 
