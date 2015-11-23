@@ -1,7 +1,7 @@
 open Terrain
 open Feunit
 open Constants
-open Ai
+open PathFinder
 open Player
 
 let turn = ref 0
@@ -64,12 +64,24 @@ let move (x1,y1) (x2,y2) : unit =
 
   failwith "TODO"
 
-let endturns : unit =
-  failwith "TODO"
-
 let wait (u: feunit) : unit =
   let endturn = get_endturn u in
   if endturn then failwith "This unit's turn is over" else set_endturn u false
+
+let endturns s: unit =
+  let switch s (a:feunit) :unit =
+  match s with
+  | "Ally" ->
+              match a with
+              | Ally _ -> set_endturn a true
+              | _ -> ()
+  | "Enemy" -> match a with
+              | Enemy _ -> set_endturn a true
+              | _ -> () in
+  Array.iter (fun a -> Array.iter (switch s) a) currentUnits
+
+let start_turns s :unit =
+  failwith "TODO"
 
 let set_units (feunits:feunit array array) : unit =
   currentUnits := feunits;
@@ -87,7 +99,7 @@ let to_2d_list (matrix: 'a array array) : 'a matrix =
 let get_units () : feunit matrix =
   to_2d_list !currentUnits
 let get_map () : terrain matrix =
-  to_2d_list !currentTerrains
+  to_list2d_list !currentTerrains
 
 (* increments the turn counter *)
 let inc_turn (): unit  = turn := !turn + 1
