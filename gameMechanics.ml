@@ -8,6 +8,18 @@ let turn = ref 0
 let currentUnits = ref [||]
 let currentTerrains = ref [||]
 
+(* converts an 'a array array to 'a matrix *)
+let to_2d_list (matrix: 'a array array) : 'a matrix =
+  let first_layer = Array.to_list matrix in
+  List.map (fun a -> Array.to_list a) first_layer
+
+(* private getters *)
+let get_units () : feunit matrix =
+  to_2d_list !currentUnits
+let get_map () : terrain matrix =
+  to_2d_list !currentTerrains
+
+
 (*check if a unit exists at point x,y*)
 let exists (x,y) =
   if !currentUnits.(y).(x) <> Null then true else false
@@ -51,35 +63,50 @@ let attack_unit (x1,y1) (x2,y2): unit =
 
 
 let move (x1,y1) (x2,y2) : unit =
-  (* let u = get_unit (x1,y1) in
+  let u = get_unit (x1,y1) in
   if get_endturn u then failwith "unit cannot move, turn is over" else
-  let path = stuff in
-  if ____ then let terrain1 = get_terrain (x2,y2) in
-              set_atk_bonus unit1 (get_atkBonus terrain1);
-              set_def_bonus unit1 (get_defBonus terrain1);
-              set_hasMoved unit1 true
-  else failwith "not a valid move" *)
+  let path = shortest_path (x1,y1) (x2,y2) (get_units ()) (get_map ()) in
+  if List.length path.path > 0 then let terrain1 = get_terrain (x2,y2) in
+              set_atk_bonus u (get_atkBonus terrain1);
+              set_def_bonus u (get_defBonus terrain1);
+              set_hasMoved u true
+  else failwith "not a valid move"
 
-  failwith "TODO"
 
-let wait (u: feunit) : unit =
+let wait (x,y) : unit =
+  let u = get_unit (x,y) in
   let endturn = get_endturn u in
   if endturn then failwith "This unit's turn is over" else set_endturn u false
 
 let endturns s: unit =
   let switch s (a:feunit) :unit =
   match s with
-  | "Ally" ->
+  | "Ally" -> let () =
               match a with
-              | Ally _ -> set_endturn a true
+              | Ally _ -> set_endturn a true; set_hasMoved a true
               | _ -> ()
-  | "Enemy" -> match a with
-              | Enemy _ -> set_endturn a true
-              | _ -> () in
-  Array.iter (fun a -> Array.iter (switch s) a) currentUnits
+              in ()
+  | "Enemy" -> let () = match a with
+              | Enemy _ -> set_endturn a true; set_hasMoved a true
+              | _ -> ()
+              in ()
+  | _ -> () in
+  Array.iter (fun a -> Array.iter (switch s) a) !currentUnits
 
 let start_turns s :unit =
-  failwith "TODO"
+  let switch s (a:feunit) :unit =
+  match s with
+  | "Ally" -> let () =
+              match a with
+              | Ally _ -> set_endturn a false; set_hasMoved a false
+              | _ -> ()
+              in ()
+  | "Enemy" -> let () = match a with
+              | Enemy _ -> set_endturn a false; set_hasMoved a false
+              | _ -> ()
+              in ()
+  | _ -> () in
+  Array.iter (fun a -> Array.iter (switch s) a) !currentUnits
 
 let set_units (feunits:feunit array array) : unit =
   currentUnits := feunits;
@@ -88,31 +115,53 @@ let set_map (map:terrain array array) : unit =
   currentTerrains := map;
   turn := 0
 
-(* converts an 'a array array to 'a matrix *)
-let to_2d_list (matrix: 'a array array) : 'a matrix =
-  let first_layer = Array.to_list matrix in
-  List.map (fun a -> Array.to_list a) first_layer
 
-(* private getters *)
-let get_units () : feunit matrix =
-  to_2d_list !currentUnits
-let get_map () : terrain matrix =
-  to_list2d_list !currentTerrains
 
 (* increments the turn counter *)
 let inc_turn (): unit  = turn := !turn + 1
 
 (* performs the actions list and updates the map and units based on the actions*)
 let perform_actions (actions: action list) : unit =
-  failwith "TODO"
+  let perform_act action =
+  match action with
+  | Wait (x,y) -> wait (x,y)
+  | Move ((x1,y1),(x2,y2)) -> move (x1,y1) (x2,y2)
+  | Attack ((x1,y1),(x2,y2)) -> attack_unit (x1,y1) (x2,y2) in
+  List.iter perform_act actions
 
 (* Goes through each terrain in currentTerrains and calls their draw functions *)
 let draw_terrain () : unit =
-  failwith "TODO"
+   for y = 0 to Array.length !currentTerrains do
+      for x = 0 to Array.length !currentTerrains.(0) do
+        Terrain.draw (!currentTerrains.(y).(x)) (x,y) gridSide gridSide
+      done
+  done
+
 
 (* Goes through each unit in currentUnits and calls their draw functions *)
 let draw_unit () : unit =
-  failwith "TODO"
+  for y = 0 to Array.length !currentUnits do
+      for x = 0 to Array.length !currentUnits.(0) do
+        Feunit.draw (!currentUnits.(y).(x)) (x,y) gridSide gridSide
+      done
+  done
+
+let turn_over s : bool =
+  let check s (a:feunit) :bool =
+  match s with
+  | "Ally" -> let over =
+              match a with
+              |  Ally _ -> get_endturn a
+              |  _ -> true
+              in over
+  | "Enemy" -> let over =
+              match a with
+              | Enemy _ -> get_endturn a
+              | _ -> true
+              in over
+  | _ -> true in
+  let check_array ary = Array.fold_left (fun a b -> a && check s b) true ary in
+  Array.fold_left (fun a b -> a && check_array b) true !currentUnits
 
 let draw () : unit =
   (* draw map objects first *)
@@ -133,7 +182,7 @@ let update () : unit =
   let actions =
     if !turn mod 2 = 0
     then Player.update (get_units ()) (get_map ())
-    else failwith "TODO" (* Ai.update (get_units ()) (get_map ()) *) in
+    else Ai.update (get_units ()) (get_map ()) in
 
   inc_turn ();
   perform_actions actions

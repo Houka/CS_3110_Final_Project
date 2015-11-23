@@ -55,7 +55,7 @@ val attack_unit: (int*int) -> (int*int) -> unit
 *)
 val move: int * int -> int * int -> unit
 
-(* [wait u1] alters that unit in the matrix so its endturn attribute says it has finished
-    its turn.
+(* [wait (x,y)] alters the unit at x,y in the matrix so its endturn attribute
+    says it has finished its turn.
  *)
-val wait: feunit -> unit
+val wait: int*int -> unit
