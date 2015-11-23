@@ -91,6 +91,12 @@ let get_percent_hp (feunit:feunit) :int =
   | Enemy stats ->
       int_of_float ((float_of_int stats.hp) /. (float_of_int stats.maxHp))
 
+let get_endturn (feunit: feunit) : bool =
+  match feunit with
+  | Null -> false
+  | Ally stats
+  | Enemy stats -> stats.endturn
+
 let draw u (x,y) w h : unit =
    match u with
   | Null -> ()
