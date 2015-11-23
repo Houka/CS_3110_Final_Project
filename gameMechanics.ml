@@ -1,7 +1,7 @@
 open Terrain
 open Feunit
 open Constants
-(* open Ai *)
+open Ai
 open Player
 
 let turn = ref 0
