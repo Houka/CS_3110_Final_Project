@@ -18,5 +18,9 @@ type terrain = Impassable | Sea of stats | Plain of stats
  *)
 val get_terrain : int -> terrain
 
+
+(*getters*)
+val get_atkBonus: terrain -> int
+val get_defBonus: terrain -> int
 (* [draw t (x,y) w h] draws the terrain's image at (x,y) with width [w] and height [h] *)
 val draw : terrain -> (int*int) -> int -> int -> unit
