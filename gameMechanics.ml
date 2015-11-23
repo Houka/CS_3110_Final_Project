@@ -10,9 +10,9 @@ let currentTerrains = ref [||]
 
 
 (* legal actions *)
-let attack (u1: feunit) (u2: feunit) : unit =
+let attack (u1: feunit) (x1,y1) (u2: feunit) (x2,y2): unit =
   failwith "TODO"
-let move (u1: feunit) (x,y) : unit =
+let move (u1: feunit) (x1,y1) (x2,y2) : unit =
   failwith "TODO"
 let wait (u1: feunit) : unit =
   failwith "TODO"

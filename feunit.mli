@@ -9,7 +9,7 @@ type stats = { name: string; maxHp: int;
               atk: int; def: int; atkRange: int; movRange: int;
               mutable hp: int; mutable atkBonus: int; mutable defBonus: int;
               mutable atkRangeBonus: int; mutable movRangeBonus: int;
-              weapon: string; img: Sprite.image; endturn: bool }
+              weapon: string; img: Sprite.image; mutable endturn: bool }
 (* Represents a fire emblem unit *)
 type feunit = Null | Ally of stats | Enemy of stats
 
@@ -23,6 +23,7 @@ val set_atk_bonus : feunit -> int -> unit
 val set_def_bonus : feunit -> int -> unit
 val set_mov_bonus : feunit -> int -> unit
 val set_range_bonus : feunit -> int -> unit
+val set_end_turn : feunit -> bool -> unit
 val add_hp : feunit -> int -> unit (* note: can add negatives, duh *)
 
 (* getters *)

@@ -4,7 +4,7 @@ type stats = { name: string; maxHp: int;
               atk: int; def: int; atkRange: int; movRange: int;
               mutable hp: int; mutable atkBonus: int; mutable defBonus: int;
               mutable atkRangeBonus: int; mutable movRangeBonus: int;
-              weapon: string; img: Sprite.image; endturn: bool }
+              weapon: string; img: Sprite.image; mutable endturn: bool }
 
 type feunit = Null | Ally of stats | Enemy of stats
 
@@ -47,6 +47,12 @@ let set_range_bonus (feunit:feunit) (bonus:int) : unit =
   | Null -> ()
   | Ally stats
   | Enemy stats -> stats.atkRangeBonus <- bonus
+
+let set_end_turn (feunit:feunit) (b:bool) : unit =
+  match feunit with
+  | Null -> ()
+  | Ally stats
+  | Enemy stats -> stats.endturn <- b
 
 let add_hp (feunit:feunit) (bonus:int) : unit =
   match feunit with

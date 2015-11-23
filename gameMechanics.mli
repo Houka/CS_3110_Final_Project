@@ -23,8 +23,9 @@ val draw: unit -> unit
 *)
 val update: unit -> unit
 
-(* [attack units terrains u1 u2] will enforce game machanics and rules as it
-    applies an attack from [u1] to [u2]. It apply the attack on the units matrix.
+(* [attack units terrains u1 (x1,y1) u2 (x2,y2)] will enforce game machanics and
+    rules as it applies an attack from [u1] at location (x1,y1) to [u2] at
+    location (x2,y2). It apply the attack on the units matrix.
     If [u1] attacking [u2] is not allowed it will failwith exception else
     it will apply damage calculated from terrain bonuses and from [u1] to [u2]
     and apply that to the unit matrix.
@@ -37,20 +38,20 @@ val update: unit -> unit
     (ex: if a attacks b and the rules allow this then Some c will be returned
       where c is b but with lower hp)
  *)
-val attack: feunit -> feunit -> unit
+val attack: feunit -> (int*int) -> feunit -> (int*int) -> unit
 
-(* [move units terrains u1 (x,y)] apply the action of moving from [u1]'s current
-    position to a position that is ([u1].x + x, [u1].y + y). In other words (x,y)
-    are relative positions. Before it applies this movement on the units matrix,
-    it must check that it is a valid move.
+(* [move units terrains u1 (x1,y1) (x2,y2))] apply the action of moving from
+    [u1]'s current position (x1,y1)to a position that (x1 + x2, y1 + y2).
+    In other words (x2,y2) are relative positions. Before it applies this
+    movement on the units matrix, it must check that it is a valid move.
 
     A valid move is the following:
       - at that position, no other unit is there
       - at that position, the terrain is traversible by the unit
-      - moving to (x,y) is in the range of the unit's movement range
+      - moving to (x1+x2,y1+y2) is in the range of the unit's movement range
       - there is a terrain at that position
 *)
-val move: feunit -> int * int -> unit
+val move: feunit -> int * int -> int*int -> unit
 
 (* [wait u1] alters that unit in the matrix so its endturn attribute says it has finished
     its turn.
