@@ -4,20 +4,46 @@ open Constants
 open PathFinder
 
 
+let find_first_units (units: feunit matrix) : ((int*int) * (int*int) list) =
+ let rec row (ulist : feunit matrix) el al i l  =
+   match ulist with
+   | [] -> (el, al)
+   | rh::rt -> let rec column rlist el1 al1 i l =
+                 (match rlist with
+                  | [] -> (el1, al1)
+                  | hd::tl -> (match hd with
+                              | Enemy s -> if s.endturn then
+                                             column tl el1 al1 (i + 1) l
+                                           else
+                                             column tl (i,l) al1 (i + 1) l
+                              | Ally s -> column tl el1 ((i, l)::al1) (i + 1) l
+                              | Null -> column tl el1 al1 (i + 1) l))
+                in
+                let (a, b) = column rh (-1,-1) [] 0 l in
+                if not (a = (-1, -1)) then
+                  row rt a (b@al) 0 (l + 1)
+                else
+                  row rt el (b@al) 0 (l + 1)
+  in row units (-1,-1) [] 0 0
+
+
 (*Returns list of move action given an unit. Move action is limited by the given
   unit's movRange*)
 let move (d: dest_path) (enemy: feunit) : action list =
-  let es = match enemy with | Enemy s | Ally s -> s | _ -> failwith "invalid" in
-  let path = d.path in
-  let rec loop p actions c =
-    match p with
-    | [] -> actions
-    | (x,y)::tl ->
-        if c >= (es.movRange - 1) then
-          [Move (d.start, (x, y))]
-        else
-          loop tl actions (c + 1)
-  in loop path [] 0
+  if d.cost = max_int then
+    [Wait d.start]
+  else
+    let es = match enemy with | Enemy s | Ally s -> s | _ -> failwith "invalid" in
+    let path = d.path in
+    let rec loop p actions c =
+      match p with
+      | [] -> actions
+      | (x,y)::tl ->
+          if c >= (es.movRange - 1) then
+            [Move (d.start, (x, y)); Wait (x, y)]
+          else
+            loop tl actions (c + 1)
+    in loop path [] 0
 
 (*Returns list of move action ending with an attack action. List of action is
   limited by given unit's movRange and atkRange*)
@@ -104,18 +130,19 @@ let find_effective (units: feunit matrix) (weapon: string)
 let update (units:feunit matrix) (terrains: terrain matrix)
 : action list  =
   (*Finds the index of enemy and ally unit in units*)
-  let (e, a) = find_units units in
-  let enemies = e in
-  let players = a in
+  let (e, a) = find_first_units units in
+  let enemy = e in
 
-  (*Loop through enemy feunit *)
-  let rec create_action enemy =
-    match enemy with
-    | [] -> []
-    | hd::tl ->
+  if enemy = (-1, -1) then
+    []
+  else
+    let players = a in
+
+    (*Loop through enemy feunit *)
+    let rec create_action enemy =
         let paths =
-          List.map (fun x -> shortest_path hd x units terrains) players in
-        let e = match (grab units hd) with
+          List.map (fun x -> shortest_path enemy x units terrains) players in
+        let e = match (grab units enemy) with
                 | Enemy s | Ally s -> s | _ -> failwith "invalid" in
         let within =
           List.filter (fun d -> d.cost <= (e.atkRange + e.movRange)) paths in
@@ -123,33 +150,33 @@ let update (units:feunit matrix) (terrains: terrain matrix)
           (*Check healths, if more than one target then finds most effectiveness*)
           let targets = find_lowest units within in
           if List.length targets > 1 then
-            let weapon = match (grab units hd) with
+            let weapon = match (grab units enemy) with
                          | Enemy s | Ally s -> s.weapon
                          | _ -> failwith "invalid" in
             let target = find_effective units weapon targets in
-            let actions = move_attack target (grab units hd) in
-            actions@(create_action tl)
+            let actions = move_attack target (grab units enemy) in
+            actions
           else
             let actions =
               match targets with
               | [] -> []
-              | dh::_ -> move_attack dh (grab units hd)
+              | dh::_ -> move_attack dh (grab units enemy)
             in
-            actions@(create_action tl)
+            actions
         else if List.length within = 1 then
           (*Atack closest Unit*)
           let actions =
             match within with
             | [] -> []
-            | dh::_ -> move_attack dh (grab units hd)
+            | dh::_ -> move_attack dh (grab units enemy)
           in
-          actions@(create_action tl)
+          actions
         else
           (*Move towards closest Unit*)
           let closest =
           List.fold_left (fun a x -> if x.cost < a.cost then x else a)
           (List.nth paths 0) paths in
-          let actions = move closest (grab units hd) in
-          actions@(create_action tl)
-  in
-  create_action enemies
+          let actions = move closest (grab units enemy) in
+          actions
+    in
+    create_action enemy
