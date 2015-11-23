@@ -23,7 +23,7 @@ val set_atk_bonus : feunit -> int -> unit
 val set_def_bonus : feunit -> int -> unit
 val set_mov_bonus : feunit -> int -> unit
 val set_range_bonus : feunit -> int -> unit
-val set_end_turn : feunit -> bool -> unit
+val set_endturn : feunit -> bool -> unit
 val add_hp : feunit -> int -> unit (* note: can add negatives, duh *)
 
 (* getters *)

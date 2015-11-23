@@ -48,7 +48,7 @@ let set_range_bonus (feunit:feunit) (bonus:int) : unit =
   | Ally stats
   | Enemy stats -> stats.atkRangeBonus <- bonus
 
-let set_end_turn (feunit:feunit) (b:bool) : unit =
+let set_endturn (feunit:feunit) (b:bool) : unit =
   match feunit with
   | Null -> ()
   | Ally stats

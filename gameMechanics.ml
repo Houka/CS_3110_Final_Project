@@ -12,10 +12,11 @@ let currentTerrains = ref [||]
 (* legal actions *)
 let attack (u1: feunit) (x1,y1) (u2: feunit) (x2,y2): unit =
   failwith "TODO"
-let move (u1: feunit) (x1,y1) (x2,y2) : unit =
+let move (u: feunit) (x1,y1) (x2,y2) : unit =
   failwith "TODO"
-let wait (u1: feunit) : unit =
-  (* let endturn = get_endturn u1 in  *)failwith "TODO"
+let wait (u: feunit) : unit =
+  let endturn = get_endturn u in
+  if endturn then failwith "This unit's turn is over" else set_endturn u false
 
 let set_units (feunits:feunit array array) : unit =
   currentUnits := feunits;
