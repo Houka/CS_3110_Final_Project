@@ -18,5 +18,5 @@ val draw_unit_stats : feunit -> unit
 (* Draws to the GUI all necessary stats on the given terrain *)
 val draw_terrain_stats : terrain -> unit
 
-(* Draws a display string on the top lvl og the GUI *)
+(* Draws a display string on the top lvl of the GUI *)
 val draw_string: string -> int*int -> unit

@@ -19,8 +19,8 @@ let get_unit (classnum: int) : feunit =
         atkRange = info.Jsonparser.atkRange; movRange = info.Jsonparser.movRange;
         hp = info.Jsonparser.maxHp; atkBonus = 0; defBonus = 0;
         atkRangeBonus = 0; movRangeBonus = 0; weapon = info.Jsonparser.weapon;
-        img = Sprite.get_image info.Jsonparser.img; endturn = true;
-        hasMoved = true} in
+        img = Sprite.(resize (get_image info.Jsonparser.img) Constants.gridSide Constants.gridSide);
+        endturn = true; hasMoved = true} in
     print_string "creating unit\n";
     if classnum > 0
     then Ally unit_stats
@@ -118,13 +118,16 @@ let get_hasMoved (feunit: feunit) : bool =
   | Ally stats
   | Enemy stats -> stats.hasMoved
 
-let draw u (x,y) w h : unit =
+let draw u (x,y) : unit =
    match u with
   | Null -> ()
   | Ally stats
   | Enemy stats ->
-                  let img = stats.img in
-                  Sprite.(draw (resize img w h) (x,y))
+    let img = stats.img in
+    let x' = x*Constants.gridSide in
+    let y' =
+      (-y-1+Constants.(gameHeight/gridSide))*Constants.gridSide in
+    Sprite.(draw img (x',y'))
 
 let attack (unit1: feunit) (unit2:feunit) : feunit*feunit =
   (*weapon triangle*)

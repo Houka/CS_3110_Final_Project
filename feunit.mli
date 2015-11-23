@@ -37,8 +37,9 @@ val get_percent_hp : feunit -> int (* hp/maxHp * 100 *)
 val get_weapon : feunit -> string
 val get_endturn : feunit -> bool
 val get_hasMoved: feunit -> bool
-(* [draw u (x,y) w h] draws the unit's image at (x,y) with width [w] and height [h] *)
-val draw : feunit -> (int*int) -> int -> int -> unit
+
+(* [draw u (x,y)] draws the unit's image at (x,y)  *)
+val draw : feunit -> (int*int) -> unit
 
 (*attack a b carries out an attack from a on b*)
 val attack: feunit -> feunit -> feunit*feunit

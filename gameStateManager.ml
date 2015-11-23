@@ -12,7 +12,10 @@ let currentState = ref "menu"
 let construct_terrain_matrix matrix =
   let traverse_rows a x =
     let nrow =
-      List.fold_left (fun a' x' -> Array.append a' [|(get_terrain x')|]) [||] x in
+      List.fold_left (fun a' x' ->
+        let newterrain = (get_terrain x') in
+        Array.append a' [|newterrain|]
+      ) [||] x in
     Array.append a [|nrow|] in
   List.fold_left (traverse_rows) [||] matrix
 
@@ -26,6 +29,24 @@ let construct_feunit_matrix matrix =
     Array.append a [|nrow|] in
   List.fold_left (traverse_rows) [||] matrix
 
+(* apply the terrain bonuses to each unit *)
+let apply_bonus_to_units units terrains : unit=
+  for y = 0 to (Array.length units)-1 do
+    for x = 0 to (Array.length (units.(0)))-1 do
+      let u = units.(y).(x) in
+      match u with
+      | Null -> ()
+      | _ ->
+        let t = match terrains.(y).(x) with
+          | Impassable -> failwith "Unit on Impassable terrain"
+          | Sea t| Plain t| Mountain t| City t | Forest t -> t in
+        set_atk_bonus u (t.atkBonus);
+        set_def_bonus u (t.defBonus);
+        set_mov_bonus u (0); (* unimplemented feature *)
+        set_range_bonus u (0) (* unimplemented feature *)
+    done
+  done
+
 (* Takes in a [levelname] then gets that level's data from the Level module,
  *  constructs the level by assigning currentState with [levelname],
  *  construct a list of units based on info from the Level and assigns that to
@@ -34,8 +55,12 @@ let construct_feunit_matrix matrix =
  *)
 let set_level_data (levelname: string) : unit =
   let l = get_level levelname in
-  GameMechanics.set_units (construct_feunit_matrix l.unit_matrix);
-  GameMechanics.set_map (construct_terrain_matrix l.terrain_matrix)
+  let t = construct_terrain_matrix l.terrain_matrix in
+  let u = construct_feunit_matrix l.unit_matrix in
+  apply_bonus_to_units u t;
+  GameMechanics.set_units (u);
+  GameMechanics.set_map (t)
+
 
 let get_current_state () : string = !currentState
 

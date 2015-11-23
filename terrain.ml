@@ -12,8 +12,8 @@ let get_terrain (classnum:int) : terrain =
     let info = List.assoc classnum terrain_list in
     let terrain_type = info.Jsonparser.terrain_type in
     let terrain_stats = {name = info.Jsonparser.name;
-        atkBonus = info.Jsonparser.atkBonus; defBonus = info.Jsonparser.defBonus;
-        img = Sprite.get_image info.Jsonparser.img} in
+      atkBonus = info.Jsonparser.atkBonus; defBonus = info.Jsonparser.defBonus;
+      img = Sprite.(resize (get_image info.Jsonparser.img) Constants.gridSide Constants.gridSide)} in
     print_string "creating terrain \n";
     match terrain_type with
     | "impassable" -> Impassable
@@ -42,10 +42,13 @@ let get_defBonus (terrain:terrain): int =
   | City stats
   | Forest stats -> stats.defBonus
 
-let draw t (x,y) w h : unit =
+let draw t (x,y) : unit =
+  let x' = x*Constants.gridSide in
+  let y' = (-y-1+Constants.(gameHeight/gridSide))*Constants.gridSide in
   match t with
-  | Impassable -> Graphics.set_color 0x000000;
-                    Graphics.draw_rect x y w h
+  | Impassable ->
+    Graphics.set_color 0x000000;
+    Graphics.fill_rect x' y' Constants.gridSide Constants.gridSide
   | Sea stats | Plain stats | Mountain stats | City stats | Forest stats ->
-      let img = stats.img in
-      Sprite.(draw (resize img w h) (x,y))
+    let img = stats.img in
+    Sprite.(draw img (x',y'))

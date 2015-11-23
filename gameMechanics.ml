@@ -124,6 +124,7 @@ let inc_turn (): unit  = turn := !turn + 1
 let perform_actions (actions: action list) : unit =
   let perform_act action =
   match action with
+  | Endturn -> failwith "TODO"
   | Wait (x,y) -> wait (x,y)
   | Move ((x1,y1),(x2,y2)) -> move (x1,y1) (x2,y2)
   | Attack ((x1,y1),(x2,y2)) -> attack_unit (x1,y1) (x2,y2) in
@@ -131,18 +132,18 @@ let perform_actions (actions: action list) : unit =
 
 (* Goes through each terrain in currentTerrains and calls their draw functions *)
 let draw_terrain () : unit =
-   for y = 0 to Array.length !currentTerrains do
-      for x = 0 to Array.length !currentTerrains.(0) do
-        Terrain.draw (!currentTerrains.(y).(x)) (x,y) gridSide gridSide
+   for y = 0 to (Array.length !currentTerrains)-1 do
+      for x = 0 to (Array.length !currentTerrains.(0))-1 do
+        Terrain.draw (!currentTerrains.(y).(x)) (x,y)
       done
   done
 
 
 (* Goes through each unit in currentUnits and calls their draw functions *)
 let draw_unit () : unit =
-  for y = 0 to Array.length !currentUnits do
-      for x = 0 to Array.length !currentUnits.(0) do
-        Feunit.draw (!currentUnits.(y).(x)) (x,y) gridSide gridSide
+  for y = 0 to (Array.length !currentUnits)-1 do
+      for x = 0 to (Array.length !currentUnits.(0))-1 do
+        Feunit.draw (!currentUnits.(y).(x)) (x,y)
       done
   done
 
@@ -169,14 +170,14 @@ let draw () : unit =
   draw_unit ();
 
   (* for Player's cursor drawings *)
-  Player.draw();
+  Player.draw()
 
-  (* for Hub drawings *)
+  (* for Hub drawings *)(*
   let cursor = Player.get_cursor () in
   let highlightedUnit = !currentUnits.(cursor.y).(cursor.x) in
   let highlightedTerrain = !currentTerrains.(cursor.y).(cursor.x) in
   Hub.draw_unit_stats highlightedUnit;
-  Hub.draw_terrain_stats highlightedTerrain
+  Hub.draw_terrain_stats highlightedTerrain *)
 
 let update () : unit =
   let actions =
@@ -184,5 +185,5 @@ let update () : unit =
     then Player.update (get_units ()) (get_map ())
     else Ai.update (get_units ()) (get_map ()) in
 
-  inc_turn ();
+  (* inc_turn (); *)
   perform_actions actions
