@@ -24,6 +24,7 @@ let get_unit (classnum: int) : feunit =
     then Ally unit_stats
     else Enemy unit_stats
 
+
 let set_atk_bonus (feunit:feunit) (bonus:int) : unit =
   match feunit with
   | Null -> ()
@@ -91,6 +92,12 @@ let get_percent_hp (feunit:feunit) :int =
   | Enemy stats ->
       int_of_float ((float_of_int stats.hp) /. (float_of_int stats.maxHp))
 
+let get_weapon (feunit:feunit) :string =
+  match feunit with
+  | Null -> ""
+  | Ally stats
+  | Enemy stats -> stats.weapon
+
 let get_endturn (feunit: feunit) : bool =
   match feunit with
   | Null -> false
@@ -104,3 +111,25 @@ let draw u (x,y) w h : unit =
   | Enemy stats ->
                   let img = stats.img in
                   Sprite.(draw (resize img w h) (x,y))
+
+let attack (unit1: feunit) (unit2:feunit) : feunit*feunit =
+  (*weapon triangle*)
+  let weapon_bonus (a:feunit) (b:feunit) : int =
+    let w1 = get_weapon a in
+    let w2 = get_weapon b in
+
+    match w1,w2 with
+    | "sword", "axe" -> 2
+    | "sword", "lance" -> -2
+    | "lance", "axe" -> -2
+    | "lance", "sword" -> 2
+    | "axe", "sword" -> -2
+    | "axe", "lance" -> 2
+    | _ -> 0 in
+
+    let hp_difference = (get_total_atk unit1) - (get_total_def unit2) +
+                        (weapon_bonus unit1 unit2) in
+
+    let () =if hp_difference > 0 then (add_hp unit2 (-1*hp_difference))
+                                  else () in
+    if get_percent_hp unit2 <=0 then (unit1, Null) else (unit1,unit2)
