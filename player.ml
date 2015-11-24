@@ -9,7 +9,7 @@ type cursor = {x: int; y: int; color: int}
 let selection_menu = ref ["Wait";"End Turn";"Attack";"Move"]
 
 (* player vars *)
-let player_cursor = ref {x=0;y=0;color=0xFF0000}
+let player_cursor = ref {x=0;y=0;color=colorNormal}
 let selected = ref false
 
 let get_cursor () : cursor = !player_cursor
@@ -52,7 +52,10 @@ let select_event (u :feunit) (t: terrain): Constants.action list =
   | (true,'s') -> failwith "TODO"
   | (true,'d') -> failwith "TODO"
   | (true,'j') -> failwith "TODO"
-  | (true,'k') -> selected := false; []
+  | (true,'k') -> let c = get_cursor() in
+                  print_string "player unselected";
+                  player_cursor := {x=c.x; y=c.y; color=colorNormal};
+                  selected := false; []
   | _ -> failwith "TODO" (* keyboard inputs to make option menu *)
 
 
@@ -65,7 +68,10 @@ let deselect_event (units :feunit matrix) (terrains: terrain matrix)
   | (true,'a') -> move_player_cursor_x (-1); []
   | (true,'s') -> move_player_cursor_y (1); []
   | (true,'d') -> move_player_cursor_x (1); []
-  | (true,'j') -> selected := true; []
+  | (true,'j') -> let c = get_cursor() in
+                  print_string "player selected";
+                  player_cursor := {x=c.x; y=c.y; color=colorSelected};
+                  selected := true; []
   | _ -> []
 
 (* gets the center x,y pos of the player's selection box *)
@@ -74,20 +80,41 @@ let get_center_pt (): int*int =
   (cursor.x*Constants.gameWidth+Constants.gridSide/2,
   cursor.y*Constants.gameHeight+Constants.gridSide/2)
 
+let draw_selection () : unit =
+  if !selected then
+  let (centerX, centerY) = get_center_pt() in
+    let (longestWidth, longestHeight) =
+      List.fold_left (fun a x ->
+        let len = Graphics.text_size (x) in
+        if len>a then len else a
+      ) (0,0) !selection_menu in
+    let draw_strings a = () in
+
+    (* draws selection containment box *)
+    Graphics.fill_rect centerX centerY longestWidth
+                      (longestHeight*List.length !selection_menu);
+    draw_strings (
+      List.fold_right (
+        fun x a -> Hub.draw_string x (centerX,centerY+a*longestHeight); a+1
+      ) !selection_menu 0
+    )
+  else
+    ()
+
 let draw () : unit =
+  let (centerX, centerY) = get_center_pt() in
   (* drawing the player cursor *)
   Graphics.set_color 0xFF0000;
-  Graphics.fill_rect ((get_cursor()).x*Constants.gridSide)
-        ((-(get_cursor()).y-1+Constants.(gameHeight/gridSide))*Constants.gridSide)
-        (Constants.gridSide) (Constants.gridSide)
+  Graphics.draw_rect ((get_cursor()).x*Constants.gridSide)
+        ((-(get_cursor()).y-1+Constants.(gameHeight/gridSide))*Constants.gridSide-1)
+        (Constants.gridSide) (Constants.gridSide);
+
+  (* draws a cross on center of cursor *)
+  Graphics.moveto centerX centerY;
+  Graphics.draw_char '+';
 
   (* drawing the selection menu *)
-  (* if !selected then
-    let draw_option (x:string) () : unit =
-      Hub.draw_string
-    List.fold_right (draw_option) selection_menu ()
-  else
-    () *)
+  draw_selection ()
 
 let update (units :feunit matrix) (terrains: terrain matrix)
   : Constants.action list =

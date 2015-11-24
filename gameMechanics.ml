@@ -213,17 +213,25 @@ let count_enemies (): int =
   !count
 
 let rec update () : unit =
-  if count_allies () = 0 then print_string "Enemies win." else
-  if count_enemies () = 0 then print_string "You win!" else
+  if count_allies () = 0 then print_string "Enemies win.\n" else
+  if count_enemies () = 0 then print_string "You win!\n" else
   (*if turn is even it is Player's turn; if it is odd it is enemy turn*)
-  if !turn mod 2 = 0
-    then if not (turn_over "Ally")
-           then
-             let actions = Player.update (get_units ()) (get_map ())
-             in perform_actions actions; draw () ;update()
-           else ((start_turns "Enemy"); (inc_turn ()); update ())
-    else if not (turn_over "Enemy")
-           then
-             let actions = Ai.update (get_units ()) (get_map ()) in
-             perform_actions actions; draw ();update()
-           else start_turns "Ally"; inc_turn (); update ()
+  if !turn mod 2 = 1
+  then
+      if not (turn_over "Ally")
+      then
+        let actions = Player.update (get_units ()) (get_map ()) in
+        perform_actions actions
+      else
+        (start_turns "Enemy";
+        inc_turn ())
+  else
+      if not (turn_over "Enemy")
+      then
+        let actions = Ai.update (get_units ()) (get_map ()) in
+        perform_actions actions;
+        draw ();
+        update()
+      else
+        start_turns "Ally";
+        inc_turn ()

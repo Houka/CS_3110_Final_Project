@@ -8,8 +8,7 @@ let rec update input =
   match input.key with
   | 'q' ->  (* quit qui *)
             close_graph ()
-  | x -> Printf.printf "Keypressed: %c\n" x;
-          flush_all ();
+  | x -> flush_all ();
           (* keyboard input updates *)
           InputManager.set_keypressed input.keypressed input.key;
 
