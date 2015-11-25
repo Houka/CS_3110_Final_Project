@@ -75,7 +75,7 @@ let attack_unit (x1,y1) (x2,y2): unit =
                                             else num_enemies := !num_enemies - 1))
         else ()
       else ()
-    in set_endturn unit1 true(* ;num_usable_units := !num_usable_units-1 *)
+    in set_endturn unit1 true;num_usable_units := !num_usable_units-1
 
 
 let move (x1,y1) (x2,y2) : unit =
@@ -93,7 +93,7 @@ let wait (x,y) : unit =
   let u = get_unit (x,y) in
   let endturn = get_endturn u in
   if endturn then failwith "This unit's turn is over"
-             else set_endturn u false(* ; num_usable_units := !num_usable_units-1 *)
+             else set_endturn u false; num_usable_units := !num_usable_units-1
 
 let end_turns (): unit =
   let switch (a:feunit) :unit =
@@ -101,8 +101,8 @@ let end_turns (): unit =
       | Ally _ -> set_endturn a true; set_hasMoved a true
       | Enemy _ -> set_endturn a true; set_hasMoved a true
       | _ -> () in
-  (Array.iter (fun a -> Array.iter (switch) a) !currentUnits)(* ;
-  num_usable_units := 0 *)
+  (Array.iter (fun a -> Array.iter (switch) a) !currentUnits);
+  num_usable_units := 0
   (* let switch s (a:feunit) :unit =
   match s with
   | "Ally" -> let () =
