@@ -226,14 +226,14 @@ let draw () : unit =
   draw_unit ();
 
   (* for Player's cursor drawings *)
-  Player.draw()
+  Player.draw();
 
-  (* for Hub drawings *)(*
+  (* for Hub drawings *)
   let cursor = Player.get_cursor () in
   let highlightedUnit = !currentUnits.(cursor.y).(cursor.x) in
   let highlightedTerrain = !currentTerrains.(cursor.y).(cursor.x) in
   Hub.draw_unit_stats highlightedUnit;
-  Hub.draw_terrain_stats highlightedTerrain *)
+  Hub.draw_terrain_stats highlightedTerrain
 
 
 

@@ -11,6 +11,7 @@ type 'a matrix = 'a list list
 let gridSide = 50
 
 (* GUI variables *)
+
 let gameWidth = 550
 let gameHeight = 400
 let gameScale = 1

@@ -10,12 +10,14 @@ open Terrain
  *)
 
 (* Draws to the GUI all necessary stats on the given unit.
- * If the unit is an Ally, the stats is displayed on left side
- * If the unit is an Enemy, the stats is displayed on the right side
+ * If the unit is an Ally, the stats are displayed on top left side
+ * If the unit is an Enemy, the stats are displayed on the top right side
 *)
 val draw_unit_stats : feunit -> unit
 
-(* Draws to the GUI all necessary stats on the given terrain *)
+(* Draws to the GUI all necessary stats on the given terrain.
+ * Stats are displayed on the bottom right side
+ *)
 val draw_terrain_stats : terrain -> unit
 
 (* Draws a display string on the top lvl of the GUI *)
