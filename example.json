@@ -1,7 +1,7 @@
 {
   "levels": [
     {
-      "name" : "level1",
+      "name" : "menu",
       "next" : "null",
       "units_matrix":
         [ [0,-1,0,0],

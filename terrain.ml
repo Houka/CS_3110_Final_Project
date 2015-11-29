@@ -1,10 +1,10 @@
 open Jsonparser
 
-type stats = {name:string; atkBonus:int; defBonus:int; img: Sprite.image}
+type t_stats = {name:string; atkBonus:int; defBonus:int; img: Sprite.image}
 
-type terrain = Impassable | Sea of stats | Plain of stats
-              | Mountain of stats | City of stats
-              | Forest of stats
+type terrain = Impassable | Sea of t_stats | Plain of t_stats
+              | Mountain of t_stats | City of t_stats
+              | Forest of t_stats
 
 let get_terrain (classnum:int) : terrain =
   if classnum = 0 then Impassable else
@@ -13,7 +13,8 @@ let get_terrain (classnum:int) : terrain =
     let terrain_type = info.Jsonparser.terrain_type in
     let terrain_stats = {name = info.Jsonparser.name;
       atkBonus = info.Jsonparser.atkBonus; defBonus = info.Jsonparser.defBonus;
-      img = Sprite.(resize (get_image info.Jsonparser.img) Constants.gridSide Constants.gridSide)} in
+      img = Sprite.(resize (get_image info.Jsonparser.img)
+                            Constants.gridSide Constants.gridSide)} in
     print_string "creating terrain \n";
     match terrain_type with
     | "impassable" -> Impassable
@@ -27,28 +28,35 @@ let get_terrain (classnum:int) : terrain =
 let get_atkBonus (terrain:terrain): int =
   match terrain with
   | Impassable -> 0
-  | Sea stats
-  | Plain stats
-  | Mountain stats
-  | City stats
-  | Forest stats -> stats.atkBonus
+  | Sea t_stats
+  | Plain t_stats
+  | Mountain t_stats
+  | City t_stats
+  | Forest t_stats -> t_stats.atkBonus
 
 let get_defBonus (terrain:terrain): int =
   match terrain with
   | Impassable -> 0
-  | Sea stats
-  | Plain stats
-  | Mountain stats
-  | City stats
-  | Forest stats -> stats.defBonus
+  | Sea t_stats
+  | Plain t_stats
+  | Mountain t_stats
+  | City t_stats
+  | Forest t_stats -> t_stats.defBonus
 
 let draw t (x,y) : unit =
   let x' = x*Constants.gridSide in
   let y' = (-y-1+Constants.(gameHeight/gridSide))*Constants.gridSide in
   match t with
   | Impassable ->
-    Graphics.set_color 0x000000;
-    Graphics.fill_rect x' y' Constants.gridSide Constants.gridSide
-  | Sea stats | Plain stats | Mountain stats | City stats | Forest stats ->
-    let img = stats.img in
+    let result =
+      try Sprite.(draw
+                  (resize (get_image "images/terrains/rock.png")
+                    Constants.gridSide Constants.gridSide)
+                  (x',y')) with
+      | _ ->
+        Graphics.set_color 0x000000;
+        Graphics.fill_rect x' y' Constants.gridSide Constants.gridSide in
+      result
+  | Sea t_stats | Plain t_stats | Mountain t_stats | City t_stats | Forest t_stats ->
+    let img = t_stats.img in
     Sprite.(draw img (x',y'))

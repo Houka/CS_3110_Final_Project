@@ -21,9 +21,13 @@ let move_player_cursor_x x : unit =
 
   (* x boundary conditions *)
   if c.x + x >= max_x-1
-  then player_cursor := {x=max_x-1; y=c.y; color=c.color}
+  then
+        (InputManager.add_map_offset 1 0;
+        player_cursor := {x=max_x-1; y=c.y; color=c.color})
   else if c.x + x <= 0
-    then player_cursor := {x=0; y=c.y; color=c.color}
+    then
+          (InputManager.add_map_offset (-1) 0;
+          player_cursor := {x=0; y=c.y; color=c.color})
     else player_cursor := {x=c.x+x; y=c.y; color=c.color}
 
 let move_player_cursor_y y : unit =
@@ -31,9 +35,13 @@ let move_player_cursor_y y : unit =
   let c = get_cursor () in
   (* y boundary conditions *)
   if c.y + y >= max_y-1
-  then player_cursor := {x=c.x; y=max_y-1; color=c.color}
+  then
+        (InputManager.add_map_offset 0 1;
+        player_cursor := {x=c.x; y=max_y-1; color=c.color})
   else if c.y + y <= 0
-    then player_cursor := {x=c.x; y=0; color=c.color}
+    then
+          (InputManager.add_map_offset 0 (-1);
+          player_cursor := {x=c.x; y=0; color=c.color})
     else player_cursor := {x=c.x; y=c.y+y; color=c.color}
 
 (* Returns a selection menu with all the possible actions you can do on the element
@@ -54,7 +62,7 @@ let select_event (u :feunit) (t: terrain): Constants.action list =
   | (true,'j') -> failwith "TODO"
   | (true,'k') -> let c = get_cursor() in
                   print_string "player unselected";
-                  player_cursor := {x=c.x; y=c.y; color=colorNormal};
+                  player_cursor := {x=c.x; y=c.y; color=colorSelected};
                   selected := false; []
   | _ -> failwith "TODO" (* keyboard inputs to make option menu *)
 
@@ -70,7 +78,7 @@ let deselect_event (units :feunit matrix) (terrains: terrain matrix)
   | (true,'d') -> move_player_cursor_x (1); []
   | (true,'j') -> let c = get_cursor() in
                   print_string "player selected";
-                  player_cursor := {x=c.x; y=c.y; color=colorSelected};
+                  player_cursor := {x=c.x; y=c.y; color=colorNormal};
                   selected := true; []
   | _ -> []
 
@@ -83,11 +91,7 @@ let get_center_pt (): int*int =
 let draw_selection () : unit =
   if !selected then
   let (centerX, centerY) = get_center_pt() in
-    let (longestWidth, longestHeight) =
-      List.fold_left (fun a x ->
-        let len = Graphics.text_size (x) in
-        if len>a then len else a
-      ) (0,0) !selection_menu in
+    let (longestWidth, longestHeight) = Hub.get_longest_string_dim !selection_menu in
     let draw_strings a = () in
 
     (* draws selection containment box *)
@@ -104,7 +108,7 @@ let draw_selection () : unit =
 let draw () : unit =
   let (centerX, centerY) = get_center_pt() in
   (* drawing the player cursor *)
-  Graphics.set_color 0xFF0000;
+  Graphics.set_color ((get_cursor()).color);
   Graphics.draw_rect ((get_cursor()).x*Constants.gridSide)
         ((-(get_cursor()).y-1+Constants.(gameHeight/gridSide))*Constants.gridSide-1)
         (Constants.gridSide) (Constants.gridSide);

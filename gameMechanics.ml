@@ -185,23 +185,6 @@ let perform_actions (actions: action list) : unit =
   | Attack ((x1,y1),(x2,y2)) -> attack_unit (x1,y1) (x2,y2) in
   List.iter perform_act actions
 
-(* Goes through each terrain in currentTerrains and calls their draw functions *)
-let draw_terrain () : unit =
-   for y = 0 to (Array.length !currentTerrains)-1 do
-      for x = 0 to (Array.length !currentTerrains.(0))-1 do
-        Terrain.draw (!currentTerrains.(y).(x)) (x,y)
-      done
-  done
-
-
-(* Goes through each unit in currentUnits and calls their draw functions *)
-let draw_unit () : unit =
-  for y = 0 to (Array.length !currentUnits)-1 do
-      for x = 0 to (Array.length !currentUnits.(0))-1 do
-        Feunit.draw (!currentUnits.(y).(x)) (x,y)
-      done
-  done
-
 (*checks if the turn is over for "Ally" or "Enemy"*)
 let turn_over s : bool =
   let check s (a:feunit) :bool =
@@ -220,6 +203,29 @@ let turn_over s : bool =
   let check_array ary = Array.fold_left (fun a b -> a && check s b) true ary in
   Array.fold_left (fun a b -> a && check_array b) true !currentUnits
 
+(* Goes through each terrain in currentTerrains and calls their draw functions *)
+let draw_terrain () : unit =
+  let (offX, offY) = InputManager.get_map_offset () in
+  let minY = min (gameHeight/gridSide+offY) ((Array.length !currentTerrains)-1) in
+  let minX = min (gameWidth/gridSide+offX) ((Array.length !currentTerrains.(0))-1) in
+   for y = offY to minY do
+      for x = offX to minX do
+        Terrain.draw (!currentTerrains.(y).(x)) (x-offX,y-offY)
+      done
+  done
+
+
+(* Goes through each unit in currentUnits and calls their draw functions *)
+let draw_unit () : unit =
+  let (offX, offY) = InputManager.get_map_offset () in
+  let minY = min (gameHeight/gridSide+offY) ((Array.length !currentUnits)-1) in
+  let minX = min (gameWidth/gridSide+offX) ((Array.length !currentUnits.(0))-1) in
+  for y = offY to minY do
+      for x = offX to minX do
+        Feunit.draw (!currentUnits.(y).(x)) (x-offX,y-offY)
+      done
+  done
+
 let draw () : unit =
   (* draw map objects first *)
   draw_terrain ();
@@ -229,13 +235,13 @@ let draw () : unit =
   Player.draw();
 
   (* for Hub drawings *)
+  let (offX, offY) = InputManager.get_map_offset () in
   let cursor = Player.get_cursor () in
-  let highlightedUnit = !currentUnits.(cursor.y).(cursor.x) in
-  let highlightedTerrain = !currentTerrains.(cursor.y).(cursor.x) in
+  let highlightedUnit = !currentUnits.(cursor.y+offY).(cursor.x+offX) in
+  let highlightedTerrain = !currentTerrains.(cursor.y+offY).(cursor.x+offX) in
+  Graphics.set_color Constants.textColor;
   Hub.draw_unit_stats highlightedUnit;
   Hub.draw_terrain_stats highlightedTerrain
-
-
 
 
 let rec update () : unit =

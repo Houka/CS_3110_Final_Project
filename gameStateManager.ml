@@ -58,6 +58,7 @@ let set_level_data (levelname: string) : unit =
   let t = construct_terrain_matrix l.terrain_matrix in
   let u = construct_feunit_matrix l.unit_matrix in
   apply_bonus_to_units u t;
+  InputManager.set_map_limits (Array.length t.(0)) (Array.length t);
   GameMechanics.set_units (u);
   GameMechanics.set_map (t)
 

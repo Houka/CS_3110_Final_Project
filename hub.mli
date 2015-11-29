@@ -22,3 +22,8 @@ val draw_terrain_stats : terrain -> unit
 
 (* Draws a display string on the top lvl of the GUI *)
 val draw_string: string -> int*int -> unit
+
+(* Returns the largest dimensions (width, height) from a list of strings
+    if the longest string was drawn onto the screen.
+ *)
+val get_longest_string_dim: (string list) -> int*int

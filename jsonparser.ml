@@ -1,14 +1,10 @@
 open Constants
 open Yojson.Basic.Util
 
-(*Note: need to add -p yojson when compiling*)
-
-
-(*should be changed later to accept user input with the following code:
 let json =
   let a = Array.to_list Sys.argv in
-  let name = List.nth a 1 in*)
-let json = Yojson.Basic.from_file "example.json"
+  let name = List.nth a 1 in
+  Yojson.Basic.from_file name
 
 type terrain_info = {name:string; atkBonus:int; defBonus: int;
                       terrain_type:string; img: string}

@@ -11,7 +11,6 @@ type 'a matrix = 'a list list
 let gridSide = 50
 
 (* GUI variables *)
-
 let gameWidth = 550
 let gameHeight = 400
 let gameScale = 1
@@ -20,4 +19,8 @@ let gameTitle = "OCaml Fire Emblem"
 (* player constants *)
 let colorSelected = 0xFF0000
 let colorNormal =   0xCCCCCC
+
+(* hub constants *)
+let textPadding = 10
+let textColor = 0x333333
 

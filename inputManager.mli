@@ -8,3 +8,10 @@
 val set_keypressed: bool -> char -> unit
 val get_keypressed: unit -> bool
 val get_key: unit -> char
+
+(* setters and getters to manage moving of the game map. works on relative vectors. *)
+val get_map_offset: unit -> (int*int)
+val set_map_limits: int -> int -> unit
+(*  [add_map_offset x y] changes the offset so map can be draw at specified offset
+    postC: offset stays in limits of map_limits *)
+val add_map_offset: int -> int -> unit
