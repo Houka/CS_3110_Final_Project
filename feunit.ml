@@ -54,14 +54,14 @@ let set_range_bonus (feunit:feunit) (bonus:int) : unit =
 let set_endturn (feunit:feunit) (b:bool) : unit =
   match feunit with
   | Null -> ()
-  | Ally stats
-  | Enemy stats -> stats.endturn <- b
+  | Ally stats -> Printf.printf "ally turn ended %b\n" b;stats.endturn <- b
+  | Enemy stats -> Printf.printf "enemy turn ended %b\n" b;stats.endturn <- b
 
 let set_hasMoved (feunit:feunit) (b:bool) : unit =
   match feunit with
   | Null -> ()
-  | Ally stats
-  | Enemy stats -> stats.hasMoved<- b
+  | Ally stats -> Printf.printf "ally moved %b\n" b;stats.hasMoved<- b
+  | Enemy stats -> Printf.printf "enemy moved %b\n" b;stats.hasMoved<- b
 
 let add_hp (feunit:feunit) (bonus:int) : unit =
   match feunit with

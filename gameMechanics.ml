@@ -84,12 +84,17 @@ let attack_unit (x1,y1) (x2,y2): unit =
 
 let move (x1,y1) (x2,y2) : unit =
   let u = get_unit (x1,y1) in
+  let (offX, offY) = InputManager.get_map_offset () in
   if get_endturn u then failwith "unit cannot move, turn is over" else
+  if exists (x2,y2) then failwith "space is already occupied" else
   let path = shortest_path (x1,y1) (x2,y2) (get_units ()) (get_map ()) in
   if List.length path.path > 0 then let terrain1 = get_terrain (x2,y2) in
               set_atk_bonus u (get_atkBonus terrain1);
               set_def_bonus u (get_defBonus terrain1);
-              set_hasMoved u true
+              set_hasMoved u true;
+              !currentUnits.(y1+offY).(x1+offX) <- Null;
+              !currentUnits.(y2+offY).(x2+offX) <- u;
+
   else failwith "not a valid move"
 
 
@@ -97,7 +102,7 @@ let wait (x,y) : unit =
   let u = get_unit (x,y) in
   let endturn = get_endturn u in
   if endturn then failwith "This unit's turn is over"
-             else set_endturn u false; num_usable_units := !num_usable_units-1
+             else set_endturn u true; num_usable_units := !num_usable_units-1
 
 let end_turns (): unit =
   let switch (a:feunit) :unit =
@@ -159,6 +164,7 @@ let start_turns s :unit =
               | _ -> ()
               in ()
   | _ -> () in
+  print_string ("started turns for "^s^"\n");
   Array.iter (fun a -> Array.iter (switch s) a) !currentUnits
 
 
@@ -184,9 +190,9 @@ let perform_actions (actions: action list) : unit =
   let perform_act action =
   match action with
   | Endturn -> end_turns ()
-  | Wait (x,y) -> Printf.printf "action: wait (%i,%i)" x y;wait (x,y)
-  | Move ((x1,y1),(x2,y2)) -> Printf.printf "action: move (%i,%i) (%i,%i)" x1 y1 x2 y2;move (x1,y1) (x2,y2)
-  | Attack ((x1,y1),(x2,y2)) -> Printf.printf "action: attack (%i,%i) (%i,%i)" x1 y1 x2 y2; attack_unit (x1,y1) (x2,y2) in
+  | Wait (x,y) -> Printf.printf "action: wait (%i,%i)\n" x y;wait (x,y)
+  | Move ((x1,y1),(x2,y2)) -> Printf.printf "action: move (%i,%i) (%i,%i)\n" x1 y1 x2 y2;move (x1,y1) (x2,y2)
+  | Attack ((x1,y1),(x2,y2)) -> Printf.printf "action: attack (%i,%i) (%i,%i)\n" x1 y1 x2 y2; attack_unit (x1,y1) (x2,y2) in
   List.iter perform_act actions
 
 (*checks if the turn is over for "Ally" or "Enemy"*)
@@ -248,24 +254,38 @@ let draw () : unit =
   Hub.draw_terrain_stats highlightedTerrain
 
 
+
+
 let rec update () : unit =
+  flush_all ();
   if !num_allies = 0 then print_string "Enemies win.\n" else
   if !num_enemies = 0 then print_string "You win!\n" else
   (*if turn is odd it is Player's turn; if it is even it is enemy turn*)
   if !turn mod 2 = 1
   then
-      (* let () = print_int !turn in *)
+      player_turn ()
+  else
+      ai_turn ()
+
+and player_turn () =
+  let () = Printf.printf ("turn: %i\n") !turn in
       if not (!num_usable_units = 0)
       then
         let actions = Player.update (get_units ()) (get_map ()) in
         print_string "Player's turn \n";
-        perform_actions actions
-      else
-        (start_turns "Enemy";
-        inc_turn ();
-        num_usable_units := !num_enemies)
-  else
-      let () = print_int !turn in
+        perform_actions actions;
+        if (!num_usable_units = 0) then
+          (start_turns "Enemy";
+          inc_turn ();
+          Printf.printf ("incremented turn to: %i\n") !turn;
+          num_usable_units := !num_enemies;
+          update ())
+        else print_string "entered else1\n"
+      else print_string "entered else2\n"
+
+and ai_turn () =
+  let () = Printf.printf ("turn: %i\n") !turn;
+      Printf.printf ("number of usable units: %i\n") !num_usable_units in
       if not (!num_usable_units = 0)
       then
         let actions = Ai.update (get_units ()) (get_map ()) in
@@ -276,4 +296,6 @@ let rec update () : unit =
       else
         start_turns "Ally";
         inc_turn ();
-        num_usable_units := !num_enemies
+        Printf.printf ("incremented turn(ai) to: %i\n") !turn;
+        Printf.printf ("number of allies is: %i\n") !num_allies;
+        num_usable_units := !num_allies
