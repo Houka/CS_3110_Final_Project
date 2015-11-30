@@ -7,7 +7,7 @@
 (* Contains all the t_stats a terrain has/needs. Info from JSON. *)
 type t_stats = {name:string; atkBonus:int; defBonus:int; img: Sprite.image}
 (* Type of the terrain tells which units can travel through it.*)
-type terrain = Impassable | Sea of t_stats | Plain of t_stats
+type terrain = Impassable of t_stats| Sea of t_stats | Plain of t_stats
               | Mountain of t_stats | City of t_stats
               | Forest of t_stats
 

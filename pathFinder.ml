@@ -46,7 +46,7 @@ let shortest_path (enemy: (int * int)) (ally: (int * int))
                         else false in
     let terrain_obstacle = if bounds then
                              (match (grab terrains (i, j)) with
-                             | Sea _ | Mountain _ | Impassable -> false
+                             | Sea _ | Mountain _ | Impassable _ -> false
                              | _ -> true)
                            else false in
     (efficient && bounds && retrace && unit_obstacle && terrain_obstacle)

@@ -26,11 +26,15 @@ let get_map () : terrain matrix =
 
 (*check if a unit exists at point x,y*)
 let exists (x,y) =
-  if !currentUnits.(y).(x) <> Null then true else false
+  let (offX, offY) = InputManager.get_map_offset () in
+  if !currentUnits.(y+offY).(x+offX) <> Null then true else false
 
 let get_unit (x,y) =
-  if !currentUnits.(y).(x) <> Null then !currentUnits.(y).(x) else failwith
-      "unit doesn't exist at location"
+  let (offX, offY) = InputManager.get_map_offset () in
+  if !currentUnits.(y+offY).(x+offX) <> Null
+  then !currentUnits.(y).(x)
+  else failwith ("unit doesn't exist at location ("^
+                (string_of_int(x+offX))^","^(string_of_int(y+offY))^")")
 
 let get_terrain (x,y) =
   !currentTerrains.(y).(x)
@@ -180,9 +184,9 @@ let perform_actions (actions: action list) : unit =
   let perform_act action =
   match action with
   | Endturn -> end_turns ()
-  | Wait (x,y) -> wait (x,y)
-  | Move ((x1,y1),(x2,y2)) -> move (x1,y1) (x2,y2)
-  | Attack ((x1,y1),(x2,y2)) -> attack_unit (x1,y1) (x2,y2) in
+  | Wait (x,y) -> Printf.printf "action: wait (%i,%i)" x y;wait (x,y)
+  | Move ((x1,y1),(x2,y2)) -> Printf.printf "action: move (%i,%i) (%i,%i)" x1 y1 x2 y2;move (x1,y1) (x2,y2)
+  | Attack ((x1,y1),(x2,y2)) -> Printf.printf "action: attack (%i,%i) (%i,%i)" x1 y1 x2 y2; attack_unit (x1,y1) (x2,y2) in
   List.iter perform_act actions
 
 (*checks if the turn is over for "Ally" or "Enemy"*)
@@ -254,6 +258,7 @@ let rec update () : unit =
       if not (!num_usable_units = 0)
       then
         let actions = Player.update (get_units ()) (get_map ()) in
+        print_string "Player's turn \n";
         perform_actions actions
       else
         (start_turns "Enemy";
@@ -264,6 +269,7 @@ let rec update () : unit =
       if not (!num_usable_units = 0)
       then
         let actions = Ai.update (get_units ()) (get_map ()) in
+        print_string "AI's turn \n";
         perform_actions actions;
         draw ();
         update()

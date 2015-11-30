@@ -38,7 +38,7 @@ let apply_bonus_to_units units terrains : unit=
       | Null -> ()
       | _ ->
         let t = match terrains.(y).(x) with
-          | Impassable -> failwith "Unit on Impassable terrain"
+          | Impassable _-> failwith "Unit on Impassable terrain"
           | Sea t| Plain t| Mountain t| City t | Forest t -> t in
         set_atk_bonus u (t.atkBonus);
         set_def_bonus u (t.defBonus);
