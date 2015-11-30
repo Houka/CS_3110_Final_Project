@@ -261,6 +261,7 @@ let rec update () : unit =
   if !num_allies = 0 then print_string "Enemies win.\n" else
   if !num_enemies = 0 then print_string "You win!\n" else
   (*if turn is odd it is Player's turn; if it is even it is enemy turn*)
+  let () = print_string "checking turn number... \n" in
   if !turn mod 2 = 1
   then
       player_turn ()
@@ -292,10 +293,14 @@ and ai_turn () =
         print_string "AI's turn \n";
         perform_actions actions;
         draw ();
-        update()
-      else
-        start_turns "Ally";
+        if (!num_usable_units = 0) then
+        (start_turns "Ally";
         inc_turn ();
         Printf.printf ("incremented turn(ai) to: %i\n") !turn;
-        Printf.printf ("number of allies is: %i\n") !num_allies;
-        num_usable_units := !num_allies
+        num_usable_units := !num_allies;
+        Printf.printf ("number of allies is: %i\n") !num_usable_units
+        )
+        else
+        update()
+      else
+        ()
