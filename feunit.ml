@@ -13,6 +13,8 @@ let get_unit (classnum: int) : feunit =
   if classnum = 0 then Null else
     let unit_list = get_all_unit_data () in
     let info = List.assoc (abs classnum) unit_list in
+    (* let image_name = if classnum > 0 then info.Jsonparser.img^"_ally"
+                                    else info.Jsonparser.img^"_enemy" in *)
 
     let unit_stats = {name = info.Jsonparser.name; maxHp = info.Jsonparser.maxHp;
         atk = info.Jsonparser.atk; def = info.Jsonparser.def;

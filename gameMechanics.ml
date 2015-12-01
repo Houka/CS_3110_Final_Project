@@ -63,7 +63,7 @@ let attack_unit (x1,y1) (x2,y2): unit =
   if not (opposite_sides unit1 unit2) then failwith "units are allied" else
   if get_endturn unit1 then failwith "unit cannot attack, turn is over" else
   if (not (in_range (x1,y1) (x2, y2) (get_total_range unit1)))
-    then failwith "unit2 out of range of attack"
+    then  print_string "unit out of range, can't attack" (* failwith "unit2 out of range of attack" *)
   else
 
     let (a,b) = attack unit1 unit2 in
@@ -97,7 +97,7 @@ let move (x1,y1) (x2,y2) : unit =
               !currentUnits.(y1+offY).(x1+offX) <- Null;
               !currentUnits.(y2+offY).(x2+offX) <- u;
 
-  else failwith "not a valid move"
+  else print_string "not a valid move"(* failwith "not a valid move" *)
 
 
 let wait (x,y) : unit =
