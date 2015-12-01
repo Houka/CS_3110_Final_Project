@@ -42,11 +42,11 @@ let shortest_path (enemy: (int * int)) (ally: (int * int))
     let unit_obstacle = if bounds then
                           (match (grab units (i, j)) with
                           | Null -> true
-                          | _ -> if (i, j) = ally then true else false)
+                          | _ -> (i, j) = ally)
                         else false in
     let terrain_obstacle = if bounds then
                              (match (grab terrains (i, j)) with
-                             | Sea _ | Mountain _ | Impassable _ -> false
+                             | Sea _ | Mountain _ | Impassable -> false
                              | _ -> true)
                            else false in
     (efficient && bounds && retrace && unit_obstacle && terrain_obstacle)
@@ -71,7 +71,11 @@ let shortest_path (enemy: (int * int)) (ally: (int * int))
       if is_valid (i, j - 1) visited (c + 1) then
         find_path (i, j - 1) ((i, j)::visited) (c + 1) ((i, j - 1)::p)
       else ();
-  in (find_path enemy [] 0 []); d
+  in
+  if is_valid ally [] 0 then
+    (find_path enemy [] 0 []; d)
+  else
+    d
 
 let find_paths (units : feunit matrix) (terrains: terrain matrix)
 ((x,y): (int * int)) : (int * int) list =
