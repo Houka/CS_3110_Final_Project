@@ -38,7 +38,9 @@ let get_terrain (x,y) =
   !currentTerrains.(y).(x)
 
 let in_range (x1, y1) (x2, y2) range =
-  (y2-y1+x2-x1) <= range
+  let xdiff = abs (x2-x1) in
+  let ydiff = abs (y2-y1) in
+  xdiff + ydiff <= range
 
 let opposite_sides (a:feunit) (b:feunit) =
   match a, b with
