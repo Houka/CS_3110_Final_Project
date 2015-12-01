@@ -62,6 +62,17 @@ let move_attack (d: dest_path) (enemy: feunit) : action list =
           let m = Move (d.start, (x2, y2)) in
           let a = Attack ((x2, y2), (x3, y3)) in
           [m;a]
+    | (x1,y1)::(x2, y2)::[] ->
+        if es.atkRange > 1 then
+          let a = Attack (d.start, (x2, y2)) in
+          [a]
+        else
+          let m = Move (d.start, (x1, y1)) in
+          let a = Attack ((x1, y1), (x2, y2)) in
+          [m;a]
+    | (x, y)::[] ->
+          let a = Attack (d.start, (x, y)) in
+          [a]
     | (x, y)::tl ->
         loop tl actions
   in loop path []
@@ -130,8 +141,7 @@ let find_effective (units: feunit matrix) (weapon: string)
 let update (units:feunit matrix) (terrains: terrain matrix)
 : action list  =
   (*Finds the index of enemy and ally unit in units*)
-  let (e, a) = find_first_units units in
-  let enemy = e in
+  let (enemy, a) = find_first_units units in
 
   if enemy = (-1, -1) then
     []
@@ -141,7 +151,8 @@ let update (units:feunit matrix) (terrains: terrain matrix)
     (*Loop through enemy feunit *)
     let rec create_action enemy =
         let paths =
-          List.map (fun x -> shortest_path enemy x units terrains) players in
+          List.map (fun x -> shortest_path enemy x max_int units terrains)
+          players in
         let e = match (grab units enemy) with
                 | Enemy s | Ally s -> s | _ -> failwith "invalid" in
         let within =
@@ -173,10 +184,14 @@ let update (units:feunit matrix) (terrains: terrain matrix)
           actions
         else
           (*Move towards closest Unit*)
-          let closest =
-          List.fold_left (fun a x -> if x.cost < a.cost then x else a)
-          (List.nth paths 0) paths in
-          let actions = move closest (grab units enemy) in
-          actions
+          if List.length paths > 0 then
+            let closest =
+            List.fold_left (fun a x -> if x.cost < a.cost then x else a)
+            (List.nth paths 0) paths in
+            let actions = move closest (grab units enemy) in
+            actions
+          else
+            [Wait enemy]
+
     in
     create_action enemy

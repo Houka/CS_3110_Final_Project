@@ -1,0 +1,199 @@
+{
+  "levels": [
+    {
+      "name" : "menu",
+      "next" : "level1",
+      "units_matrix":
+        [
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,5,0,0,0,-6,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0]
+
+        ],
+      "terrain_matrix":
+        [
+          [0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,4,4,4,4,4,4,4,0,0],
+          [0,0,4,4,4,4,4,4,4,0,0],
+          [0,0,4,4,4,4,4,4,4,0,0],
+          [0,0,4,4,4,4,4,4,4,0,0],
+          [0,0,4,4,4,4,4,4,4,0,0],
+          [0,0,4,4,4,4,4,4,4,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0]
+
+        ]
+    },
+    {
+      "name" : "level1",
+      "next" : "null",
+      "units_matrix":
+        [
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,3,0,0,0,0,0,0,-3,0,0,0,0],
+          [0,0,0,1,0,0,0,0,0,0,0,-1,0,0,0],
+          [0,0,4,0,0,0,0,0,0,0,0,0,-4,0,0],
+          [0,0,0,1,0,0,0,0,0,0,0,-2,0,0,0],
+          [0,0,0,3,0,0,0,0,0,0,-3,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0,0,-1,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
+        ],
+      "terrain_matrix":
+        [
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+          [0,0,4,4,4,4,4,4,4,4,4,4,4,0,0],
+          [0,0,4,4,4,4,4,4,4,4,4,4,4,0,0],
+          [0,0,4,4,6,6,6,4,4,4,4,4,4,0,0],
+          [0,0,4,4,6,1,6,4,4,4,4,4,4,0,0],
+          [0,0,4,4,6,6,2,2,2,4,4,4,4,0,0],
+          [0,0,4,4,4,4,2,2,2,4,4,4,4,0,0],
+          [0,0,4,4,6,6,2,2,2,4,4,4,4,0,0],
+          [0,0,4,4,6,1,6,4,4,4,4,4,4,0,0],
+          [0,0,4,4,6,6,6,4,4,4,4,4,4,0,0],
+          [0,0,4,4,4,4,4,4,4,4,4,4,4,0,0],
+          [0,0,4,4,4,4,4,4,4,4,4,4,4,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        ]
+    },
+    {
+      "name" : "null",
+      "next" : "null",
+      "units_matrix":
+        [ []
+        ],
+
+      "terrain_matrix":
+        [ []
+        ]
+    }
+  ],
+
+//note: For terrain types = Impassable | Sea | Plain | Mountain | City | Forest
+//           (use lower case)
+  "terrain": [
+    {   "name":"impassable",
+        "class" : 0,
+        "atkBonus": 0,
+        "defBonus":0,
+        "img": "images/terrains/rock.png",
+        "type": "impassable"
+    },
+    {   "name":"city",
+        "class" : 1,
+        "atkBonus": 2,
+        "defBonus":1,
+        "img": "images/terrains/city.png",
+        "type": "city"
+    },
+    {   "name":"forest",
+        "class" : 2,
+        "atkBonus": 1,
+        "defBonus":1,
+        "img": "images/terrains/forest.png",
+        "type": "forest"
+    },
+    {   "name":"mountain",
+        "class" : 3,
+        "atkBonus": 2,
+        "defBonus":2,
+        "img": "images/terrains/mountain.png",
+        "type": "mountain"
+    },
+    {   "name":"plain",
+        "class" : 4,
+        "atkBonus": 0,
+        "defBonus":0,
+        "img": "images/terrains/plain.png",
+        "type": "plain"
+    },
+    {   "name":"rock",
+        "class" : 5,
+        "atkBonus": 0,
+        "defBonus":0,
+        "img": "images/terrains/rock.png",
+        "type": "impassable"
+    },
+    {   "name":"sea",
+        "class" : 6,
+        "atkBonus": -1,
+        "defBonus":-1,
+        "img": "images/terrains/sea.png",
+        "type": "sea"
+    }
+  ],
+
+//note: For units ny class with 0 cannot show on the map. 0 is reserved for empty space
+  "units": [
+    {   "name":"swordsman",
+        "class": 1,
+        "maxhp": 20,
+        "attack": 8,
+        "defense": 2,
+        "move": 4,
+        "range": 1,
+        "weapon": "sword",
+        "image": "images/swordsman.png"
+    },
+    {   "name":"fighter",
+        "class": 2,
+        "maxhp": 25,
+        "attack": 10,
+        "defense": 0,
+        "move": 4,
+        "range": 1,
+        "weapon": "axe",
+        "image": "images/swordsman.png"
+    },
+    {   "name":"lancer",
+        "class": 3,
+        "maxhp": 22,
+        "attack": 7,
+        "defense": 5,
+        "move": 4,
+        "range": 1,
+        "weapon": "lance",
+        "image": "images/swordsman.png"
+    },
+    {   "name":"archer",
+        "class": 4,
+        "maxhp": 18,
+        "attack": 8,
+        "defense": 0,
+        "move": 5,
+        "range": 2,
+        "weapon": "bow",
+        "image": "images/swordsman.png"
+    },
+    {   "name":"Roy",
+        "class": 5,
+        "maxhp": 30,
+        "attack": 8,
+        "defense": 2,
+        "move": 5,
+        "range": 1,
+        "weapon": "sword",
+        "image": "images/swordsman.png"
+    },
+    {   "name":"demon",
+        "class": 6,
+        "maxhp": 24,
+        "attack": 7,
+        "defense": 1,
+        "move": 3,
+        "range": 1,
+        "weapon": "claw",
+        "image": "images/swordsman.png"
+    }
+  ]
+}

@@ -17,7 +17,11 @@ val grab : 'a matrix -> (int * int) -> 'a
 
 val find_units : feunit matrix -> ((int * int) list * (int * int) list)
 
-val shortest_path :  (int * int) -> (int * int) -> feunit matrix ->
-                      terrain matrix -> dest_path
+val shortest_path : (int * int) -> (int * int) -> int -> feunit matrix ->
+                     terrain matrix -> dest_path
 
-val find_paths : feunit matrix -> terrain matrix -> (int * int) -> (int * int) list
+val find_paths : feunit matrix -> terrain matrix -> (int * int) ->
+                 (int * int) list
+
+val find_attack: feunit matrix -> terrain matrix -> (int * int) ->
+                 (int * int) list

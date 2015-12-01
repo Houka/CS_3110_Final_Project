@@ -26,21 +26,21 @@ let get_map () : terrain matrix =
 
 (*check if a unit exists at point x,y*)
 let exists (x,y) =
-  let (offX, offY) = InputManager.get_map_offset () in
-  if !currentUnits.(y+offY).(x+offX) <> Null then true else false
+  if !currentUnits.(y).(x) <> Null then true else false
 
 let get_unit (x,y) =
-  let (offX, offY) = InputManager.get_map_offset () in
-  if !currentUnits.(y+offY).(x+offX) <> Null
+  if !currentUnits.(y).(x) <> Null
   then !currentUnits.(y).(x)
   else failwith ("unit doesn't exist at location ("^
-                (string_of_int(x+offX))^","^(string_of_int(y+offY))^")")
+                (string_of_int(x))^","^(string_of_int(y))^")")
 
 let get_terrain (x,y) =
   !currentTerrains.(y).(x)
 
 let in_range (x1, y1) (x2, y2) range =
-  (y2-y1+x2-x1) <= range
+  let xdiff = abs (x2-x1) in
+  let ydiff = abs (y2-y1) in
+  xdiff + ydiff <= range
 
 let opposite_sides (a:feunit) (b:feunit) =
   match a, b with
@@ -61,41 +61,47 @@ let attack_unit (x1,y1) (x2,y2): unit =
   let unit2_type = type_of unit2 in
   if not (opposite_sides unit1 unit2) then failwith "units are allied" else
   if get_endturn unit1 then failwith "unit cannot attack, turn is over" else
+  let () = Printf.printf "range: %i \n" (get_total_range unit1) in
   if (not (in_range (x1,y1) (x2, y2) (get_total_range unit1)))
-    then failwith "unit2 out of range of attack"
+    then  print_string "unit out of range, can't attack" (* failwith "unit2 out of range of attack" *)
   else
 
     let (a,b) = attack unit1 unit2 in
     let () =
-    if b = Null then (!currentUnits.(y2).(x2) <- Null;
-      (if unit2_type = "Ally" then num_allies := !num_allies - 1
-                             else num_enemies := !num_enemies - 1))
+    if b = Null then
+      ((if unit2_type = "Ally" then num_allies := !num_allies - 1
+                             else num_enemies := !num_enemies - 1);
+      !currentUnits.(y2).(x2) <- b; !currentUnits.(y1).(x1) <- a)
     else
     (*counterattack*)
       if (in_range (x2,y2) (x1, y1) (get_total_range unit2)) then
         let (c,d) = attack b a in
-        if d = Null then (!currentUnits.(y1).(x1) <- Null;
-                    (if unit1_type = "Ally" then num_allies := !num_allies - 1
-                                            else num_enemies := !num_enemies - 1))
-        else ()
+        (if d = Null then
+                    if unit1_type = "Ally" then num_allies := !num_allies - 1
+                                            else num_enemies := !num_enemies - 1
+        else ());  !currentUnits.(y2).(x2) <- c; !currentUnits.(y1).(x1) <- d
       else ()
     in set_endturn unit1 true;num_usable_units := !num_usable_units-1
 
 
 let move (x1,y1) (x2,y2) : unit =
   let u = get_unit (x1,y1) in
-  let (offX, offY) = InputManager.get_map_offset () in
+  let dest_terrain = match get_terrain (x2,y2) with
+                     | Impassable _ -> "impassable"
+                     | _ -> "other" in
+
   if get_endturn u then failwith "unit cannot move, turn is over" else
   if exists (x2,y2) then failwith "space is already occupied" else
-  let path = shortest_path (x1,y1) (x2,y2) (get_units ()) (get_map ()) in
+  if dest_terrain = "impassable" then print_string "terrain is impassable" else
+  let path = shortest_path (x1,y1) (x2,y2) max_int (get_units ()) (get_map ()) in
   if List.length path.path > 0 then let terrain1 = get_terrain (x2,y2) in
               set_atk_bonus u (get_atkBonus terrain1);
               set_def_bonus u (get_defBonus terrain1);
               set_hasMoved u true;
-              !currentUnits.(y1+offY).(x1+offX) <- Null;
-              !currentUnits.(y2+offY).(x2+offX) <- u;
+              !currentUnits.(y1).(x1) <- Null;
+              !currentUnits.(y2).(x2) <- u;
 
-  else failwith "not a valid move"
+  else print_string "not a valid move"(* failwith "not a valid move" *)
 
 
 let wait (x,y) : unit =
@@ -257,9 +263,9 @@ let draw () : unit =
 
 
 let rec update () : unit =
-  flush_all ();
-  if !num_allies = 0 then print_string "Enemies win.\n" else
-  if !num_enemies = 0 then print_string "You win!\n" else
+  (* flush_all (); *)
+  if !num_allies = 0 then (draw();print_string "Enemies win.\n") else
+  if !num_enemies = 0 then (draw();print_string "You win!\n") else
   (*if turn is odd it is Player's turn; if it is even it is enemy turn*)
   let () = print_string "checking turn number... \n" in
   if !turn mod 2 = 1
@@ -279,8 +285,7 @@ and player_turn () =
           (start_turns "Enemy";
           inc_turn ();
           Printf.printf ("incremented turn to: %i\n") !turn;
-          num_usable_units := !num_enemies;
-          update ())
+          num_usable_units := !num_enemies)
         else print_string "entered else1\n"
       else print_string "entered else2\n"
 
@@ -291,6 +296,7 @@ and ai_turn () =
       then
         let actions = Ai.update (get_units ()) (get_map ()) in
         print_string "AI's turn \n";
+        if actions = [] then print_string "no actions\n" else ();
         perform_actions actions;
         draw ();
         if (!num_usable_units = 0) then
@@ -298,7 +304,8 @@ and ai_turn () =
         inc_turn ();
         Printf.printf ("incremented turn(ai) to: %i\n") !turn;
         num_usable_units := !num_allies;
-        Printf.printf ("number of allies is: %i\n") !num_usable_units
+        Printf.printf ("number of allies is: %i\n") !num_usable_units;
+        update()
         )
         else
         update()
