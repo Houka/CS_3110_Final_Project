@@ -62,6 +62,14 @@ let move_attack (d: dest_path) (enemy: feunit) : action list =
           let m = Move (d.start, (x2, y2)) in
           let a = Attack ((x2, y2), (x3, y3)) in
           [m;a]
+    | (x1,y1)::(x2, y2)::[] ->
+        if es.atkRange > 1 then
+          let a = Attack (d.start, (x2, y2)) in
+          [a]
+        else
+          let m = Move (d.start, (x1, y1)) in
+          let a = Attack ((x1, y1), (x2, y2)) in
+          [m;a]
     | (x, y)::[] ->
           let a = Attack (d.start, (x, y)) in
           [a]
