@@ -63,10 +63,10 @@ let construct_selection (u:feunit) : unit =
   match u with
   | Null | Enemy _ -> selection_menu.selections <- ["End Turn"]
   | Ally stats->
-    if get_hasMoved u
-    then selection_menu.selections <- ["Wait";"End Turn";"Attack"]
-    else if get_endturn u
-      then selection_menu.selections <- ["End Turn"]
+    if get_endturn u
+    then selection_menu.selections <- ["End Turn"]
+    else if get_hasMoved u
+      then selection_menu.selections <- ["Wait";"End Turn";"Attack"]
       else selection_menu.selections <- ["Wait";"End Turn";"Attack";"Move"]
 
 (* translates points from bottom left coordinate system to top left system *)
@@ -113,24 +113,22 @@ let draw_selection () : unit =
 let draw_range () : unit =
   if !moving || !attacking then
     let c = !temp_cursor in
-    let origin = get_cursor() in
-    let (cX,cY) = translate_pt (c.x,c.y) in
     List.iter (fun (x,y) ->
-      let (x',y') = translate_pt (x+origin.x,y+origin.y) in
+      let (x',y') = translate_pt (x+c.x,y+c.y) in
       Sprite.draw (cursorHighlight) (x',y')
-    ) !rangeList;
-    Sprite.draw (c.img) (cX,cY)
+    ) !rangeList
   else
     ()
 
 let draw () : unit =
   let c = get_cursor() in
   let (cX, cY) = translate_pt (c.x,c.y) in
+  (* drawing moving and attacking *)
+  draw_range ();
+
   (* drawing the player cursor *)
   Sprite.draw (c.img) (cX,cY);
 
-  (* drawing moving and attacking *)
-  draw_range ();
   (* drawing the selection menu *)
   draw_selection ()
 
@@ -195,12 +193,12 @@ let move (units :feunit matrix) (terrains: terrain matrix)
   : Constants.action list =
   (* updating player cursor *)
   match (InputManager.get_keypressed (),InputManager.get_key ()) with
-  | (true,'w') -> move_cursor_y temp_cursor (-1); []
-  | (true,'a') -> move_cursor_x temp_cursor (-1); []
-  | (true,'s') -> move_cursor_y temp_cursor (1); []
-  | (true,'d') -> move_cursor_x temp_cursor (1); []
-  | (true,'j') -> let origin = get_cursor() in
-                  let destin = !temp_cursor in
+  | (true,'w') -> move_cursor_y player_cursor (-1); []
+  | (true,'a') -> move_cursor_x player_cursor (-1); []
+  | (true,'s') -> move_cursor_y player_cursor (1); []
+  | (true,'d') -> move_cursor_x player_cursor (1); []
+  | (true,'j') -> let destin = get_cursor() in
+                  let origin = !temp_cursor in
                   let (offX, offY) = InputManager.get_map_offset () in
                   reset();
                   [Move ((origin.x+offX,origin.y+offY),
@@ -213,20 +211,18 @@ let attack (units :feunit matrix) (terrains: terrain matrix)
   : Constants.action list =
   (* updating player cursor *)
   match (InputManager.get_keypressed (),InputManager.get_key ()) with
-  | (true,'w') -> move_cursor_y temp_cursor (-1); []
-  | (true,'a') -> move_cursor_x temp_cursor (-1); []
-  | (true,'s') -> move_cursor_y temp_cursor (1); []
-  | (true,'d') -> move_cursor_x temp_cursor (1); []
-  | (true,'j') -> let origin = get_cursor() in
-                  let destin = !temp_cursor in
+  | (true,'w') -> move_cursor_y player_cursor (-1); []
+  | (true,'a') -> move_cursor_x player_cursor (-1); []
+  | (true,'s') -> move_cursor_y player_cursor (1); []
+  | (true,'d') -> move_cursor_x player_cursor (1); []
+  | (true,'j') -> let destin = get_cursor() in
+                  let origin = !temp_cursor in
                   let (offX, offY) = InputManager.get_map_offset () in
                   reset();
                   [Attack ((origin.x+offX,origin.y+offY),
                           (destin.x+offX,destin.y+offY))]
   | (true,'k') -> reset (); []
   | _ -> []
-
-let test = [(0,0);(0,1);(1,0);(-1,0);(0,-1);(2,0);(0,2);(-2,0);(0,-2);(1,1);(-1,1);(1,-1);(-1,-1)]
 
 let update (units :feunit matrix) (terrains: terrain matrix)
   : Constants.action list =
@@ -245,7 +241,7 @@ let update (units :feunit matrix) (terrains: terrain matrix)
               moving:=true;
               selection_menu.selected <- 0;
               selected := false;
-              rangeList:= test;
+              rangeList:= [(0,0);(0,1);(1,0);(-1,0);(0,-1)];
               []
     | Attack -> temp_cursor := !player_cursor;
               attacking:= true;

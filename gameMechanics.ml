@@ -26,15 +26,13 @@ let get_map () : terrain matrix =
 
 (*check if a unit exists at point x,y*)
 let exists (x,y) =
-  let (offX, offY) = InputManager.get_map_offset () in
-  if !currentUnits.(y+offY).(x+offX) <> Null then true else false
+  if !currentUnits.(y).(x) <> Null then true else false
 
 let get_unit (x,y) =
-  let (offX, offY) = InputManager.get_map_offset () in
-  if !currentUnits.(y+offY).(x+offX) <> Null
+  if !currentUnits.(y).(x) <> Null
   then !currentUnits.(y).(x)
   else failwith ("unit doesn't exist at location ("^
-                (string_of_int(x+offX))^","^(string_of_int(y+offY))^")")
+                (string_of_int(x))^","^(string_of_int(y))^")")
 
 let get_terrain (x,y) =
   !currentTerrains.(y).(x)
@@ -55,7 +53,6 @@ let type_of (u:feunit):string =
   |Null -> "Null"
 (* legal actions *)
 let attack_unit (x1,y1) (x2,y2): unit =
-  let (offX, offY) = InputManager.get_map_offset () in
   let unit1 = get_unit (x1,y1) in
   let unit2 = get_unit (x2,y2) in
   let unit1_type = type_of unit1 in
@@ -71,7 +68,7 @@ let attack_unit (x1,y1) (x2,y2): unit =
     if b = Null then
       ((if unit2_type = "Ally" then num_allies := !num_allies - 1
                              else num_enemies := !num_enemies - 1);
-      !currentUnits.(y2+offY).(x2+offX) <- b; !currentUnits.(y1+offY).(x1+offX) <- a)
+      !currentUnits.(y2).(x2) <- b; !currentUnits.(y1).(x1) <- a)
     else
     (*counterattack*)
       if (in_range (x2,y2) (x1, y1) (get_total_range unit2)) then
@@ -79,7 +76,7 @@ let attack_unit (x1,y1) (x2,y2): unit =
         (if d = Null then
                     if unit1_type = "Ally" then num_allies := !num_allies - 1
                                             else num_enemies := !num_enemies - 1
-        else ());  !currentUnits.(y2+offY).(x2+offX) <- c; !currentUnits.(y1+offY).(x1+offX) <- d
+        else ());  !currentUnits.(y2).(x2) <- c; !currentUnits.(y1).(x1) <- d
       else ()
     in set_endturn unit1 true;num_usable_units := !num_usable_units-1
 
@@ -87,9 +84,10 @@ let attack_unit (x1,y1) (x2,y2): unit =
 let move (x1,y1) (x2,y2) : unit =
   let u = get_unit (x1,y1) in
   let (offX, offY) = InputManager.get_map_offset () in
-  let dest_terrain = match get_terrain (x2,y2) with
+  let dest_terrain = match get_terrain (offX+x2,offY+y2) with
                      | Impassable _ -> "impassable"
                      | _ -> "other" in
+
   if get_endturn u then failwith "unit cannot move, turn is over" else
   if exists (x2,y2) then failwith "space is already occupied" else
   if dest_terrain = "impassable" then print_string "terrain is impassable" else
@@ -98,8 +96,8 @@ let move (x1,y1) (x2,y2) : unit =
               set_atk_bonus u (get_atkBonus terrain1);
               set_def_bonus u (get_defBonus terrain1);
               set_hasMoved u true;
-              !currentUnits.(y1+offY).(x1+offX) <- Null;
-              !currentUnits.(y2+offY).(x2+offX) <- u;
+              !currentUnits.(y1).(x1) <- Null;
+              !currentUnits.(y2).(x2) <- u;
 
   else print_string "not a valid move"(* failwith "not a valid move" *)
 
