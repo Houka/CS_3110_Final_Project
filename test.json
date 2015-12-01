@@ -44,6 +44,13 @@
 //note: For terrain types = Impassable | Sea | Plain | Mountain | City | Forest
 //           (use lower case)
   "terrain": [
+    {   "name":"impassable",
+        "class" : 0,
+        "atkBonus": 0,
+        "defBonus":0,
+        "img": "images/terrains/impassable.png",
+        "type": "impassable"
+    },
     {   "name":"city",
         "class" : 1,
         "atkBonus": 2,

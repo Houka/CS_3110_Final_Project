@@ -41,7 +41,8 @@ let draw_unit_stats (feunit : feunit) : unit =
       ] in
   let draw_stats (unit_stats : stats) (x,y) =
     let unitStatsList = get_stats_strings unit_stats in
-    draw_loop unitStatsList (x,y)
+    let (w,h) = Graphics.text_size ("h") in
+    draw_loop unitStatsList (x,y-h)
   in
   match feunit with
   | Null -> ()
