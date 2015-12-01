@@ -67,7 +67,7 @@ let add_hp (feunit:feunit) (bonus:int) : unit =
   match feunit with
   | Null -> ()
   | Ally stats
-  | Enemy stats -> print_int (stats.hp+bonus);  stats.hp <- stats.hp + bonus
+  | Enemy stats ->  stats.hp <- stats.hp + bonus
 
 let get_total_atk (feunit:feunit) :int =
   match feunit with
