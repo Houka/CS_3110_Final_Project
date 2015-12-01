@@ -59,6 +59,7 @@ let attack_unit (x1,y1) (x2,y2): unit =
   let unit2_type = type_of unit2 in
   if not (opposite_sides unit1 unit2) then failwith "units are allied" else
   if get_endturn unit1 then failwith "unit cannot attack, turn is over" else
+  let () = Printf.printf "range: %i \n" (get_total_range unit1) in
   if (not (in_range (x1,y1) (x2, y2) (get_total_range unit1)))
     then  print_string "unit out of range, can't attack" (* failwith "unit2 out of range of attack" *)
   else
@@ -263,7 +264,7 @@ let draw () : unit =
 let rec update () : unit =
   (* flush_all (); *)
   if !num_allies = 0 then (draw();print_string "Enemies win.\n") else
-  if !num_enemies = 0 then print_string "You win!\n" else
+  if !num_enemies = 0 then (draw();print_string "You win!\n") else
   (*if turn is odd it is Player's turn; if it is even it is enemy turn*)
   let () = print_string "checking turn number... \n" in
   if !turn mod 2 = 1
