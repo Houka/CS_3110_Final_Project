@@ -60,4 +60,4 @@ let draw (img: image) (x,y) : unit =
 (* loads all images into a mapping *)
 let init () =
   let imgs = Jsonparser.get_images () in
-  images := List.map (fun a -> (a,load_image a)) imgs
+  images := (List.map (fun a -> (a,load_image a)) imgs)

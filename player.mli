@@ -9,7 +9,7 @@ open Constants
  *)
 
 (* The properties of a player's cursor *)
-type cursor = {x: int; y: int; color: int}
+type cursor = {x: int; y: int; img: Sprite.image}
 
 (* Draws to the GUI the player's own cursor *)
 val draw : unit -> unit
