@@ -62,6 +62,9 @@ let move_attack (d: dest_path) (enemy: feunit) : action list =
           let m = Move (d.start, (x2, y2)) in
           let a = Attack ((x2, y2), (x3, y3)) in
           [m;a]
+    | (x, y)::[] ->
+          let a = Attack (d.start, (x, y)) in
+          [a]
     | (x, y)::tl ->
         loop tl actions
   in loop path []
