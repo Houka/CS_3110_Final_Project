@@ -133,8 +133,7 @@ let find_effective (units: feunit matrix) (weapon: string)
 let update (units:feunit matrix) (terrains: terrain matrix)
 : action list  =
   (*Finds the index of enemy and ally unit in units*)
-  let (e, a) = find_first_units units in
-  let enemy = e in
+  let (enemy, a) = find_first_units units in
 
   if enemy = (-1, -1) then
     []
@@ -176,10 +175,14 @@ let update (units:feunit matrix) (terrains: terrain matrix)
           actions
         else
           (*Move towards closest Unit*)
-          let closest =
-          List.fold_left (fun a x -> if x.cost < a.cost then x else a)
-          (List.nth paths 0) paths in
-          let actions = move closest (grab units enemy) in
-          actions
+          if List.length paths > 0 then
+            let closest =
+            List.fold_left (fun a x -> if x.cost < a.cost then x else a)
+            (List.nth paths 0) paths in
+            let actions = move closest (grab units enemy) in
+            actions
+          else
+            [Wait enemy]
+
     in
     create_action enemy
