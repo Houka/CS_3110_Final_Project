@@ -55,6 +55,7 @@ let type_of (u:feunit):string =
   |Null -> "Null"
 (* legal actions *)
 let attack_unit (x1,y1) (x2,y2): unit =
+  let (offX, offY) = InputManager.get_map_offset () in
   let unit1 = get_unit (x1,y1) in
   let unit2 = get_unit (x2,y2) in
   let unit1_type = type_of unit1 in
@@ -67,17 +68,18 @@ let attack_unit (x1,y1) (x2,y2): unit =
 
     let (a,b) = attack unit1 unit2 in
     let () =
-    if b = Null then (!currentUnits.(y2).(x2) <- Null;
-      (if unit2_type = "Ally" then num_allies := !num_allies - 1
-                             else num_enemies := !num_enemies - 1))
+    if b = Null then
+      ((if unit2_type = "Ally" then num_allies := !num_allies - 1
+                             else num_enemies := !num_enemies - 1);
+      !currentUnits.(y2+offY).(x2+offX) <- b; !currentUnits.(y1+offY).(x1+offX) <- a)
     else
     (*counterattack*)
       if (in_range (x2,y2) (x1, y1) (get_total_range unit2)) then
         let (c,d) = attack b a in
-        if d = Null then (!currentUnits.(y1).(x1) <- Null;
-                    (if unit1_type = "Ally" then num_allies := !num_allies - 1
-                                            else num_enemies := !num_enemies - 1))
-        else ()
+        (if d = Null then
+                    if unit1_type = "Ally" then num_allies := !num_allies - 1
+                                            else num_enemies := !num_enemies - 1
+        else ());  !currentUnits.(y2+offY).(x2+offX) <- c; !currentUnits.(y1+offY).(x1+offX) <- d
       else ()
     in set_endturn unit1 true;num_usable_units := !num_usable_units-1
 
@@ -257,8 +259,8 @@ let draw () : unit =
 
 
 let rec update () : unit =
-  flush_all ();
-  if !num_allies = 0 then print_string "Enemies win.\n" else
+  (* flush_all (); *)
+  if !num_allies = 0 then (draw();print_string "Enemies win.\n") else
   if !num_enemies = 0 then print_string "You win!\n" else
   (*if turn is odd it is Player's turn; if it is even it is enemy turn*)
   let () = print_string "checking turn number... \n" in
@@ -279,8 +281,7 @@ and player_turn () =
           (start_turns "Enemy";
           inc_turn ();
           Printf.printf ("incremented turn to: %i\n") !turn;
-          num_usable_units := !num_enemies;
-          update ())
+          num_usable_units := !num_enemies)
         else print_string "entered else1\n"
       else print_string "entered else2\n"
 
@@ -291,6 +292,7 @@ and ai_turn () =
       then
         let actions = Ai.update (get_units ()) (get_map ()) in
         print_string "AI's turn \n";
+        if actions = [] then print_string "no actions\n" else ();
         perform_actions actions;
         draw ();
         if (!num_usable_units = 0) then
@@ -298,7 +300,8 @@ and ai_turn () =
         inc_turn ();
         Printf.printf ("incremented turn(ai) to: %i\n") !turn;
         num_usable_units := !num_allies;
-        Printf.printf ("number of allies is: %i\n") !num_usable_units
+        Printf.printf ("number of allies is: %i\n") !num_usable_units;
+        update()
         )
         else
         update()

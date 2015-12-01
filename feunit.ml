@@ -67,7 +67,7 @@ let add_hp (feunit:feunit) (bonus:int) : unit =
   match feunit with
   | Null -> ()
   | Ally stats
-  | Enemy stats -> stats.hp <- stats.hp + bonus
+  | Enemy stats ->  stats.hp <- stats.hp + bonus
 
 let get_total_atk (feunit:feunit) :int =
   match feunit with
@@ -98,7 +98,13 @@ let get_percent_hp (feunit:feunit) :int =
   | Null -> 0
   | Ally stats
   | Enemy stats ->
-      int_of_float ((float_of_int stats.hp) /. (float_of_int stats.maxHp))
+      int_of_float (100.0*.(float_of_int stats.hp) /. (float_of_int stats.maxHp))
+
+let get_hp (feunit:feunit) :int =
+   match feunit with
+  | Null -> 0
+  | Ally stats
+  | Enemy stats -> stats.hp
 
 let get_weapon (feunit:feunit) :string =
   match feunit with
@@ -149,4 +155,6 @@ let attack (unit1: feunit) (unit2:feunit) : feunit*feunit =
 
     let () =if hp_difference > 0 then (add_hp unit2 (-1*hp_difference))
                                   else () in
-    if get_percent_hp unit2 <=0 then (unit1, Null) else (unit1,unit2)
+ (*    set_endturn unit1 true;
+    set_hasMoved unit1 true; *)
+    if get_hp unit2 <=0 then (unit1, Null) else (unit1,unit2)
