@@ -34,7 +34,7 @@ let main () =
 
   (* loading screen *)
   print_string "adding loading screen\n";
-  Sprite.(draw (resize (load_image "images/loading.png") gameWidth gameHeight) (0,0));
+  Sprite.(draw (resize (load_image "images/misc/loading.png") gameWidth gameHeight) (0,0));
 
   (* inits *)
   print_string "loading in contents\n";
@@ -43,7 +43,7 @@ let main () =
 
   (* loaded screen *)
   print_string "adding loaded screen\n";
-  Sprite.(draw (resize (load_image "images/loaded.png") gameWidth gameHeight) (0,0));
+  Sprite.(draw (resize (load_image "images/misc/loaded.png") gameWidth gameHeight) (0,0));
 
   init()
 
