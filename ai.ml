@@ -143,7 +143,8 @@ let update (units:feunit matrix) (terrains: terrain matrix)
     (*Loop through enemy feunit *)
     let rec create_action enemy =
         let paths =
-          List.map (fun x -> shortest_path enemy x units terrains) players in
+          List.map (fun x -> shortest_path enemy x max_int units terrains)
+          players in
         let e = match (grab units enemy) with
                 | Enemy s | Ally s -> s | _ -> failwith "invalid" in
         let within =

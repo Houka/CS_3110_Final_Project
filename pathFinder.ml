@@ -30,11 +30,11 @@ let find_units (units: feunit matrix) : ((int*int) list * (int*int) list) =
 
 (*Returns a list of record that contains the shortest path from given enemy unit
 to a player unit*)
-let shortest_path (enemy: (int * int)) (ally: (int * int))
+let shortest_path (enemy: (int * int)) (ally: (int * int)) (limit: int)
 (units : feunit matrix) (terrains : terrain matrix) : dest_path =
   let d = {start = enemy; destination = ally; cost = max_int; path = []} in
   let is_valid (i, j) visited c =
-    let efficient = c <= d.cost in
+    let efficient = c <= d.cost && c <= limit in
     let bounds = j < List.length units && j >= 0 &&
                  i < List.length (List.nth units 0) && i >= 0 in
     let retrace = List.fold_left (fun a x -> not (x = (i, j)) && a) true
@@ -46,7 +46,7 @@ let shortest_path (enemy: (int * int)) (ally: (int * int))
                         else false in
     let terrain_obstacle = if bounds then
                              (match (grab terrains (i, j)) with
-                             | Sea _ | Mountain _ | Impassable _ -> false
+                             | Impassable _ -> false
                              | _ -> true)
                            else false in
     (efficient && bounds && retrace && unit_obstacle && terrain_obstacle)
@@ -96,12 +96,51 @@ let find_paths (units : feunit matrix) (terrains: terrain matrix)
     match (y1 >= top && y1 <= bottom) with
     | true -> let rec loop2 x2 l2 =
                 match (x2 >= left && x2 <= right) with
-                | true -> let path = shortest_path (x,y) (x2, y1) units terrains in
+                | true -> let path = shortest_path (x,y) (x2, y1)
+                          s.movRange units terrains in
                           if path.cost = max_int || path.cost > s.movRange then
                             loop2 (x2 + 1) l2
                           else
-                            loop2 (x2 + 1) ((x2,y1)::l2)
+                            if (x2 - x, y1 - y) = (0, 0) then
+                              loop2 (x2 + 1) l2
+                            else
+                              loop2 (x2 + 1) ((x2 - x,y1 - y)::l2)
                 | false -> l2
               in loop1 (x1, y1 + 1) l1@(loop2 x1 l1)
     | false -> l1
   in loop1 (left, top) []
+
+
+let find_attack (units : feunit matrix) (terrains: terrain matrix)
+((x,y): (int * int)) : (int * int) list =
+  let s = match grab units (x,y) with
+          | Enemy s | Ally s -> s
+          | _ -> failwith "invalid" in
+  let top = if (y - s.atkRange) < 0 then 0 else (y - s.atkRange) in
+  let bottom = if (y + s.atkRange) >= (List.length units) - 1 then
+                 (List.length units) - 1
+               else
+                 (y + s.atkRange) in
+  let right = if (y + s.atkRange) >= (List.length (List.nth units 0)) then
+                (List.length (List.nth units 0)) - 1
+              else
+                (x + s.atkRange) in
+  let left = if (x - s.atkRange) < 0 then 0 else (x - s.atkRange) in
+  let rec loop1 (x1, y1) l1 =
+    match (y1 >= top && y1 <= bottom) with
+    | true -> let rec loop2 x2 l2 =
+                match (x2 >= left && x2 <= right) with
+                | true -> let path = shortest_path (x,y) (x2, y1) s.atkRange
+                          units terrains in
+                          if path.cost = max_int || path.cost > s.atkRange then
+                            loop2 (x2 + 1) l2
+                          else
+                            if (x2 - x, y1 - y) = (0, 0) then
+                              loop2 (x2 + 1) l2
+                            else
+                              loop2 (x2 + 1) ((x2 - x,y1 - y)::l2)
+                | false -> l2
+              in loop1 (x1, y1 + 1) l1@(loop2 x1 l1)
+    | false -> l1
+  in loop1 (left, top) []
+
