@@ -22,3 +22,6 @@ val shortest_path : (int * int) -> (int * int) -> int -> feunit matrix ->
 
 val find_paths : feunit matrix -> terrain matrix -> (int * int) ->
                  (int * int) list
+
+val find_attack: feunit matrix -> terrain matrix -> (int * int) ->
+                 (int * int) list

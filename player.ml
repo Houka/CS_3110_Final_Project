@@ -241,13 +241,15 @@ let update (units :feunit matrix) (terrains: terrain matrix)
               moving:=true;
               selection_menu.selected <- 0;
               selected := false;
-              rangeList:= [(0,0);(0,1);(1,0);(-1,0);(0,-1)];
+              rangeList:= PathFinder.find_paths units terrains
+                          (cursor.x+offX,cursor.y+offY);
               []
     | Attack -> temp_cursor := !player_cursor;
               attacking:= true;
               selection_menu.selected <- 0;
               selected := false;
-              rangeList := [(0,0);(0,1);(1,0);(-1,0);(0,-1)];
+              rangeList:= PathFinder.find_attack units terrains
+                          (cursor.x+offX,cursor.y+offY);
               []
     | End ->construct_selection u;
             reset ();
