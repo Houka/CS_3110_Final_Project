@@ -83,8 +83,7 @@ let attack_unit (x1,y1) (x2,y2): unit =
 
 let move (x1,y1) (x2,y2) : unit =
   let u = get_unit (x1,y1) in
-  let (offX, offY) = InputManager.get_map_offset () in
-  let dest_terrain = match get_terrain (offX+x2,offY+y2) with
+  let dest_terrain = match get_terrain (x2,y2) with
                      | Impassable _ -> "impassable"
                      | _ -> "other" in
 
