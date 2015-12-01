@@ -59,11 +59,11 @@ let attack_unit (x1,y1) (x2,y2): unit =
   let unit2 = get_unit (x2,y2) in
   let unit1_type = type_of unit1 in
   let unit2_type = type_of unit2 in
-  if not (opposite_sides unit1 unit2) then failwith "units are allied" else
-  if get_endturn unit1 then failwith "unit cannot attack, turn is over" else
+  if not (opposite_sides unit1 unit2) then print_string "units are allied\n" else
+  if get_endturn unit1 then print_string "unit cannot attack, turn is over\n" else
   let () = Printf.printf "range: %i \n" (get_total_range unit1) in
   if (not (in_range (x1,y1) (x2, y2) (get_total_range unit1)))
-    then  print_string "unit out of range, can't attack" (* failwith "unit2 out of range of attack" *)
+    then  print_string "unit out of range, can't attack\n" (* failwith "unit2 out of range of attack" *)
   else
 
     let (a,b) = attack unit1 unit2 in
@@ -91,8 +91,8 @@ let move (x1,y1) (x2,y2) : unit =
                      | _ -> "other" in
 
   if get_endturn u then failwith "unit cannot move, turn is over" else
-  if exists (x2,y2) then failwith "space is already occupied" else
-  if dest_terrain = "impassable" then print_string "terrain is impassable" else
+  if exists (x2,y2) then print_string "space is already occupied\n" else
+  if dest_terrain = "impassable" then print_string "destination is impassable\n" else
   let path = shortest_path (x1,y1) (x2,y2) max_int (get_units ()) (get_map ()) in
   if List.length path.path > 0 then let terrain1 = get_terrain (x2,y2) in
               set_atk_bonus u (get_atkBonus terrain1);
@@ -197,8 +197,10 @@ let perform_actions (actions: action list) : unit =
   match action with
   | Endturn -> end_turns ()
   | Wait (x,y) -> Printf.printf "action: wait (%i,%i)\n" x y;wait (x,y)
-  | Move ((x1,y1),(x2,y2)) -> Printf.printf "action: move (%i,%i) (%i,%i)\n" x1 y1 x2 y2;move (x1,y1) (x2,y2)
-  | Attack ((x1,y1),(x2,y2)) -> Printf.printf "action: attack (%i,%i) (%i,%i)\n" x1 y1 x2 y2; attack_unit (x1,y1) (x2,y2) in
+  | Move ((x1,y1),(x2,y2)) -> Printf.printf "action: move (%i,%i) (%i,%i)\n"
+                                              x1 y1 x2 y2;move (x1,y1) (x2,y2)
+  | Attack ((x1,y1),(x2,y2)) -> Printf.printf "action: attack (%i,%i) (%i,%i)\n"
+                                    x1 y1 x2 y2; attack_unit (x1,y1) (x2,y2) in
   List.iter perform_act actions
 
 (*checks if the turn is over for "Ally" or "Enemy"*)
