@@ -5,9 +5,12 @@ open Constants
 type cursor = {x: int; y: int; img: Sprite.image}
 
 (* cursor constants *)
-let cursorSelected = Sprite.(resize (load_image "images/test.png") gridSide gridSide)
-let cursorNormal = Sprite.(resize (load_image "images/test.png") gridSide gridSide)
-let cursorHighlight = Sprite.(resize (load_image "images/test.png") gridSide gridSide)
+let cursorSelected =
+  Sprite.(resize (load_image "images/misc/cursors/selectCursor.png") gridSide gridSide)
+let cursorNormal =
+  Sprite.(resize (load_image "images/misc/cursors/deselectCursor.png") gridSide gridSide)
+let cursorHighlight =
+  Sprite.(resize (load_image "images/misc/cursors/moveCursor.png") gridSide gridSide)
 
 (* types of menus that player can have *)
 type menu = {mutable selections:string list; mutable selected:int}

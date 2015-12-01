@@ -39,7 +39,7 @@ let main () =
   (* inits *)
   print_string "loading in contents\n";
   Sprite.init ();
-  GameStateManager.set_current_state "menu";
+  GameStateManager.set_level_data "menu";
 
   (* loaded screen *)
   print_string "adding loaded screen\n";

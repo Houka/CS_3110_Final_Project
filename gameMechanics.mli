@@ -20,8 +20,9 @@ val draw: unit -> unit
  *  is to gather instructions from all players (AI included) and act on those
  *  instructions. If the instuction provided is an invalid action (based on the
  *  game rules enforced here) then an exception will be thrown
+ *  Note: returns 1 if you have won the level, -1 if you lost, 0 otherwise
 *)
-val update: unit -> unit
+val update: unit -> int
 
 (* [attack (x1,y1) (x2,y2)] will enforce game machanics and
     rules as it applies an attack from the unit at location (x1,y1) to the unit at
