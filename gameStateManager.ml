@@ -3,8 +3,8 @@ open Terrain
 open Level
 open Async.Std
 
-(* mutable var to keep track of level state *)
-let currentState = ref "menu"
+(* mutable var to keep track of level state (current state, next state) *)
+let state = ref ("menu","menu")
 
 (* contructs unit and terrain matrices that shows the position of the unit
     or terrain in the map
@@ -57,20 +57,18 @@ let set_level_data (levelname: string) : unit =
   let l = get_level levelname in
   let t = construct_terrain_matrix l.terrain_matrix in
   let u = construct_feunit_matrix l.unit_matrix in
+  state := (levelname, l.next);
   apply_bonus_to_units u t;
   InputManager.set_map_limits (Array.length t.(0)) (Array.length t);
   GameMechanics.set_units (u);
   GameMechanics.set_map (t)
 
-
-let get_current_state () : string = !currentState
-
-let set_current_state (statename : string) : unit =
-  currentState := statename;
-  set_level_data statename
-
 let update () : unit =
-  GameMechanics.update ()
+  match GameMechanics.update () with
+  | 1 -> set_level_data (snd !state)
+  | 0 -> ()
+  | -1 -> set_level_data (fst !state)
+  | _ -> ()
 
 let draw () : unit =
   GameMechanics.draw()

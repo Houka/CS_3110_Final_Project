@@ -262,19 +262,19 @@ let draw () : unit =
 
 
 
-let rec update () : unit =
+let rec update () : int =
   (* flush_all (); *)
-  if !num_allies = 0 then (draw();print_string "Enemies win.\n") else
-  if !num_enemies = 0 then (draw();print_string "You win!\n") else
   (*if turn is odd it is Player's turn; if it is even it is enemy turn*)
   let () = print_string "checking turn number... \n" in
+  if !num_allies = 0 then (print_string "Enemies win.\n";draw();-1) else
+  if !num_enemies = 0 then (print_string "You win!\n";draw();1) else
   if !turn mod 2 = 1
   then
-      player_turn ()
+      (player_turn (); 0)
   else
-      ai_turn ()
+      (ai_turn (); 0)
 
-and player_turn () =
+and player_turn ():unit =
   let () = Printf.printf ("turn: %i\n") !turn in
       if not (!num_usable_units = 0)
       then
@@ -289,7 +289,7 @@ and player_turn () =
         else print_string "entered else1\n"
       else print_string "entered else2\n"
 
-and ai_turn () =
+and ai_turn ():unit =
   let () = Printf.printf ("turn: %i\n") !turn;
       Printf.printf ("number of usable units: %i\n") !num_usable_units in
       if not (!num_usable_units = 0)
@@ -305,9 +305,9 @@ and ai_turn () =
         Printf.printf ("incremented turn(ai) to: %i\n") !turn;
         num_usable_units := !num_allies;
         Printf.printf ("number of allies is: %i\n") !num_usable_units;
-        update()
+        ignore (update())
         )
         else
-        update()
+        ignore (update())
       else
         ()

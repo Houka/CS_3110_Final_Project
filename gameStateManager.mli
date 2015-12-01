@@ -13,11 +13,9 @@ open Terrain
  *   - Keeps track of turn
  *)
 
-(* geter and setter for
- * the name of the current state of the game (i.e. returns "menu")
+(* setter for the current level of the game
 *)
-val get_current_state : unit -> string
-val set_current_state : string -> unit
+val set_level_data : string -> unit
 
 (* The main update loop for this class.
  *  This will handle all the management logic and delegate when something needs
