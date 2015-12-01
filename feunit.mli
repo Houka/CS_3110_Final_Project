@@ -34,6 +34,7 @@ val get_total_def : feunit -> int
 val get_total_mov : feunit -> int
 val get_total_range : feunit -> int
 val get_percent_hp : feunit -> int (* hp/maxHp * 100 *)
+val get_hp : feunit -> int
 val get_weapon : feunit -> string
 val get_endturn : feunit -> bool
 val get_hasMoved: feunit -> bool

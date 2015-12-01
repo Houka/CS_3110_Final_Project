@@ -87,8 +87,12 @@ let attack_unit (x1,y1) (x2,y2): unit =
 let move (x1,y1) (x2,y2) : unit =
   let u = get_unit (x1,y1) in
   let (offX, offY) = InputManager.get_map_offset () in
+  let dest_terrain = match get_terrain (x2,y2) with
+                     | Impassable _ -> "impassable"
+                     | _ -> "other" in
   if get_endturn u then failwith "unit cannot move, turn is over" else
   if exists (x2,y2) then failwith "space is already occupied" else
+  if dest_terrain = "impassable" then print_string "terrain is impassable" else
   let path = shortest_path (x1,y1) (x2,y2) (get_units ()) (get_map ()) in
   if List.length path.path > 0 then let terrain1 = get_terrain (x2,y2) in
               set_atk_bonus u (get_atkBonus terrain1);
