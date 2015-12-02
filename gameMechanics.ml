@@ -230,7 +230,6 @@ let draw_terrain () : unit =
       done
   done
 
-
 (* Goes through each unit in currentUnits and calls their draw functions *)
 let draw_unit () : unit =
   let (offX, offY) = InputManager.get_map_offset () in
@@ -243,6 +242,8 @@ let draw_unit () : unit =
   done
 
 let draw () : unit =
+  Graphics.auto_synchronize false;
+
   (* draw map objects first *)
   draw_terrain ();
   draw_unit ();
@@ -257,10 +258,8 @@ let draw () : unit =
   let highlightedTerrain = !currentTerrains.(cursor.y+offY).(cursor.x+offX) in
   Graphics.set_color Constants.textColor;
   Hub.draw_unit_stats highlightedUnit;
-  Hub.draw_terrain_stats highlightedTerrain
-
-
-
+  Hub.draw_terrain_stats highlightedTerrain;
+  Graphics.auto_synchronize true
 
 let rec update () : int =
   (*if turn is odd it is Player's turn; if it is even it is enemy turn*)
