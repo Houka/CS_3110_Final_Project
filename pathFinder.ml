@@ -32,7 +32,7 @@ let find_units (units: feunit matrix) : ((int*int) list * (int*int) list) =
 to a player unit*)
 let shortest_path (startc: (int * int)) (endc: (int * int)) (limit: int)
 (units : feunit matrix) (terrains : terrain matrix) : dest_path =
-  let d = {start = startc; destination = endc; cost = 10; path = []} in
+  let d = {start = startc; destination = endc; cost = limit; path = []} in
   let is_valid (i, j) visited c =
     let efficient = c <= d.cost && c <= limit in
     let bounds = j < List.length units && j >= 0 &&
@@ -159,4 +159,3 @@ let find_attack (units : feunit matrix) (terrains: terrain matrix)
               in loop1 (x1, y1 + 1) l1@(loop2 x1 l1)
     | false -> l1
   in loop1 (left, top) []
-
