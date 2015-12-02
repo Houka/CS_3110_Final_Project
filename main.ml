@@ -40,7 +40,7 @@ let main () =
   (* loaded screen *)
   Sprite.(draw (resize (load_image "images/misc/loaded.png") gameWidth gameHeight) (0,0));
 
-  print_string "Turn 1: Player turn\n";
+
 
   init()
 

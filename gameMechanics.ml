@@ -265,8 +265,9 @@ let draw () : unit =
 let rec update () : int =
   (*if turn is odd it is Player's turn; if it is even it is enemy turn*)
   flush_all();
-  if !num_allies = 0 then (print_string "Enemies win. Try again.\n\n";draw();-1) else
+
   if !num_enemies = 0 then (print_string "You win!\n\n";draw();1) else
+  if !num_allies = 0 then (print_string "Enemies win. Try again.\n\n";draw();-1) else
   if !turn mod 2 = 1
   then
       player_turn ()

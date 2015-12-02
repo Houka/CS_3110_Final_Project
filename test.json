@@ -4,15 +4,13 @@
       "name" : "menu",
       "next" : "null",
       "units_matrix":
-        [ [0,0,0,0,0,0,0,0,0,0,0],
+        [ [0,0,-1,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,-1,0,1,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0],
           [0,0,1,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0,0,0],
-          [0,0,0,0,0,0,0,0,0,0,0],
           [0,0,0,0,0,0,0,0,0,0,0]
         ],
       "terrain_matrix":
@@ -23,8 +21,6 @@
           [5,2,1,4,4,4,6,6,4,4,4],
           [5,2,1,4,4,6,6,6,4,4,3],
           [5,2,1,4,4,6,6,6,4,3,3],
-          [5,4,6,6,6,6,4,4,3,3,3],
-          [5,4,6,6,6,6,4,4,3,3,3],
           [5,4,6,6,6,6,4,4,3,3,3]
         ]
     },
@@ -44,13 +40,6 @@
 //note: For terrain types = Impassable | Sea | Plain | Mountain | City | Forest
 //           (use lower case)
   "terrain": [
-    {   "name":"impassable",
-        "class" : 0,
-        "atkBonus": 0,
-        "defBonus":0,
-        "img": "images/terrains/impassable.png",
-        "type": "impassable"
-    },
     {   "name":"city",
         "class" : 1,
         "atkBonus": 2,
@@ -99,9 +88,9 @@
   "units": [
     {   "name":"swordsman",
         "class": 1,
-        "maxhp": 10,
+        "maxhp": 100,
         "attack": 5,
-        "defense": 0,
+        "defense": 10,
         "move": 3,
         "range": 1,
         "weapon": "sword",

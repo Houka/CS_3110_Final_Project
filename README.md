@@ -43,4 +43,7 @@ Our goal is to replicate the battle system in Fire Emblem for the GameBoy Advanc
   Your archers can attack other short-ranged units without fear of counterattack, so use them to soften up your enemy before killing them.
   Use the weapon triangle to your advantage. Swords beat axes, lances beat swords, axes beat lances.
 
+## Known bugs/issues:
+
+
 
