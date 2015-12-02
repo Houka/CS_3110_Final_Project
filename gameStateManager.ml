@@ -66,9 +66,12 @@ let set_level_data (levelname: string) : unit =
 
 let update () : unit =
   match GameMechanics.update () with
-  | 1 -> set_level_data (snd !state);ignore(GameMechanics.update ())
+  | 1 -> Sprite.(draw (get_image "next_level") (0,0));
+          set_level_data (snd !state);
+          ignore(Graphics.(wait_next_event [Key_pressed]))
   | 0 -> ()
-  | -1 -> set_level_data (fst !state);ignore(GameMechanics.update ())
+  | -1 -> Sprite.(draw (get_image "lose") (0,0));
+          set_level_data (fst !state)
   | _ -> ()
 
 let draw () : unit =
