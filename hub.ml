@@ -14,7 +14,6 @@ let rec draw_loop slist (x,y) : unit =
       let y' = y - h in
       draw_string (hd) (x,y); draw_loop tl (x,y')
 
-
 let get_longest_string_dim (l:string list) : int*int =
   List.fold_left (fun a x ->
     let len = Graphics.text_size (x) in
