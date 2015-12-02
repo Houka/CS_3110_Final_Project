@@ -138,8 +138,9 @@ let draw u (x,y) : unit =
     let y' =
       (-y-1+Constants.(gameHeight/gridSide))*Constants.gridSide in
     Sprite.(draw img (x',y'));
+    Graphics.set_color 0xFFFFFF;
+    Graphics.draw_rect (x'+4) (y'-1) (Constants.gridSide-8) 7;
     Graphics.set_color 0xFF0000;
-    Graphics.draw_rect (x'+5) y' (Constants.gridSide-10) 5;
     Graphics.fill_rect (x'+5) y' ((Constants.gridSide-10)*(get_percent_hp u)/100) 5
 
 let attack (unit1: feunit) (unit2:feunit) : feunit*feunit =

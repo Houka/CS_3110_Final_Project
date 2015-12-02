@@ -58,11 +58,10 @@ let attack_unit (x1,y1) (x2,y2): unit =
   let unit2 = get_unit (x2,y2) in
   let unit1_type = type_of unit1 in
   let unit2_type = type_of unit2 in
+  if (not (in_range (x1,y1) (x2, y2) (get_total_range unit1)))
+    then  print_string "unit out of range, can't attack\n" else
   if not (opposite_sides unit1 unit2) then print_string "units are allied, can't attack allies\n" else
   if get_endturn unit1 then print_string "turn is over, unit cannot attack\n" else
-  if (not (in_range (x1,y1) (x2, y2) (get_total_range unit1)))
-    then  print_string "unit out of range, can't attack\n" (* failwith "unit2 out of range of attack" *)
-  else
 
     let (a,b) = attack unit1 unit2 in
     let () =
@@ -184,7 +183,8 @@ let set_units (feunits:feunit array array) : unit =
 
 let set_map (map:terrain array array) : unit =
   currentTerrains := map;
-  turn := 1
+  turn := 1;
+  InputManager.reset_map_offset ()
 
 
 
@@ -259,20 +259,23 @@ let draw () : unit =
   Graphics.set_color Constants.textColor;
   Hub.draw_unit_stats highlightedUnit;
   Hub.draw_terrain_stats highlightedTerrain;
+  Hub.draw_current_turn !turn;
   Graphics.auto_synchronize true
 
 let rec update () : int =
   (*if turn is odd it is Player's turn; if it is even it is enemy turn*)
   flush_all();
-
-  if !num_enemies = 0 then (print_string "You win!\n\n";draw();1) else
-  if !num_allies = 0 then (print_string "Enemies win. Try again.\n\n";draw();-1) else
   if !turn mod 2 = 1
   then
-      player_turn ()
+      (ignore(player_turn ());
+      check_end_level())
   else
-      ai_turn ()
-
+      (ignore(ai_turn ());
+      check_end_level())
+and check_end_level ():int =
+  if !num_enemies = 0 then (print_string "You win!\n\n";draw();1) else
+  if !num_allies = 0 then (print_string "Enemies win. Try again.\n\n";draw();-1)
+  else 0
 and player_turn ():int =
       if not (!num_usable_units = 0)
       then
@@ -300,7 +303,7 @@ and ai_turn ():int =
         num_usable_units := !num_allies;
         Printf.printf "Turn %i: Player turn\n" !turn;
         draw ();
-        update()
+        0
         )
         else
         (draw ();

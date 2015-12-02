@@ -20,6 +20,11 @@ val draw_unit_stats : feunit -> unit
  *)
 val draw_terrain_stats : terrain -> unit
 
+(* Draws a display string on the bottom right of the GUI.
+ * Displays whose turn it is currently
+ *)
+val draw_current_turn: int -> unit
+
 (* Draws a display string on the top lvl of the GUI *)
 val draw_string: string -> int*int -> unit
 
@@ -27,3 +32,4 @@ val draw_string: string -> int*int -> unit
     if the longest string was drawn onto the screen.
  *)
 val get_longest_string_dim: (string list) -> int*int
+
