@@ -286,7 +286,9 @@ and player_turn ():unit =
           (start_turns "Enemy";
           inc_turn ();
           Printf.printf ("incremented turn to: %i\n") !turn;
-          num_usable_units := !num_enemies)
+          num_usable_units := !num_enemies;
+          draw ();
+          ignore(update()))
         else print_string "entered else1\n"
       else print_string "entered else2\n"
 
@@ -306,9 +308,11 @@ and ai_turn ():unit =
         Printf.printf ("incremented turn(ai) to: %i\n") !turn;
         num_usable_units := !num_allies;
         Printf.printf ("number of allies is: %i\n") !num_usable_units;
+        draw ();
         ignore (update())
         )
         else
-        ignore (update())
+        (draw ();
+        ignore (update()))
       else
         ()
