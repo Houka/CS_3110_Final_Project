@@ -31,8 +31,7 @@ let exists (x,y) =
 let get_unit (x,y) =
   if !currentUnits.(y).(x) <> Null
   then !currentUnits.(y).(x)
-  else failwith ("unit doesn't exist at location ("^
-                (string_of_int(x))^","^(string_of_int(y))^")")
+  else Null
 
 let get_terrain (x,y) =
   !currentTerrains.(y).(x)
