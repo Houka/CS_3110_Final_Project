@@ -203,9 +203,15 @@ let move (units :feunit matrix) (terrains: terrain matrix)
   | (true,'j') -> let destin = get_cursor() in
                   let origin = !temp_cursor in
                   let (offX, offY) = InputManager.get_map_offset () in
-                  reset();
-                  [Move ((origin.x+offX,origin.y+offY),
-                          (destin.x+offX,destin.y+offY))]
+                  if List.exists
+                    (fun x -> x=(destin.x-origin.x,destin.y-origin.y)) !rangeList
+                  then
+                    (reset();
+                    [Move ((origin.x+offX,origin.y+offY),
+                            (destin.x+offX,destin.y+offY))])
+                  else
+                    (reset();
+                    [])
   | (true,'k') -> reset (); []
   | _ -> []
 
@@ -221,9 +227,15 @@ let attack (units :feunit matrix) (terrains: terrain matrix)
   | (true,'j') -> let destin = get_cursor() in
                   let origin = !temp_cursor in
                   let (offX, offY) = InputManager.get_map_offset () in
-                  reset();
+                  if List.exists
+                    (fun x -> x=(destin.x-origin.x,destin.y-origin.y)) !rangeList
+                  then
+                  (reset();
                   [Attack ((origin.x+offX,origin.y+offY),
-                          (destin.x+offX,destin.y+offY))]
+                          (destin.x+offX,destin.y+offY))])
+                  else
+                    (reset();
+                    [])
   | (true,'k') -> reset (); []
   | _ -> []
 
