@@ -33,29 +33,34 @@ let get_cursor () : cursor = !player_cursor
 let move_cursor_x cursor x : unit =
   let max_x = Constants.(gameWidth/gridSide) in
   let c = !cursor in
-
+  let t = !temp_cursor in
   (* x boundary conditions *)
   if c.x + x >= max_x-1
   then
         (InputManager.add_map_offset 1 0;
+          temp_cursor:= {x=(t.x-1);y=t.y;img=t.img};
         cursor := {x=max_x-1; y=c.y; img=c.img})
   else if c.x + x <= 0
     then
           (InputManager.add_map_offset (-1) 0;
+          temp_cursor:= {x=(t.x+1);y=t.y;img=t.img};
           cursor := {x=0; y=c.y; img=c.img})
     else cursor := {x=c.x+x; y=c.y; img=c.img}
 
 let move_cursor_y cursor y : unit =
   let max_y = Constants.(gameHeight/gridSide) in
   let c = !cursor in
+  let t = !temp_cursor in
   (* y boundary conditions *)
   if c.y + y >= max_y-1
   then
         (InputManager.add_map_offset 0 1;
+          temp_cursor:= {x=t.x;y=(t.y-1);img=t.img};
         cursor := {x=c.x; y=max_y-1; img=c.img})
   else if c.y + y <= 0
     then
           (InputManager.add_map_offset 0 (-1);
+          temp_cursor:= {x=t.x;y=(t.y+1);img=t.img};
           cursor := {x=c.x; y=0; img=c.img})
     else cursor := {x=c.x; y=c.y+y; img=c.img}
 
@@ -210,11 +215,15 @@ let move (units :feunit matrix) (terrains: terrain matrix)
                   if List.exists
                     (fun x -> x=(destin.x+offX,destin.y+offY)) !rangeList
                   then
-                    (reset();
+                    (Printf.printf "Move (%i,%i) (%i,%i)\n"
+                      (origin.x+offX)(origin.y+offY)(destin.x+offX)(destin.y+offY);
+                      reset();
                     [Move ((origin.x+offX,origin.y+offY),
                             (destin.x+offX,destin.y+offY))])
                   else
-                    (reset();
+                    (Printf.printf "Did not move (%i,%i) (%i,%i)\n"
+                      (origin.x+offX)(origin.y+offY)(destin.x+offX)(destin.y+offY);
+                      reset();
                     [])
   | (true,'k') -> reset (); []
   | _ -> []
@@ -232,13 +241,17 @@ let attack (units :feunit matrix) (terrains: terrain matrix)
                   let origin = !temp_cursor in
                   let (offX, offY) = InputManager.get_map_offset () in
                   if List.exists
-                    (fun x -> x=(destin.x+offX,destin.y+offY  )) !rangeList
+                    (fun x -> x=(destin.x+offX,destin.y+offY)) !rangeList
                   then
-                  (reset();
+                  (Printf.printf "Attack (%i,%i) (%i,%i)\n"
+                      (origin.x+offX)(origin.y+offY)(destin.x+offX)(destin.y+offY);
+                  reset();
                   [Attack ((origin.x+offX,origin.y+offY),
                           (destin.x+offX,destin.y+offY))])
                   else
-                    (reset();
+                    (Printf.printf "Did not attack (%i,%i) (%i,%i)\n"
+                      (origin.x+offX)(origin.y+offY)(destin.x+offX)(destin.y+offY);
+                    reset();
                     [])
   | (true,'k') -> reset (); []
   | _ -> []
