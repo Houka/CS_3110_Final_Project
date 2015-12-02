@@ -17,6 +17,6 @@ let gameScale = 1
 let gameTitle = "OCaml Fire Emblem"
 
 (* hub constants *)
-let textPadding = 10
+let textPadding = 15
 let textColor = 0x333333
 

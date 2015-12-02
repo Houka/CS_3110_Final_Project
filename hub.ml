@@ -46,18 +46,19 @@ let draw_unit_stats (feunit : feunit) : unit =
   match feunit with
   | Null -> ()
   | Ally stats ->
+    let (longestW, longestH) = get_longest_string_dim (get_stats_strings stats) in
     Graphics.set_color 0xFFFFFF;
-    Graphics.fill_rect 0 (Constants.gameHeight-90) 100 90;
+    Graphics.fill_rect 0 (Constants.gameHeight-100) (longestW+Constants.textPadding) 100;
     Graphics.set_color 0x333333;
-    draw_stats stats (Constants.textPadding,Constants.gameHeight)
+    draw_stats stats (Constants.textPadding/2,Constants.gameHeight)
   | Enemy stats ->
     let (longestW, longestH) = get_longest_string_dim (get_stats_strings stats) in
     Graphics.set_color 0xFFFFFF;
-    Graphics.fill_rect (Constants.gameWidth - 110)
-                        (Constants.gameHeight-90) 110 90;
+    Graphics.fill_rect (Constants.gameWidth - (longestW+Constants.textPadding))
+                        (Constants.gameHeight-100) (longestW+Constants.textPadding) 100;
     Graphics.set_color 0x333333;
     draw_stats stats
-      (Constants.(gameWidth-textPadding) - longestW, Constants.gameHeight)
+      (Constants.(gameWidth-textPadding/2) - longestW, Constants.gameHeight)
 
 let draw_terrain_stats (terrain: terrain) : unit =
   let get_stats_strings (terrain_stats: t_stats) =
@@ -76,9 +77,10 @@ let draw_terrain_stats (terrain: terrain) : unit =
     let (longestW,longestH) = get_longest_string_dim terrainStatsList in
     let maxTextHeight = longestH*(List.length terrainStatsList) in
     Graphics.set_color 0xFFFFFF;
-    Graphics.fill_rect (Constants.gameWidth - 100) 0 100 60;
+    Graphics.fill_rect (Constants.gameWidth - (longestW+Constants.textPadding))
+                        0 (longestW+Constants.textPadding) 60;
     Graphics.set_color 0x333333;
-    (draw_stats stats (Constants.(gameWidth - textPadding) - longestW ,maxTextHeight))
+    (draw_stats stats (Constants.(gameWidth - textPadding/2) - longestW ,maxTextHeight))
 
 
 
