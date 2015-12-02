@@ -13,15 +13,15 @@ let get_unit (classnum: int) : feunit =
   if classnum = 0 then Null else
     let unit_list = get_all_unit_data () in
     let info = List.assoc (abs classnum) unit_list in
-    (* let image_name = if classnum > 0 then info.Jsonparser.img^"_ally"
-                                    else info.Jsonparser.img^"_enemy" in *)
+    let image_name = if classnum > 0 then "images/sprites/allies/"^info.Jsonparser.img
+                                    else "images/sprites/enemies/"^info.Jsonparser.img in
 
     let unit_stats = {name = info.Jsonparser.name; maxHp = info.Jsonparser.maxHp;
         atk = info.Jsonparser.atk; def = info.Jsonparser.def;
         atkRange = info.Jsonparser.atkRange; movRange = info.Jsonparser.movRange;
         hp = info.Jsonparser.maxHp; atkBonus = 0; defBonus = 0;
         atkRangeBonus = 0; movRangeBonus = 0; weapon = info.Jsonparser.weapon;
-        img = Sprite.(resize (get_image info.Jsonparser.img) Constants.gridSide Constants.gridSide);
+        img = Sprite.(resize (get_image image_name) Constants.gridSide Constants.gridSide);
         endturn = true; hasMoved = true} in
     print_string "creating unit\n";
     if classnum > 0
@@ -56,14 +56,14 @@ let set_range_bonus (feunit:feunit) (bonus:int) : unit =
 let set_endturn (feunit:feunit) (b:bool) : unit =
   match feunit with
   | Null -> ()
-  | Ally stats -> Printf.printf "ally turn ended %b\n" b;stats.endturn <- b
-  | Enemy stats -> Printf.printf "enemy turn ended %b\n" b;stats.endturn <- b
+  | Ally stats -> (* Printf.printf "ally turn ended %b\n" b; *)stats.endturn <- b
+  | Enemy stats -> (* Printf.printf "enemy turn ended %b\n" b; *)stats.endturn <- b
 
 let set_hasMoved (feunit:feunit) (b:bool) : unit =
   match feunit with
   | Null -> ()
-  | Ally stats -> Printf.printf "ally moved %b\n" b;stats.hasMoved<- b
-  | Enemy stats -> Printf.printf "enemy moved %b\n" b;stats.hasMoved<- b
+  | Ally stats -> (* Printf.printf "ally moved %b\n" b; *)stats.hasMoved<- b
+  | Enemy stats -> (* Printf.printf "enemy moved %b\n" b; *)stats.hasMoved<- b
 
 let add_hp (feunit:feunit) (bonus:int) : unit =
   match feunit with
