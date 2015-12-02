@@ -259,6 +259,7 @@ let draw () : unit =
   Graphics.set_color Constants.textColor;
   Hub.draw_unit_stats highlightedUnit;
   Hub.draw_terrain_stats highlightedTerrain;
+  Hub.draw_current_turn !turn;
   Graphics.auto_synchronize true
 
 let rec update () : int =

@@ -82,5 +82,20 @@ let draw_terrain_stats (terrain: terrain) : unit =
     Graphics.set_color 0x333333;
     (draw_stats stats (Constants.(gameWidth - textPadding/2) - longestW ,maxTextHeight))
 
+let draw_current_turn (turn: int) : unit =
+  let (longestW,longestH) = get_longest_string_dim ["Your Turn";"Enemy's Turn"] in
+  let maxTextHeight = longestH*(List.length ["Your Turn";"Enemy's Turn"]) in
+  let pos = (Constants.textPadding/2,maxTextHeight) in
+  Graphics.set_color 0xFFFFFF;
+  Graphics.fill_rect 0 0 (longestW+Constants.textPadding) (Constants.gameHeight-100);
+  Graphics.set_color 0x333333;
+
+  if turn = 1 then draw_string "Your Turn" pos
+  else draw_string "Enemy's Turn" pos
+
+
+
+
+
 
 
