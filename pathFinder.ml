@@ -98,7 +98,7 @@ let find_paths (units : feunit matrix) (terrains: terrain matrix)
                 match (x2 >= left && x2 <= right) with
                 | true -> let path = shortest_path (x,y) (x2, y1)
                           s.movRange units terrains in
-                          if path.cost = max_int || path.cost > s.movRange then
+                          if path.cost = 20 || path.cost > s.movRange then
                             loop2 (x2 + 1) l2
                           else
                             if (x2 - x, y1 - y) = (0, 0) then
@@ -132,7 +132,7 @@ let find_attack (units : feunit matrix) (terrains: terrain matrix)
                 match (x2 >= left && x2 <= right) with
                 | true -> let path = shortest_path (x,y) (x2, y1) s.atkRange
                           units terrains in
-                          if path.cost = max_int || path.cost > s.atkRange then
+                          if path.cost = 20 || path.cost > s.atkRange then
                             loop2 (x2 + 1) l2
                           else
                             if (x2 - x, y1 - y) = (0, 0) then
