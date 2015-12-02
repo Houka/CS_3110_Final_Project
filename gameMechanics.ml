@@ -92,7 +92,7 @@ let move (x1,y1) (x2,y2) : unit =
   if get_endturn u then failwith "unit cannot move, turn is over" else
   if exists (x2,y2) then print_string "space is already occupied\n" else
   if dest_terrain = "impassable" then print_string "destination is impassable\n" else
-  let path = shortest_path (x1,y1) (x2,y2) max_int (get_units ()) (get_map ()) in
+  let path = shortest_path (x1,y1) (x2,y2) 10 (get_units ()) (get_map ()) in
   if List.length path.path > 0 then let terrain1 = get_terrain (x2,y2) in
               set_atk_bonus u (get_atkBonus terrain1);
               set_def_bonus u (get_defBonus terrain1);

@@ -100,7 +100,10 @@ let get_percent_hp (feunit:feunit) :int =
   | Null -> 0
   | Ally stats
   | Enemy stats ->
-      int_of_float (100.0*.(float_of_int stats.hp) /. (float_of_int stats.maxHp))
+      let percent = int_of_float
+              (100.0*.(float_of_int stats.hp) /. (float_of_int stats.maxHp)) in
+      if percent<0 then 0 else percent
+
 
 let get_hp (feunit:feunit) :int =
    match feunit with
@@ -138,7 +141,7 @@ let draw u (x,y) : unit =
     Sprite.(draw img (x',y'));
     Graphics.set_color 0xFF0000;
     Graphics.draw_rect (x'+5) y' (Constants.gridSide-10) 5;
-    Graphics.fill_rect (x'+5) y' ((Constants.gridSide*(get_percent_hp u))/100-10) 5
+    Graphics.fill_rect (x'+5) y' ((Constants.gridSide-10)*(get_percent_hp u)/100) 5
 
 let attack (unit1: feunit) (unit2:feunit) : feunit*feunit =
   (*weapon triangle*)
