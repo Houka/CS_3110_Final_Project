@@ -2,7 +2,7 @@
 ## OCaml Fire Emblem
 - Install dependencies: `opam install camlimages`
 - To compile: `cs3110 compile -p camlimages.all,pa_ounit,graphics,yojson,async -t main`
-- To run: `cs3110 run main example.json`
+- To run: `cs3110 run main game.json`
 
 ## Dependencies:
 - Graphics
