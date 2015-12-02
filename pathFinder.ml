@@ -30,9 +30,9 @@ let find_units (units: feunit matrix) : ((int*int) list * (int*int) list) =
 
 (*Returns a list of record that contains the shortest path from given enemy unit
 to a player unit*)
-let shortest_path (enemy: (int * int)) (ally: (int * int)) (limit: int)
+let shortest_path (startc: (int * int)) (endc: (int * int)) (limit: int)
 (units : feunit matrix) (terrains : terrain matrix) : dest_path =
-  let d = {start = enemy; destination = ally; cost = 10; path = []} in
+  let d = {start = startc; destination = endc; cost = 10; path = []} in
   let is_valid (i, j) visited c =
     let efficient = c <= d.cost && c <= limit in
     let bounds = j < List.length units && j >= 0 &&
@@ -45,7 +45,11 @@ let shortest_path (enemy: (int * int)) (ally: (int * int)) (limit: int)
     let unit_obstacle = if bounds then
                           (match (grab units (i, j)) with
                           | Null -> true
-                          | _ -> (i, j) = ally)
+                          | _ ->
+                            (i, j) = endc ||
+                            (match (grab units (startc),grab units (i,j)) with
+                             | (Ally _, Ally _) -> true
+                             | _ -> false))
                         else false in
     let terrain_obstacle = if bounds then
                              (match (grab terrains (i, j)) with
@@ -55,7 +59,7 @@ let shortest_path (enemy: (int * int)) (ally: (int * int)) (limit: int)
     (efficient && bounds && retrace && unit_obstacle && terrain_obstacle)
   in
   let rec find_path (i, j) visited c p =
-    if (i, j) = ally then
+    if (i, j) = endc then
       if c < d.cost then (d.cost <- c; d.path <- List.rev p) else ()
     else
       (*Left*)
@@ -75,8 +79,8 @@ let shortest_path (enemy: (int * int)) (ally: (int * int)) (limit: int)
         find_path (i, j - 1) ((i, j)::visited) (c + 1) ((i, j - 1)::p)
       else ();
   in
-  if is_valid ally [] 0 then
-    (find_path enemy [] 0 []; d)
+  if is_valid endc [] 0 then
+    (find_path startc [] 0 []; d)
   else
     d
 
@@ -84,6 +88,11 @@ let shortest_path (enemy: (int * int)) (ally: (int * int)) (limit: int)
   a given unit*)
 let find_paths (units : feunit matrix) (terrains: terrain matrix)
 ((x,y): (int * int)) : (int * int) list =
+  let obstruction (i,j) =
+    match grab units (i, j) with
+    | Ally _ -> true
+    | Enemy _ -> true
+    | _ -> false in
   let s = match grab units (x,y) with
           | Enemy s | Ally s -> s
           | _ -> failwith "invalid" in
@@ -103,13 +112,14 @@ let find_paths (units : feunit matrix) (terrains: terrain matrix)
                 match (x2 >= left && x2 <= right) with
                 | true -> let path = shortest_path (x,y) (x2, y1)
                           s.movRange units terrains in
-                          if path.cost = 10 || path.cost > s.movRange then
+                          if path.cost = 10 || path.cost > s.movRange
+                          || obstruction (x2,y1) then
                             loop2 (x2 + 1) l2
                           else
-                            if (x2 - x, y1 - y) = (0, 0) then
+                            if (x2, y1) = (x, y) then
                               loop2 (x2 + 1) l2
                             else
-                              loop2 (x2 + 1) ((x2 - x,y1 - y)::l2)
+                              loop2 (x2 + 1) ((x2,y1)::l2)
                 | false -> l2
               in loop1 (x1, y1 + 1) l1@(loop2 x1 l1)
     | false -> l1
@@ -141,10 +151,10 @@ let find_attack (units : feunit matrix) (terrains: terrain matrix)
                           if path.cost = 10 || path.cost > s.atkRange then
                             loop2 (x2 + 1) l2
                           else
-                            if (x2 - x, y1 - y) = (0, 0) then
+                            if (x2, y1) = (x, y) then
                               loop2 (x2 + 1) l2
                             else
-                              loop2 (x2 + 1) ((x2 - x,y1 - y)::l2)
+                              loop2 (x2 + 1) ((x2,y1)::l2)
                 | false -> l2
               in loop1 (x1, y1 + 1) l1@(loop2 x1 l1)
     | false -> l1
