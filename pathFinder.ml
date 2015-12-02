@@ -132,30 +132,25 @@ let find_attack (units : feunit matrix) (terrains: terrain matrix)
   let s = match grab units (x,y) with
           | Enemy s | Ally s -> s
           | _ -> failwith "invalid" in
-  let top = if (y - s.atkRange) < 0 then 0 else (y - s.atkRange) in
-  let bottom = if (y + s.atkRange) >= (List.length units) - 1 then
-                 (List.length units) - 1
-               else
-                 (y + s.atkRange) in
-  let right = if (y + s.atkRange) >= (List.length (List.nth units 0)) then
-                (List.length (List.nth units 0)) - 1
-              else
-                (x + s.atkRange) in
-  let left = if (x - s.atkRange) < 0 then 0 else (x - s.atkRange) in
-  let rec loop1 (x1, y1) l1 =
-    match (y1 >= top && y1 <= bottom) with
-    | true -> let rec loop2 x2 l2 =
-                match (x2 >= left && x2 <= right) with
-                | true -> let path = shortest_path (x,y) (x2, y1) (s.atkRange + 1)
-                          units terrains in
-                          if path.cost = (s.atkRange + 1) || path.cost > s.atkRange then
-                            loop2 (x2 + 1) l2
-                          else
-                            if (x2, y1) = (x, y) then
-                              loop2 (x2 + 1) l2
-                            else
-                              loop2 (x2 + 1) ((x2,y1)::l2)
-                | false -> l2
-              in loop1 (x1, y1 + 1) l1@(loop2 x1 l1)
-    | false -> l1
-  in loop1 (left, top) []
+  let is_valid (i,j) =
+    let bounds = j < List.length units && j >= 0 &&
+                 i < List.length (List.nth units 0) &&
+                 i >= 0 &&
+                 j < List.length terrains &&
+                 i < List.length (List.nth terrains 0) in
+    let terrain_obstacle = if bounds then
+                             (match (grab terrains (i, j)) with
+                             | Impassable _ -> false
+                             | _ -> true)
+                           else false in
+    (bounds && terrain_obstacle)
+  in
+  let range1 = [(1,0); (0,1); (-1,0); (0,-1)] in
+  let range2 = [(1,0); (0,1); (-1,0); (0,-1); (2,0); (0,2); (-2,0); (0,-2);
+                (1,1); (-1,-1); (1, -1); (-1,1)] in
+  let init_range = if s.atkRange = 1 then
+                     List.map (fun (rx,ry) -> (x + rx, y + ry)) range1
+                   else
+                     List.map (fun (rx,ry) -> (x + rx, y + ry)) range2
+  in
+  List.filter (is_valid) init_range
