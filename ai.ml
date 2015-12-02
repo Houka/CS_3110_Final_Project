@@ -3,7 +3,7 @@ open Terrain
 open Constants
 open PathFinder
 
-
+(*Returns a enemy unit and a list of player unit given unit matrix*)
 let find_first_units (units: feunit matrix) : ((int*int) * (int*int) list) =
  let rec row (ulist : feunit matrix) el al i l  =
    match ulist with
@@ -138,16 +138,15 @@ let find_effective (units: feunit matrix) (weapon: string)
            a
   ) fst_w dl
 
+(*Returns a list of action given a unit matrix and terrain matrix*)
 let update (units:feunit matrix) (terrains: terrain matrix)
 : action list  =
   (*Finds the index of enemy and ally unit in units*)
   let (enemy, a) = find_first_units units in
-
   if enemy = (-1, -1) then
     []
   else
     let players = a in
-
     (*Loop through enemy feunit *)
     let rec create_action enemy =
         let paths =
