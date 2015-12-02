@@ -150,12 +150,12 @@ let attack (unit1: feunit) (unit2:feunit) : feunit*feunit =
     let w2 = get_weapon b in
 
     match w1,w2 with
-    | "sword", "axe" -> 2
-    | "sword", "lance" -> -2
-    | "lance", "axe" -> -2
-    | "lance", "sword" -> 2
-    | "axe", "sword" -> -2
-    | "axe", "lance" -> 2
+    | "sword", "axe" -> 3
+    | "sword", "lance" -> -1
+    | "lance", "axe" -> -1
+    | "lance", "sword" -> 3
+    | "axe", "sword" -> -1
+    | "axe", "lance" -> 3
     | _ -> 0 in
 
     let hp_difference = (get_total_atk unit1) - (get_total_def unit2) +
