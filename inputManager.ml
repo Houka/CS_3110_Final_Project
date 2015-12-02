@@ -18,5 +18,6 @@ let add_map_offset x y =
           then if y + y0 < 0 then 0 else y
           else 0 in
   offset := (x'+x0,y'+y0)
+let reset_map_offset () = offset:=(0,0)
 
 let set_map_limits w h = mapLimits := (w,h)
