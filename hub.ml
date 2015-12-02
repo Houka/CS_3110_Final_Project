@@ -92,7 +92,7 @@ let draw_current_turn (turn: int) : unit =
   Graphics.set_color 0xFFFFFF;
   Graphics.fill_rect 0 0 (longestW+Constants.textPadding) 40;
 
-  if turn = 1 then
+  if (turn mod 2) = 1 then
     (Graphics.set_color Graphics.blue;
     draw_string "Your Turn" pos;
     Graphics.set_color 0x333333)
