@@ -115,9 +115,9 @@ let draw_selection () : unit =
 
 let draw_range () : unit =
   if !moving || !attacking then
-    let c = !temp_cursor in
+    let (offX, offY) = InputManager.get_map_offset () in
     List.iter (fun (x,y) ->
-      let (x',y') = translate_pt (x+c.x,y+c.y) in
+      let (x',y') = translate_pt (x-offX,y-offY) in
       Sprite.draw (cursorHighlight) (x',y')
     ) !rangeList
   else
@@ -180,10 +180,14 @@ let deselect_event (units :feunit matrix) (terrains: terrain matrix)
   : Constants.action list =
   (* updating player cursor *)
   match (InputManager.get_keypressed (),InputManager.get_key ()) with
-  | (true,'w') -> move_cursor_y player_cursor (-1); []
-  | (true,'a') -> move_cursor_x player_cursor (-1); []
-  | (true,'s') -> move_cursor_y player_cursor (1); []
-  | (true,'d') -> move_cursor_x player_cursor (1); []
+  | (true,'w') -> move_cursor_y player_cursor (-1);
+                  []
+  | (true,'a') -> move_cursor_x player_cursor (-1);
+                  []
+  | (true,'s') -> move_cursor_y player_cursor (1);
+                  []
+  | (true,'d') -> move_cursor_x player_cursor (1);
+                  []
   | (true,'j') -> let c = get_cursor() in
                   let (offX, offY) = InputManager.get_map_offset () in
                   player_cursor := {x=c.x; y=c.y; img=cursorSelected };
@@ -204,7 +208,7 @@ let move (units :feunit matrix) (terrains: terrain matrix)
                   let origin = !temp_cursor in
                   let (offX, offY) = InputManager.get_map_offset () in
                   if List.exists
-                    (fun x -> x=(destin.x-origin.x,destin.y-origin.y)) !rangeList
+                    (fun x -> x=(destin.x+offX,destin.y+offY)) !rangeList
                   then
                     (reset();
                     [Move ((origin.x+offX,origin.y+offY),
@@ -228,7 +232,7 @@ let attack (units :feunit matrix) (terrains: terrain matrix)
                   let origin = !temp_cursor in
                   let (offX, offY) = InputManager.get_map_offset () in
                   if List.exists
-                    (fun x -> x=(destin.x-origin.x,destin.y-origin.y)) !rangeList
+                    (fun x -> x=(destin.x+offX,destin.y+offY  )) !rangeList
                   then
                   (reset();
                   [Attack ((origin.x+offX,origin.y+offY),
