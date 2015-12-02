@@ -269,11 +269,11 @@ let rec update () : int =
   if !num_enemies = 0 then (print_string "You win!\n\n";draw();1) else
   if !turn mod 2 = 1
   then
-      (player_turn (); 0)
+      player_turn ()
   else
-      (ai_turn (); 0)
+      ai_turn ()
 
-and player_turn ():unit =
+and player_turn ():int =
       if not (!num_usable_units = 0)
       then
         let actions = Player.update (get_units ()) (get_map ()) in
@@ -284,11 +284,11 @@ and player_turn ():unit =
           num_usable_units := !num_enemies;
           draw ();
           Printf.printf "Turn %i: Enemy turn\n" !turn;
-          ignore(update()))
-        else ()
-      else ()
+          update())
+        else 0
+      else 0
 
-and ai_turn ():unit =
+and ai_turn ():int =
       if not (!num_usable_units = 0)
       then
         let actions = Ai.update (get_units ()) (get_map ()) in
@@ -300,10 +300,10 @@ and ai_turn ():unit =
         num_usable_units := !num_allies;
         Printf.printf "Turn %i: Player turn\n" !turn;
         draw ();
-        ignore (update())
+        update()
         )
         else
         (draw ();
-        ignore (update()))
+        update())
       else
-        ()
+        0
