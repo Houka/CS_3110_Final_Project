@@ -206,7 +206,15 @@ let get_all_level_data (): (string*level_info) list =
   in make_list names units terrain next
 
 let get_images () : string list =
-  extract_terrain_images () @ extract_unit_image ()
+  let terrain_images = extract_terrain_images () in
+  let unit_images = extract_unit_image () in
+  let ally_images =
+      List.map (fun x -> "images/sprites/allies/"^x) unit_images in
+  let enemy_images =
+      List.map (fun x -> "images/sprites/enemies/"^x) unit_images in
+  terrain_images@ally_images@enemy_images
+
+
 
 (*the code below is used to check the level data is correct*)
 (* let _ =
