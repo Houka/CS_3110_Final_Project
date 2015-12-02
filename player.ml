@@ -252,26 +252,26 @@ let update (units :feunit matrix) (terrains: terrain matrix)
   else if !selected then
     match select_event u t with
     | Null -> []
-    | Move -> temp_cursor := !player_cursor;
+    | Move -> (temp_cursor := !player_cursor;
               moving:=true;
               selection_menu.selected <- 0;
               selected := false;
               rangeList:= PathFinder.find_paths units terrains
                           (cursor.x+offX,cursor.y+offY);
-              []
-    | Attack -> temp_cursor := !player_cursor;
+              [])
+    | Attack -> (temp_cursor := !player_cursor;
               attacking:= true;
               selection_menu.selected <- 0;
               selected := false;
               rangeList:= PathFinder.find_attack units terrains
                           (cursor.x+offX,cursor.y+offY);
-              []
-    | End ->construct_selection u;
+              [])
+    | End ->(construct_selection u;
             reset ();
-            [Endturn]
-    | Wait ->construct_selection u;
+            [Endturn])
+    | Wait ->(construct_selection u;
             reset ();
-            [Wait (cursor.x+offX,cursor.y+offY)]
+            [Wait (cursor.x+offX,cursor.y+offY)])
   else
     deselect_event units terrains
 

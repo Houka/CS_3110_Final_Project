@@ -65,9 +65,9 @@ let set_level_data (levelname: string) : unit =
 
 let update () : unit =
   match GameMechanics.update () with
-  | 1 -> set_level_data (snd !state)
+  | 1 -> set_level_data (snd !state);ignore(GameMechanics.update ())
   | 0 -> ()
-  | -1 -> set_level_data (fst !state)
+  | -1 -> set_level_data (fst !state);ignore(GameMechanics.update ())
   | _ -> ()
 
 let draw () : unit =

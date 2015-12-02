@@ -11,7 +11,7 @@ type dest_path = {start: (int * int);
 let grab (matrix: 'a matrix) ((x, y) : int * int) : 'a =
   List.nth (List.nth matrix y) x
 
-(* finds units to move or attack, returns the index of enemy and ally feunit*)
+(* finds units to move sor attack, returns the index of enemy and ally feunit*)
 let find_units (units: feunit matrix) : ((int*int) list * (int*int) list) =
  let rec row (ulist : feunit matrix) el al i l  =
    match ulist with
@@ -36,7 +36,10 @@ let shortest_path (enemy: (int * int)) (ally: (int * int)) (limit: int)
   let is_valid (i, j) visited c =
     let efficient = c <= d.cost && c <= limit in
     let bounds = j < List.length units && j >= 0 &&
-                 i < List.length (List.nth units 0) && i >= 0 in
+                 i < List.length (List.nth units 0) &&
+                 i >= 0 &&
+                 j < List.length terrains &&
+                 i < List.length (List.nth terrains 0) in
     let retrace = List.fold_left (fun a x -> not (x = (i, j)) && a) true
                   visited in
     let unit_obstacle = if bounds then
@@ -77,6 +80,8 @@ let shortest_path (enemy: (int * int)) (ally: (int * int)) (limit: int)
   else
     d
 
+(*Returns a list of avalible relative coordinate that can be traveled by a
+  a given unit*)
 let find_paths (units : feunit matrix) (terrains: terrain matrix)
 ((x,y): (int * int)) : (int * int) list =
   let s = match grab units (x,y) with
@@ -110,7 +115,8 @@ let find_paths (units : feunit matrix) (terrains: terrain matrix)
     | false -> l1
   in loop1 (left, top) []
 
-
+(*Returns a list of avalible relative coordinate which can be attacked by a
+  given unit*)
 let find_attack (units : feunit matrix) (terrains: terrain matrix)
 ((x,y): (int * int)) : (int * int) list =
   let s = match grab units (x,y) with
