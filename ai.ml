@@ -30,7 +30,7 @@ let find_first_units (units: feunit matrix) : ((int*int) * (int*int) list) =
 (*Returns list of move action given an unit. Move action is limited by the given
   unit's movRange*)
 let move (d: dest_path) (enemy: feunit) : action list =
-  if d.cost = max_int then
+  if d.cost = 10 then
     [Wait d.start]
   else
     let es = match enemy with | Enemy s | Ally s -> s | _ -> failwith "invalid" in
@@ -151,7 +151,7 @@ let update (units:feunit matrix) (terrains: terrain matrix)
     (*Loop through enemy feunit *)
     let rec create_action enemy =
         let paths =
-          List.map (fun x -> shortest_path enemy x max_int units terrains)
+          List.map (fun x -> shortest_path enemy x 10 units terrains)
           players in
         let e = match (grab units enemy) with
                 | Enemy s | Ally s -> s | _ -> failwith "invalid" in
