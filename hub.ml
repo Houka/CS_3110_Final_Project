@@ -49,16 +49,18 @@ let draw_unit_stats (feunit : feunit) : unit =
     let (longestW, longestH) = get_longest_string_dim (get_stats_strings stats) in
     Graphics.set_color 0xFFFFFF;
     Graphics.fill_rect 0 (Constants.gameHeight-100) (longestW+Constants.textPadding) 100;
-    Graphics.set_color 0x333333;
-    draw_stats stats (Constants.textPadding/2,Constants.gameHeight)
+    Graphics.set_color Graphics.blue;
+    draw_stats stats (Constants.textPadding/2,Constants.gameHeight);
+    Graphics.set_color 0x333333
   | Enemy stats ->
     let (longestW, longestH) = get_longest_string_dim (get_stats_strings stats) in
     Graphics.set_color 0xFFFFFF;
     Graphics.fill_rect (Constants.gameWidth - (longestW+Constants.textPadding))
                         (Constants.gameHeight-100) (longestW+Constants.textPadding) 100;
-    Graphics.set_color 0x333333;
+    Graphics.set_color Graphics.red;
     draw_stats stats
-      (Constants.(gameWidth-textPadding/2) - longestW, Constants.gameHeight)
+      (Constants.(gameWidth-textPadding/2) - longestW, Constants.gameHeight);
+    Graphics.set_color 0x333333
 
 let draw_terrain_stats (terrain: terrain) : unit =
   let get_stats_strings (terrain_stats: t_stats) =
@@ -79,19 +81,25 @@ let draw_terrain_stats (terrain: terrain) : unit =
     Graphics.set_color 0xFFFFFF;
     Graphics.fill_rect (Constants.gameWidth - (longestW+Constants.textPadding))
                         0 (longestW+Constants.textPadding) 60;
-    Graphics.set_color 0x333333;
-    (draw_stats stats (Constants.(gameWidth - textPadding/2) - longestW ,maxTextHeight))
+    Graphics.set_color 0x006400;
+    (draw_stats stats (Constants.(gameWidth - textPadding/2) - longestW ,maxTextHeight));
+    Graphics.set_color 0x333333
 
 let draw_current_turn (turn: int) : unit =
   let (longestW,longestH) = get_longest_string_dim ["Your Turn";"Enemy's Turn"] in
   let maxTextHeight = longestH*(List.length ["Your Turn";"Enemy's Turn"]) in
-  let pos = (Constants.textPadding/2,maxTextHeight) in
+  let pos = (Constants.textPadding/2,maxTextHeight/2) in
   Graphics.set_color 0xFFFFFF;
-  Graphics.fill_rect 0 0 (longestW+Constants.textPadding) (Constants.gameHeight-100);
-  Graphics.set_color 0x333333;
+  Graphics.fill_rect 0 0 (longestW+Constants.textPadding) 40;
 
-  if turn = 1 then draw_string "Your Turn" pos
-  else draw_string "Enemy's Turn" pos
+  if turn = 1 then
+    (Graphics.set_color Graphics.blue;
+    draw_string "Your Turn" pos;
+    Graphics.set_color 0x333333)
+  else
+    (Graphics.set_color Graphics.red;
+    draw_string "Enemy's Turn" pos;
+    Graphics.set_color 0x333333)
 
 
 
