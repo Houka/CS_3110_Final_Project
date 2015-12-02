@@ -2,7 +2,7 @@ open Feunit
 open Terrain
 
 (*
- * The GameStateManager Module.
+ * The GameStateManager Module:
  *   - Keeps track of the current Game State (i.e. whether the GUI and player
  *      are viewing and interacting with the menu, level 1, etc...)
  *   - Handles updating the AI and Player logic by giving them data from
@@ -13,19 +13,18 @@ open Terrain
  *   - Keeps track of turn
  *)
 
-(* setter for the current level of the game
-*)
+(* Setter for the current level of the game *)
 val set_level_data : string -> unit
 
 (* The main update loop for this class.
- *  This will handle all the management logic and delegate when something needs
- *  to be updated. Mainly called by main.ml which passes it the keypresses
+ *   This will handle all the management logic and delegate when something needs
+ *   too be updated. Mainly called by main.ml which passes it the keypresses
  *)
 val update : unit -> unit
 
 (* The main drawing function.
- *  This will handle all the delegation of who can draw onto the screen and
- *  when they can draw. Handles who draws to which layer in the screen.
+ *   This will handle all the delegation of who can draw onto the screen and
+ *   when they can draw. Handles who draws to which layer in the screen.
  *)
 val draw : unit -> unit
 
