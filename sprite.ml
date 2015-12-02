@@ -4,7 +4,7 @@ type image = OImages.oimage
 let images = ref []
 
 let load_image (filename:string) : image =
-  let img = Printf.printf "loaded image: %s\n" filename; OImages.load filename [] in
+  let img = OImages.load filename [] in
   match OImages.tag img with
   | OImages.Rgb24 x -> img
   | OImages.Rgba32 x -> img

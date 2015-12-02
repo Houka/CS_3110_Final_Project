@@ -23,10 +23,24 @@ Our goal is to replicate the battle system in Fire Emblem for the GameBoy Advanc
 ## Controls:
 - WASD to move cursor
 - J to select
+- K to deselect
 - Q to quit
 
 ## Gameplay:
 - You can control blue units. Your goal is to eliminate all red (enemy) units.
 - This is a turn based game.
+- Every time it is your turn each of your units may move only once. You can choose to not move your unit.
+- Units may also attack or move. Upon attacking or waiting the unit's turn is over. When all of your units' turns are over the enemy's turn will begin.
+- To end your turn before all your units have waited or attacked, select "End turn" by clicking "J" anywhere and selecting end turn.
+- When attacking another unit it will counterattack if you are within its range, unless it dies from your attack.
 - Hover over a unit to see its stats.
 - Hover over a terrain spot to see the stat bonuses.
+- Keep the command prompt open to see whose turn it is and view other information on the state of the game. It will also tell you if you attempt to perform an illegal move (in which case nothing happens).
+
+## Hints:
+- Level 2:
+  Occupy the cities for a huge terrain advantage.
+  Your archers can attack other short-ranged units without fear of counterattack, so use them to soften up your enemy before killing them.
+  Use the weapon triangle to your advantage. Swords beat axes, lances beat swords, axes beat lances.
+
+

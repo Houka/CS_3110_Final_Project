@@ -114,7 +114,7 @@
         "class" : 4,
         "atkBonus": 0,
         "defBonus":0,
-        "img": "images/terrains/plain.png",
+        "img": "images/terrains/plain/plain1.png",
         "type": "plain"
     },
     {   "name":"rock",

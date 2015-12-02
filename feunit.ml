@@ -23,7 +23,6 @@ let get_unit (classnum: int) : feunit =
         atkRangeBonus = 0; movRangeBonus = 0; weapon = info.Jsonparser.weapon;
         img = Sprite.(resize (get_image image_name) Constants.gridSide Constants.gridSide);
         endturn = true; hasMoved = true} in
-    print_string "creating unit\n";
     if classnum > 0
     then Ally unit_stats
     else Enemy unit_stats

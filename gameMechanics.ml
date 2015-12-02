@@ -58,9 +58,8 @@ let attack_unit (x1,y1) (x2,y2): unit =
   let unit2 = get_unit (x2,y2) in
   let unit1_type = type_of unit1 in
   let unit2_type = type_of unit2 in
-  if not (opposite_sides unit1 unit2) then print_string "units are allied\n" else
-  if get_endturn unit1 then print_string "unit cannot attack, turn is over\n" else
-  let () = Printf.printf "range: %i \n" (get_total_range unit1) in
+  if not (opposite_sides unit1 unit2) then print_string "units are allied, can't attack allies\n" else
+  if get_endturn unit1 then print_string "turn is over, unit cannot attack\n" else
   if (not (in_range (x1,y1) (x2, y2) (get_total_range unit1)))
     then  print_string "unit out of range, can't attack\n" (* failwith "unit2 out of range of attack" *)
   else
@@ -90,8 +89,10 @@ let move (x1,y1) (x2,y2) : unit =
                      | _ -> "other" in
 
   if get_endturn u then failwith "unit cannot move, turn is over" else
-  if exists (x2,y2) then print_string "space is already occupied\n" else
-  if dest_terrain = "impassable" then print_string "destination is impassable\n" else
+  if exists (x2,y2)
+        then print_string "space is already occupied, can't move to it.\n" else
+  if dest_terrain = "impassable"
+         then print_string "destination is impassable, can't move to it.\n" else
   let path = shortest_path (x1,y1) (x2,y2) 10 (get_units ()) (get_map ()) in
   if List.length path.path > 0 then let terrain1 = get_terrain (x2,y2) in
               set_atk_bonus u (get_atkBonus terrain1);
@@ -100,7 +101,8 @@ let move (x1,y1) (x2,y2) : unit =
               !currentUnits.(y1).(x1) <- Null;
               !currentUnits.(y2).(x2) <- u;
 
-  else print_string "not a valid move"(* failwith "not a valid move" *)
+  else print_string "not a valid move, out of range of unit"
+
 
 
 let wait (x,y) : unit =
@@ -169,7 +171,6 @@ let start_turns s :unit =
               | _ -> ()
               in ()
   | _ -> () in
-  print_string ("started turns for "^s^"\n");
   Array.iter (fun a -> Array.iter (switch s) a) !currentUnits
 
 
@@ -195,11 +196,9 @@ let perform_actions (actions: action list) : unit =
   let perform_act action =
   match action with
   | Endturn -> end_turns ()
-  | Wait (x,y) -> Printf.printf "action: wait (%i,%i)\n" x y;wait (x,y)
-  | Move ((x1,y1),(x2,y2)) -> Printf.printf "action: move (%i,%i) (%i,%i)\n"
-                                              x1 y1 x2 y2;move (x1,y1) (x2,y2)
-  | Attack ((x1,y1),(x2,y2)) -> Printf.printf "action: attack (%i,%i) (%i,%i)\n"
-                                    x1 y1 x2 y2; attack_unit (x1,y1) (x2,y2) in
+  | Wait (x,y) -> wait (x,y)
+  | Move ((x1,y1),(x2,y2)) -> move (x1,y1) (x2,y2)
+  | Attack ((x1,y1),(x2,y2)) -> attack_unit (x1,y1) (x2,y2) in
   List.iter perform_act actions
 
 (*checks if the turn is over for "Ally" or "Enemy"*)
@@ -264,11 +263,10 @@ let draw () : unit =
 
 
 let rec update () : int =
-  (* flush_all (); *)
   (*if turn is odd it is Player's turn; if it is even it is enemy turn*)
-  let () = print_string "checking turn number... \n" in
-  if !num_allies = 0 then (print_string "Enemies win.\n";draw();-1) else
-  if !num_enemies = 0 then (print_string "You win!\n";draw();1) else
+  flush_all();
+  if !num_allies = 0 then (print_string "Enemies win. Try again.\n\n";draw();-1) else
+  if !num_enemies = 0 then (print_string "You win!\n\n";draw();1) else
   if !turn mod 2 = 1
   then
       (player_turn (); 0)
@@ -276,38 +274,31 @@ let rec update () : int =
       (ai_turn (); 0)
 
 and player_turn ():unit =
-  let () = Printf.printf ("turn: %i\n") !turn in
       if not (!num_usable_units = 0)
       then
         let actions = Player.update (get_units ()) (get_map ()) in
-        print_string "Player's turn \n";
         perform_actions actions;
         if (!num_usable_units = 0) then
           (start_turns "Enemy";
           inc_turn ();
-          Printf.printf ("incremented turn to: %i\n") !turn;
           num_usable_units := !num_enemies;
           draw ();
+          Printf.printf "Turn %i: Enemy turn\n" !turn;
           ignore(update()))
-        else print_string "entered else1\n"
-      else print_string "entered else2\n"
+        else ()
+      else ()
 
 and ai_turn ():unit =
-  let () = Printf.printf ("turn: %i\n") !turn;
-      Printf.printf ("number of usable units: %i\n") !num_usable_units in
       if not (!num_usable_units = 0)
       then
         let actions = Ai.update (get_units ()) (get_map ()) in
-        print_string "AI's turn \n";
-        if actions = [] then print_string "no actions\n" else ();
         perform_actions actions;
         draw ();
         if (!num_usable_units = 0) then
         (start_turns "Ally";
         inc_turn ();
-        Printf.printf ("incremented turn(ai) to: %i\n") !turn;
         num_usable_units := !num_allies;
-        Printf.printf ("number of allies is: %i\n") !num_usable_units;
+        Printf.printf "Turn %i: Player turn\n" !turn;
         draw ();
         ignore (update())
         )
