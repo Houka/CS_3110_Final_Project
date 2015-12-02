@@ -3,7 +3,8 @@ open Terrain
 open Constants
 open PathFinder
 
-(*Returns a enemy unit and a list of player unit given unit matrix*)
+(*Returns a enemy unit and a list of player unit given unit matrix, returns
+  (-1, -1) if enemy unit not found*)
 let find_first_units (units: feunit matrix) : ((int*int) * (int*int) list) =
  let rec row (ulist : feunit matrix) el al i l  =
    match ulist with
