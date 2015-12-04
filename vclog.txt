@@ -1,3 +1,85 @@
+commit bc7f9c71eade4763186240dc4ce1cbe8ce729062
+Merge: cc1fc54 8d0b065
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Fri Dec 4 18:06:47 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit cc1fc54c4dd1b92305abf03ec9fa639ab2e4d4db
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Fri Dec 4 18:06:41 2015 -0500
+
+    fix merge conflicts
+
+ feunit.ml        | 20 ++++++++++++--------
+ gameMechanics.ml |  6 ++++--
+ main.ml          |  6 ++++--
+ player.ml        | 23 +++++++++++++----------
+ sprite.ml        |  3 ++-
+ tests.ml         |  1 -
+ 6 files changed, 35 insertions(+), 24 deletions(-)
+
+commit e93f6b72313f531ad754b03e1b38642bc60f1420
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Fri Dec 4 18:04:08 2015 -0500
+
+    cleaned up code
+
+ jsonparser.ml | 17 -----------------
+ 1 file changed, 17 deletions(-)
+
+commit 8d0b0659e74f10e1fada0e3e92d10e17b68f9237
+Merge: 65608be d39a08a
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Fri Dec 4 17:59:48 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 65608bea3b930d7b13d3ae3b1d158739d2e78647
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Fri Dec 4 17:59:45 2015 -0500
+
+    Make some styling changes
+
+ feunit.ml        | 20 ++++++++++++--------
+ gameMechanics.ml |  6 ++++--
+ main.ml          |  6 ++++--
+ player.ml        | 23 +++++++++++++----------
+ sprite.ml        |  3 ++-
+ tests.ml         |  1 -
+ 6 files changed, 35 insertions(+), 24 deletions(-)
+
+commit d39a08ab9211ec45da22b3a9544f52dbe98e83b4
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Fri Dec 4 17:57:00 2015 -0500
+
+    fixed some turn issues
+
+ gameMechanics.ml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 5752ce32c6f1cbe47e03249a7409fd4ffb22d51f
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Fri Dec 4 17:55:39 2015 -0500
+
+    reformatted some code
+
+ gameMechanics.ml |   12 +-
+ vclog.txt        | 2384 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 2392 insertions(+), 4 deletions(-)
+
+commit ab4b83a8d6c61794a9632abb32fcbd75075fbe8a
+Author: leotrj <lt342@cornell.edu>
+Date:   Fri Dec 4 17:50:12 2015 -0500
+
+    Cleaned up AI
+
+ ai.ml          | 13 +++++--------
+ ai.mli         |  2 +-
+ pathFinder.ml  |  4 ++--
+ pathFinder.mli |  1 +
+ 4 files changed, 9 insertions(+), 11 deletions(-)
+
 commit 420b762e3afd76c44cc79fb837de6fd4fc2bb2af
 Author: alexxu1 <ax35@cornell.edu>
 Date:   Fri Dec 4 17:42:21 2015 -0500
