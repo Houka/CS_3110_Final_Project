@@ -215,9 +215,7 @@ let move (units :feunit matrix) (terrains: terrain matrix)
                   if List.exists
                     (fun x -> x=(destin.x+offX,destin.y+offY)) !rangeList
                   then
-                    (Printf.printf "Move (%i,%i) (%i,%i)\n"
-                      (origin.x+offX)(origin.y+offY)(destin.x+offX)(destin.y+offY);
-                      reset();
+                      (reset();
                     [Move ((origin.x+offX,origin.y+offY),
                             (destin.x+offX,destin.y+offY))])
                   else
@@ -243,9 +241,7 @@ let attack (units :feunit matrix) (terrains: terrain matrix)
                   if List.exists
                     (fun x -> x=(destin.x+offX,destin.y+offY)) !rangeList
                   then
-                  (Printf.printf "Attack (%i,%i) (%i,%i)\n"
-                      (origin.x+offX)(origin.y+offY)(destin.x+offX)(destin.y+offY);
-                  reset();
+                  (reset();
                   [Attack ((origin.x+offX,origin.y+offY),
                           (destin.x+offX,destin.y+offY))])
                   else
