@@ -60,7 +60,9 @@ let draw (img: image) (x,y) : unit =
 (* loads all images into a mapping *)
 let init () =
   let imgs = Jsonparser.get_images () in
-  images := ("next_level", resize (load_image "images/misc/nextlevel.png")
+  images := ("credits", resize (load_image "images/misc/credits.png")
+                                    Constants.gameWidth Constants.gameHeight)
+            ::("next_level", resize (load_image "images/misc/nextlevel.png")
                                     Constants.gameWidth Constants.gameHeight)
             ::("lose", resize (load_image "images/misc/lose.png")
                                 Constants.gameWidth Constants.gameHeight)

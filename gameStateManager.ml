@@ -4,7 +4,7 @@ open Level
 open Async.Std
 
 (* mutable var to keep track of level state (current state, next state) *)
-let state = ref ("menu","menu")
+let state = ref ("tutorial","tutorial")
 
 (* contructs unit and terrain matrices that shows the position of the unit
     or terrain in the map
@@ -66,9 +66,12 @@ let set_level_data (levelname: string) : unit =
 
 let update () : unit =
   match GameMechanics.update () with
-  | 1 -> Sprite.(draw (get_image "next_level") (0,0));
-          set_level_data (snd !state);
-          ignore(Graphics.(wait_next_event [Key_pressed]))
+  | 1 -> if (snd !state) = "credits" then
+           Sprite.(draw (get_image "credits") (0,0))
+         else
+           (Sprite.(draw (get_image "next_level") (0,0));
+           set_level_data (snd !state);
+           ignore(Graphics.(wait_next_event [Key_pressed])))
   | 0 -> ()
   | -1 -> Sprite.(draw (get_image "lose") (0,0));
           set_level_data (fst !state)
