@@ -1,0 +1,2384 @@
+commit 420b762e3afd76c44cc79fb837de6fd4fc2bb2af
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Fri Dec 4 17:42:21 2015 -0500
+
+    changed the last level slightly
+
+ game.json | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 7434539a24e97162703886a6ddd1445cdb8a0541
+Author: leotrj <lt342@cornell.edu>
+Date:   Fri Dec 4 15:49:59 2015 -0500
+
+    Improved AI
+
+ ai.ml     | 59 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++---
+ game.json |  4 ++--
+ 2 files changed, 58 insertions(+), 5 deletions(-)
+
+commit 2a1a7ed0bb1f2b8ba4ad5611c3b5a32af1c35ede
+Author: leotrj <lt342@cornell.edu>
+Date:   Fri Dec 4 01:35:44 2015 -0500
+
+    Modified AI for speed
+
+ ai.ml | 81 +++++++++++++++++++++++++++++++++++++------------------------------
+ 1 file changed, 45 insertions(+), 36 deletions(-)
+
+commit 3ce987d3450999252a6574707a118167d42f4bc5
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Fri Dec 4 00:48:48 2015 -0500
+
+    edited readme
+
+ README.md | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+commit 7efdd6499f1c0c13c04f34af46c6c433c0ccec97
+Merge: 5b795f3 b984a44
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Fri Dec 4 00:29:21 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 5b795f351675552fd640330d8fc9918de6da9ef7
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Fri Dec 4 00:29:16 2015 -0500
+
+    fine tuned some levels
+
+ game.json | 26 +++++++++++++-------------
+ player.ml |  8 ++------
+ 2 files changed, 15 insertions(+), 19 deletions(-)
+
+commit b984a4461e8e0e557f3c9cc85667b1bc7232de90
+Merge: 9443cd6 d885e3c
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Fri Dec 4 00:04:53 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 9443cd6b2a2e01693675d5a6273be6d7b316331f
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Fri Dec 4 00:04:30 2015 -0500
+
+    Fix bug where key inputs are queued during enemy turn
+
+ README.md        | 4 ++--
+ gameMechanics.ml | 9 ++++++++-
+ main.ml          | 5 ++++-
+ player.ml        | 8 ++++----
+ 4 files changed, 18 insertions(+), 8 deletions(-)
+
+commit d885e3c471477b7608bcb1b91500fe1160479f6b
+Merge: 5dfdb6c 73f8482
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Fri Dec 4 00:02:41 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 5dfdb6cd726a28a76dd68079c6c3fe5ab0978ccc
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Fri Dec 4 00:02:33 2015 -0500
+
+    tuned levels
+
+ game.json | 23 +++++++++++------------
+ 1 file changed, 11 insertions(+), 12 deletions(-)
+
+commit 73f8482732a0b03b7fc22331938db7b52851f5b4
+Author: leotrj <lt342@cornell.edu>
+Date:   Thu Dec 3 23:50:29 2015 -0500
+
+    Modified AI calculation
+
+ ai.ml         | 15 +++++++++------
+ pathFinder.ml | 22 +---------------------
+ 2 files changed, 10 insertions(+), 27 deletions(-)
+
+commit ccb83ef64d8a1e23ff64e329d0807ff90953aec1
+Merge: e4a906c be2cd31
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Dec 3 23:25:10 2015 -0500
+
+    fixing merge conflicts
+
+commit e4a906c9ea9af5beed7b2d68182b5c63aa0efc9f
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Dec 3 23:24:20 2015 -0500
+
+    added new level
+
+ game.json | 62 ++++++++++++++++++++++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 54 insertions(+), 8 deletions(-)
+
+commit be2cd316e269b114fec794ea5d82f428574c756e
+Author: leotrj <lt342@cornell.edu>
+Date:   Thu Dec 3 22:31:07 2015 -0500
+
+    Fixed Dragon
+
+ ai.ml     | 15 +++++++++++----
+ game.json |  4 ++--
+ 2 files changed, 13 insertions(+), 6 deletions(-)
+
+commit 9345f1696c8ca0e785203accbdb9b18533118ec2
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Thu Dec 3 22:17:58 2015 -0500
+
+    Change README back to md
+
+ README.md  | 52 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ README.txt | 52 ----------------------------------------------------
+ 2 files changed, 52 insertions(+), 52 deletions(-)
+
+commit f91b23288351290b6b6149462a6c336c65d85db4
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Thu Dec 3 22:16:40 2015 -0500
+
+    Added screen clearing before each draw
+
+ main.ml | 3 +++
+ 1 file changed, 3 insertions(+)
+
+commit 67eceb5d59960ad728af490d6ab0ae49571451bc
+Merge: 5af3763 98ff889
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Dec 3 22:06:14 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 5af3763526997985789c8c1c22983f13c4b707ac
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Dec 3 22:06:06 2015 -0500
+
+    added final level
+
+ game.json | 49 +++++++++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 43 insertions(+), 6 deletions(-)
+
+commit 98ff8894805685737fcdc6852c839092f06057df
+Merge: c62c89b df35b76
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Thu Dec 3 22:03:51 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit c62c89b657cc883c97705fa47fb4bd1be3a87d85
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Thu Dec 3 22:03:41 2015 -0500
+
+    Implement credits screen and replay option
+
+ gameStateManager.ml | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
+
+commit d27a8d637b9126fb382e1565772aa9479004b81d
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Thu Dec 3 22:01:47 2015 -0500
+
+    Update credits screen
+
+ images/misc/credits.png | Bin 48410 -> 48511 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit df35b76048fea1aa9fe4bcdab32cf6e500d22ef9
+Author: leotrj <lt342@cornell.edu>
+Date:   Thu Dec 3 21:51:31 2015 -0500
+
+    Fixed Enemy Collision
+
+ ai.ml         |  2 +-
+ pathFinder.ml | 39 ++++++++++++++++++++++++++++++---------
+ 2 files changed, 31 insertions(+), 10 deletions(-)
+
+commit 6bcad128c9e20805fd8d954bc3d3cbcdfcedc8b7
+Merge: 0b9c147 93bade3
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Thu Dec 3 21:27:24 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 0b9c1470f14f12bacb5306239b7a9cda73b5cd72
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Thu Dec 3 21:27:22 2015 -0500
+
+    Change menu to tutorial and include credits screen
+
+ gameStateManager.ml | 11 +++++++----
+ main.ml             |  2 +-
+ sprite.ml           |  4 +++-
+ 3 files changed, 11 insertions(+), 6 deletions(-)
+
+commit 93bade3d03690e9f44fe03f1c5809dc1bb5badec
+Merge: f50c1b5 be69913
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Dec 3 21:26:54 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit f50c1b50e66fc2459aad65eba0b4a7a000b40039
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Dec 3 21:26:38 2015 -0500
+
+    changed names of levels, added final boss
+
+ game.json | 16 +++++++++++++---
+ 1 file changed, 13 insertions(+), 3 deletions(-)
+
+commit be699131c7acfc999d5c25763aeef1a3b0b03ef6
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Thu Dec 3 21:16:23 2015 -0500
+
+    Add credits screen
+
+ images/misc/credits.png | Bin 0 -> 48410 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 5532285f39b1de5fddbca1afcdbba542cbe09cef
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Dec 3 21:15:09 2015 -0500
+
+    rename README to txt
+
+ README.md  | 51 ---------------------------------------------------
+ README.txt | 52 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ game.json  |  8 ++++----
+ 3 files changed, 56 insertions(+), 55 deletions(-)
+
+commit 2258e35fe97cbd3fbb3413e0a7c13becbabe50ad
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Wed Dec 2 15:03:53 2015 -0500
+
+    Add dragon and egg sprites
+
+ images/sprites/allies/dragon.png  | Bin 0 -> 1856 bytes
+ images/sprites/allies/egg.png     | Bin 0 -> 1504 bytes
+ images/sprites/enemies/dragon.png | Bin 0 -> 1856 bytes
+ images/sprites/enemies/egg.png    | Bin 0 -> 1504 bytes
+ 4 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 555c827f2650ee717a5f38af9b356f481f423765
+Author: leotrj <lt342@cornell.edu>
+Date:   Wed Dec 2 14:58:42 2015 -0500
+
+    Fixed find_attack
+
+ pathFinder.ml | 49 ++++++++++++++++++++++---------------------------
+ 1 file changed, 22 insertions(+), 27 deletions(-)
+
+commit 9410574fd2a9b72139455aaf4ba57b0e0e82b52c
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Wed Dec 2 11:52:18 2015 -0500
+
+    fixed game.json
+
+ game.json | 22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
+
+commit f995f051831244f10e23575a5f629a4f655b6f6d
+Author: Houka <cl795@cornell.edu>
+Date:   Wed Dec 2 11:54:19 2015 -0500
+
+    fixing game json
+
+ game.json | 29 ++++++++++++++++++++++++++++-
+ 1 file changed, 28 insertions(+), 1 deletion(-)
+
+commit d8d9f31a89497558b729c8d50855ff507e729967
+Author: Houka <cl795@cornell.edu>
+Date:   Wed Dec 2 11:51:40 2015 -0500
+
+    fixed game json
+
+ game.json | 33 +++------------------------------
+ 1 file changed, 3 insertions(+), 30 deletions(-)
+
+commit e1f256b028dd7cd0e9bae0620d661ac756413960
+Merge: d5ce9e7 cb57162
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Wed Dec 2 11:32:56 2015 -0500
+
+    fix merge conflicts
+
+commit d5ce9e7de219c94c325f66cd1a4db51028b9d2dc
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Wed Dec 2 11:30:47 2015 -0500
+
+    fix merge conflicts
+
+ game.json | 94 +++++++++++++++++++++++++++++++++++++++++++++++----------------
+ 1 file changed, 70 insertions(+), 24 deletions(-)
+
+commit cb571622c9ef56369b4f8a982ef36b62390291de
+Author: Houka <cl795@cornell.edu>
+Date:   Wed Dec 2 02:56:06 2015 -0500
+
+    updates to the game json
+
+ game.json | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+commit 9c7525ee29158c161880f011075084b31b4b4a48
+Merge: a67674f a70f994
+Author: Houka <cl795@cornell.edu>
+Date:   Wed Dec 2 02:26:21 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit a67674f7a21dac8c94a17c4ccbf74d594e9e860b
+Author: Houka <cl795@cornell.edu>
+Date:   Wed Dec 2 02:25:22 2015 -0500
+
+    fixed white and black tiles
+
+ images/terrains/blacktile.png | Bin 144 -> 159 bytes
+ images/terrains/whitetile.png | Bin 151 -> 157 bytes
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit a70f9949d51659510081cae11f323dded692117e
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Wed Dec 2 02:15:39 2015 -0500
+
+    Clean up code for all mli files
+
+ ai.mli               |  8 +++---
+ feunit.mli           | 22 ++++++++-------
+ gameMechanics.mli    | 75 +++++++++++++++++++++++++---------------------------
+ gameStateManager.mli | 13 +++++----
+ hub.mli              | 33 +++++++++++------------
+ inputManager.mli     | 15 ++++++-----
+ jsonparser.mli       | 27 +++++++++----------
+ level.mli            | 21 ++++++++-------
+ main.mli             |  2 +-
+ pathFinder.mli       | 10 ++++++-
+ player.mli           |  9 ++++---
+ sprite.mli           | 37 +++++++++++++-------------
+ terrain.mli          | 19 ++++++-------
+ 13 files changed, 148 insertions(+), 143 deletions(-)
+
+commit d73984db49419681bc2fcc4576a1ac2c920031d1
+Author: leotrj <lt342@cornell.edu>
+Date:   Wed Dec 2 01:32:17 2015 -0500
+
+    Fixed AI
+
+ pathFinder.ml | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+commit 1c8e68b215be30dc4868b80eb78d38a8d85b5a52
+Merge: faa1cae f0e4d6c
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Wed Dec 2 01:27:25 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit faa1caef6a05a5572c2b3a7cccda2e2631052670
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Wed Dec 2 01:27:19 2015 -0500
+
+    Clean up code in hub.ml
+
+ hub.ml | 80 +++++++++++++++++++++++++++++++++++++++---------------------------
+ 1 file changed, 48 insertions(+), 32 deletions(-)
+
+commit f0e4d6c3935d7b76f624de7e302f31f0b5f69de0
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Wed Dec 2 01:15:16 2015 -0500
+
+    made minor balance changes
+
+ README.md | 12 +++++++-----
+ feunit.ml | 12 ++++++------
+ game.json | 50 +++++++++++++++++++++++++-------------------------
+ 3 files changed, 38 insertions(+), 36 deletions(-)
+
+commit ec47cf532b4a4e5cdcbaf784d7851229b6f4dbe9
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Wed Dec 2 01:06:21 2015 -0500
+
+    Draw current turn correctly in bottom left corner
+
+ hub.ml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit a3b63d21f29ff5f2fcbe78ea0fd853dae37db088
+Author: Houka <cl795@cornell.edu>
+Date:   Wed Dec 2 00:53:07 2015 -0500
+
+    clean up of testing json files and testing pngs
+
+ example.json         |  58 --------
+ images/grass.png     | Bin 12252 -> 0 bytes
+ images/loaded.png    | Bin 283723 -> 0 bytes
+ images/loading.png   | Bin 284323 -> 0 bytes
+ images/null.png      | Bin 12252 -> 0 bytes
+ images/swordsman.png | Bin 12252 -> 0 bytes
+ images/test.png      | Bin 12252 -> 0 bytes
+ interfaces.zip       | Bin 5374 -> 0 bytes
+ levels.json          | 199 ---------------------------
+ schema.json          | 143 --------------------
+ terrains.json        | 373 ---------------------------------------------------
+ test.json            | 100 --------------
+ testing/game.ml      |  13 --
+ testing/game.mli     |   1 -
+ units.json           | 142 --------------------
+ 15 files changed, 1029 deletions(-)
+
+commit 33b6f8106f8618876c8682f4f24340da65cdcf8e
+Author: leotrj <lt342@cornell.edu>
+Date:   Wed Dec 2 00:46:22 2015 -0500
+
+    Edited AI Speed
+
+ ai.ml         | 5 ++---
+ pathFinder.ml | 5 ++---
+ 2 files changed, 4 insertions(+), 6 deletions(-)
+
+commit 7c4315b4d6768bbe898c3363f58bedee9b93448d
+Merge: 4bc9b72 3364b81
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Wed Dec 2 00:46:25 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 4bc9b72f2f9fdaab951d7a1e117306ba815765e9
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Wed Dec 2 00:46:17 2015 -0500
+
+    Update next level screen sprite
+
+ images/misc/nextlevel.png | Bin 12130 -> 14689 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 3364b81d78de65b0690b9310985cc0ccfcfce8a3
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Wed Dec 2 00:42:31 2015 -0500
+
+    Add hub function to draw current turn
+
+ hub.ml | 30 +++++++++++++++++++-----------
+ 1 file changed, 19 insertions(+), 11 deletions(-)
+
+commit cde1f80160a40fe2cb5da7c2a9f4262a3febd0b4
+Merge: a6e4868 c3436d9
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Wed Dec 2 00:30:57 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit a6e4868db2b321c5e92987091e75d908819004b0
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Wed Dec 2 00:30:53 2015 -0500
+
+    Merge conflict
+
+ gameMechanics.ml |  1 +
+ hub.ml           | 15 +++++++++++++++
+ hub.mli          |  8 +++++++-
+ 3 files changed, 23 insertions(+), 1 deletion(-)
+
+commit c3436d9d599a119b6a7f578e6d1a67dc835d9bce
+Merge: 7cd4cc8 d47eb45
+Author: Houka <cl795@cornell.edu>
+Date:   Wed Dec 2 00:19:03 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit d47eb45b2008be1f67110060cb5307e7439add67
+Merge: 2f6e058 95c5e9f
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Wed Dec 2 00:26:00 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 2f6e05839b78abe1abdd138a30fc515780b736d8
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Wed Dec 2 00:25:57 2015 -0500
+
+    fixing merge conflicts
+
+ gameMechanics.ml | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+commit 7cd4cc8f9b9efa84783416ac8532ed85eb755ee8
+Author: Houka <cl795@cornell.edu>
+Date:   Wed Dec 2 00:18:52 2015 -0500
+
+    changed look of health bar on units
+
+ feunit.ml | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 95c5e9f4af701c6ecb0800f24963addd29f23371
+Author: Houka <cl795@cornell.edu>
+Date:   Wed Dec 2 00:14:47 2015 -0500
+
+    bug fix. Next level map offset resetting
+
+ gameMechanics.ml    | 19 +++++++++++--------
+ gameStateManager.ml |  7 +++++--
+ inputManager.ml     |  1 +
+ inputManager.mli    |  4 ++++
+ sprite.ml           |  6 +++++-
+ 5 files changed, 26 insertions(+), 11 deletions(-)
+
+commit a7a9142ba8684941ff8011f1809e78d26553a70f
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Wed Dec 2 00:02:02 2015 -0500
+
+    Update lose screen sprite
+
+ images/misc/lose.png | Bin 13485 -> 15790 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 56f87304ff8c5c5135eb43d975694ab39c502c0f
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Tue Dec 1 23:58:25 2015 -0500
+
+    Add lose screen and next level screen sprites
+
+ images/misc/lose.png      | Bin 0 -> 13485 bytes
+ images/misc/nextlevel.png | Bin 0 -> 12130 bytes
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit d6ca7bbc011a53f251d30fa977839fd6a342ec72
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Dec 1 23:36:51 2015 -0500
+
+    hub padding changes
+
+ constants.ml |  2 +-
+ hub.ml       | 16 +++++++++-------
+ 2 files changed, 10 insertions(+), 8 deletions(-)
+
+commit 59a305d7c2c76607d0d6d1ef57c8388875b3b619
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Tue Dec 1 23:41:06 2015 -0500
+
+    edited a level
+
+ game.json | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 311b051568d7896964598646970d66bfdf671f62
+Merge: 5ebae0a f31cce4
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Tue Dec 1 23:38:36 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 5ebae0ae0f5fce446406f5d7b3a3034651141684
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Tue Dec 1 23:38:33 2015 -0500
+
+    added another level
+
+ README.md           |  3 +++
+ game.json           | 40 +++++++++++++++++++++++++++++++++++++++-
+ gameMechanics.ml    |  3 ++-
+ gameStateManager.ml |  1 +
+ main.ml             |  2 +-
+ test.json           | 19 ++++---------------
+ 6 files changed, 50 insertions(+), 18 deletions(-)
+
+commit f31cce48bf307c013e10431b40501ecc976eaa8c
+Merge: 1438939 4a213dc
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Tue Dec 1 23:31:53 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 1438939a337a5106905a5396080d8ae38d65fa72
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Tue Dec 1 23:31:43 2015 -0500
+
+    Fix animation flickering
+
+ gameMechanics.ml          |   9 ++++-----
+ gameStateManager.ml       |   2 +-
+ images/misc/blacktile.png | Bin 144 -> 0 bytes
+ images/misc/whitetile.png | Bin 151 -> 0 bytes
+ 4 files changed, 5 insertions(+), 6 deletions(-)
+
+commit 4a213dcd2ba79ce9fd313af0d68c72aff2365202
+Merge: e853d4f 2bae3d7
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Dec 1 23:20:36 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit e853d4fa134f35029d57ce1fbfe249a9c8ada6ef
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Dec 1 23:20:28 2015 -0500
+
+    fix bug in cursor. Can now move unit if you move cursor offscreen
+
+ player.ml | 25 +++++++++++++++++++------
+ 1 file changed, 19 insertions(+), 6 deletions(-)
+
+commit 2bae3d7db7bb137405808d9f43ad00de220bc7d4
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Tue Dec 1 23:07:29 2015 -0500
+
+    Add basic game.json
+
+ game.json | 250 +++++++++++++++++++++++++++++++-------------------------------
+ 1 file changed, 124 insertions(+), 126 deletions(-)
+
+commit dbef032f5f9d29421a96d59b97ebc67abb4bb75e
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Dec 1 22:42:44 2015 -0500
+
+    fixed bug where it waits for input before going to next level
+
+ gameMechanics.ml | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
+
+commit b4578219b807ee221d73db5b93c6a9f31dace532
+Merge: a0d4021 7796444
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Tue Dec 1 22:46:45 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit a0d4021fcc52e5aa9bd95cb96ba26597225d1949
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Tue Dec 1 22:46:41 2015 -0500
+
+    cleaned up print statements for gameplay
+
+ README.md        | 14 ++++++++++++++
+ feunit.ml        |  1 -
+ gameMechanics.ml | 45 ++++++++++++++++++---------------------------
+ levels.json      |  2 +-
+ main.ml          |  9 ++++-----
+ sprite.ml        |  2 +-
+ 6 files changed, 38 insertions(+), 35 deletions(-)
+
+commit 779644483b20e6f25611fd9af117e2d3b7fa2071
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Dec 1 22:34:54 2015 -0500
+
+    offset ability added to movment and attack range highlighting
+
+ player.ml | 20 ++++++++++++--------
+ 1 file changed, 12 insertions(+), 8 deletions(-)
+
+commit d21a4efec67bf06560528c79db36799f5d390f2b
+Author: leotrj <lt342@cornell.edu>
+Date:   Tue Dec 1 22:33:29 2015 -0500
+
+    Changed find_path and find_attack
+
+ ai.ml         |  3 ++-
+ pathFinder.ml | 32 +++++++++++++++++++++-----------
+ 2 files changed, 23 insertions(+), 12 deletions(-)
+
+commit acfbb6bc253a86abdbdfcc7db15a801c5022c754
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Tue Dec 1 22:26:15 2015 -0500
+
+    Add game.json
+
+ game.json                     | 586 ++++++++++++++++++++++++++++++++++++++++++
+ images/terrains/blacktile.png | Bin 0 -> 144 bytes
+ images/terrains/whitetile.png | Bin 0 -> 151 bytes
+ terrains.json                 | 106 ++++----
+ 4 files changed, 639 insertions(+), 53 deletions(-)
+
+commit 7fa640f5d1dc97b8586d8ae9f8ab12e5e4c84d1d
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Tue Dec 1 22:05:02 2015 -0500
+
+    Add black and white tiles
+
+ images/misc/blacktile.png | Bin 0 -> 144 bytes
+ images/misc/whitetile.png | Bin 0 -> 151 bytes
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 3fbb274d58d6fd15c168c2af07bbad3518d2e1fd
+Merge: 90521a7 c6628ba
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Tue Dec 1 21:57:20 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 90521a7f381dd7058a606bc1e0b1033f382c63b3
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Tue Dec 1 21:57:15 2015 -0500
+
+    asdf
+
+ README.md | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+commit c6628baa6a399cb33a1d87a8fc34b580f7b00dce
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Dec 1 21:56:24 2015 -0500
+
+    updated readme
+
+ README.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 6d1cc0e8cfebcbff90d82bc82352f5b25f1c2bb1
+Merge: c55297c 218712e
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Dec 1 21:53:02 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit c55297c2122fc0fdc0455ff3b5ec26ff767f0406
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Dec 1 21:52:55 2015 -0500
+
+    fixed ai and player turn switching
+
+ gameMechanics.ml    |  8 ++++++--
+ gameStateManager.ml |  4 ++--
+ player.ml           | 16 ++++++++--------
+ 3 files changed, 16 insertions(+), 12 deletions(-)
+
+commit 218712e4f6f316d36d78241279129bb7c928d7dd
+Merge: 5c7e97b 27791bf
+Author: leotrj <lt342@cornell.edu>
+Date:   Tue Dec 1 21:34:58 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 27791bfcb3d284b5e0e8481d133f1b4b5e80b304
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Tue Dec 1 21:38:14 2015 -0500
+
+    Add units.json
+
+ units.json | 142 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 142 insertions(+)
+
+commit 5c7e97b8094d86809d87b275d50ac7b000930ca8
+Author: leotrj <lt342@cornell.edu>
+Date:   Tue Dec 1 21:34:49 2015 -0500
+
+    Fixed bounds
+
+ ai.ml         |  5 ++---
+ pathFinder.ml | 12 +++++++++---
+ 2 files changed, 11 insertions(+), 6 deletions(-)
+
+commit 0d9596d099bcc8a891db3bb4601394940968d69c
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Tue Dec 1 21:31:04 2015 -0500
+
+    Add terrains.json
+
+ hub.ml        |   1 -
+ terrains.json | 373 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 373 insertions(+), 1 deletion(-)
+
+commit 7322889690d2e0405e29a82481fe2d010589e001
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Dec 1 21:30:38 2015 -0500
+
+    deselect if move and attack select goes on a square that's out of range
+
+ player.ml | 22 +++++++++++++++++-----
+ 1 file changed, 17 insertions(+), 5 deletions(-)
+
+commit 11321c1ad51baad54ce43d799d328b5f4fb4a068
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Tue Dec 1 21:17:48 2015 -0500
+
+    added images for units to json
+
+ images/sprites/allies/demon.png | Bin 0 -> 2394 bytes
+ images/sprites/enemies/roy.png  | Bin 0 -> 2092 bytes
+ jsonparser.ml                   |  10 +++++++++-
+ levels.json                     |  12 ++++++------
+ 4 files changed, 15 insertions(+), 7 deletions(-)
+
+commit f5f2582795b964b4fb1e484857627014f5913175
+Merge: 65a4925 4ed18ef
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Tue Dec 1 21:05:32 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 65a49254b46a325097f0d4e2d37deab4b88e28aa
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Tue Dec 1 21:05:27 2015 -0500
+
+    fixing merge conflicts
+
+ gameMechanics.ml | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+commit 4ed18eff810b8b2b54cd23b48d79ede95b7924c5
+Merge: 58d94df 1388363
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Dec 1 21:05:20 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 58d94dfc1571f13b7fc1c218b41ab7282fe59c77
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Dec 1 21:05:16 2015 -0500
+
+    fixed health bar error
+
+ feunit.ml | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+commit 3c4c9790957803dab87f09ae20faffa7505e70a2
+Merge: 46c6cb0 070b3e7
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Tue Dec 1 21:04:17 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 46c6cb0675c6d9955a0807a38b6d6372a8b20400
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Tue Dec 1 21:04:14 2015 -0500
+
+    resolving merge conflicts
+
+ feunit.ml | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
+
+commit 1388363fb6374840dc2c94aac93610d5ea6cace6
+Author: leotrj <lt342@cornell.edu>
+Date:   Tue Dec 1 20:59:44 2015 -0500
+
+    Optimized AI
+
+ gameMechanics.ml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 070b3e712fec669ed6b123c74d32cd4db4d9cc24
+Merge: 4a65476 946b128
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Dec 1 20:59:34 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 4a6547622eae7bd7a0d6cdf15df70e712abbca12
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Dec 1 20:59:25 2015 -0500
+
+    each unit now has a health bar under them
+
+ feunit.ml | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+commit 946b128ff66acd3cd2fef79da149022202cbb06f
+Author: leotrj <lt342@cornell.edu>
+Date:   Tue Dec 1 20:54:06 2015 -0500
+
+    Changed AI Calculation limit
+
+ ai.ml         | 4 ++--
+ pathFinder.ml | 6 +++---
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+commit 1d6a0d6eae089ea6986fff2cbdcdcf2d3fdbf8ac
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Tue Dec 1 20:47:45 2015 -0500
+
+    Add roy and demon sprites
+
+ images/sprites/allies/roy.png    | Bin 0 -> 2092 bytes
+ images/sprites/enemies/demon.png | Bin 0 -> 2394 bytes
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 3e46bb1522ab4387e1dfdf3a47012e5f29ae3aff
+Author: leotrj <lt342@cornell.edu>
+Date:   Tue Dec 1 20:39:24 2015 -0500
+
+    Changed ai calculation limit
+
+ ai.ml         | 2 +-
+ pathFinder.ml | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+commit 6921ed5fe4ec27e4fefdf8ce797619ee14f46014
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Tue Dec 1 13:52:31 2015 -0500
+
+    fixed error handling
+
+ gameMechanics.ml | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
+
+commit 256d3a86afcf127a1ceeaa32b878b7994ab416b2
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Dec 1 01:34:39 2015 -0500
+
+    updating loading and loaded screen
+
+ main.ml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 33ddaacd9cc1e0a1ca26a8a1650b4d2e18a0d1c7
+Merge: ea560e2 d49788e
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Tue Dec 1 01:29:18 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit ea560e2ee4dd51c91ad6c06929eaa28f80299b9c
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Tue Dec 1 01:29:14 2015 -0500
+
+    Add loading and loaded images
+
+ images/misc/loaded.png  | Bin 0 -> 147939 bytes
+ images/misc/loading.png | Bin 0 -> 138581 bytes
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit d49788e0f8a7ea14b82d09e00d3f0fe88ab3081c
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Dec 1 01:13:41 2015 -0500
+
+    allowed progression of levels
+
+ gameMechanics.ml     | 18 +++++++++---------
+ gameMechanics.mli    |  3 ++-
+ gameStateManager.ml  | 18 ++++++++----------
+ gameStateManager.mli |  6 ++----
+ main.ml              |  2 +-
+ player.ml            |  9 ++++++---
+ 6 files changed, 28 insertions(+), 28 deletions(-)
+
+commit 3d13b3ee2e4b909f9d9b4193a21bbfc9a208e485
+Merge: 16f6e51 3646a29
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Tue Dec 1 00:11:22 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 16f6e51e26de5f279b00c86d58fdfe65ef47f8a1
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Tue Dec 1 00:11:11 2015 -0500
+
+    Add enemies sprite
+
+ images/sprites/enemies/archer1.png    | Bin 0 -> 2325 bytes
+ images/sprites/enemies/archer2.png    | Bin 0 -> 2564 bytes
+ images/sprites/enemies/archer3.png    | Bin 0 -> 2216 bytes
+ images/sprites/enemies/axeuser1.png   | Bin 0 -> 2382 bytes
+ images/sprites/enemies/axeuser2.png   | Bin 0 -> 2536 bytes
+ images/sprites/enemies/axeuser3.png   | Bin 0 -> 2137 bytes
+ images/sprites/enemies/lanceuser1.png | Bin 0 -> 2322 bytes
+ images/sprites/enemies/lanceuser2.png | Bin 0 -> 2348 bytes
+ images/sprites/enemies/lanceuser3.png | Bin 0 -> 2385 bytes
+ images/sprites/enemies/swordsman1.png | Bin 0 -> 2445 bytes
+ images/sprites/enemies/swordsman2.png | Bin 0 -> 2108 bytes
+ images/sprites/enemies/swordsman3.png | Bin 0 -> 2169 bytes
+ 12 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 8daa03cdda8f714c5fa62ae30fe7a2d418501918
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Mon Nov 30 23:34:17 2015 -0500
+
+    Add allies sprites
+
+ images/misc/cursors/deselectCursor.png             | Bin 0 -> 277 bytes
+ images/misc/cursors/moveCursor.png                 | Bin 0 -> 234 bytes
+ images/misc/cursors/selectCursor.png               | Bin 0 -> 289 bytes
+ images/sprites/allies/archer1.png                  | Bin 0 -> 2392 bytes
+ images/sprites/allies/archer2.png                  | Bin 0 -> 2594 bytes
+ images/sprites/allies/archer3.png                  | Bin 0 -> 2184 bytes
+ images/sprites/allies/axeuser1.png                 | Bin 0 -> 2403 bytes
+ images/sprites/allies/axeuser2.png                 | Bin 0 -> 2522 bytes
+ images/sprites/allies/axeuser3.png                 | Bin 0 -> 2269 bytes
+ images/sprites/allies/lanceuser1.png               | Bin 0 -> 2365 bytes
+ images/sprites/allies/lanceuser2.png               | Bin 0 -> 2271 bytes
+ images/sprites/allies/lanceuser3.png               | Bin 0 -> 2361 bytes
+ images/sprites/allies/swordsman1.png               | Bin 0 -> 2563 bytes
+ images/sprites/allies/swordsman2.png               | Bin 0 -> 2256 bytes
+ images/sprites/allies/swordsman3.png               | Bin 0 -> 2164 bytes
+ images/sprites/cursors/deselectCursor.png          | Bin 277 -> 0 bytes
+ images/sprites/cursors/moveCursor.png              | Bin 234 -> 0 bytes
+ images/sprites/cursors/selectCursor.png            | Bin 289 -> 0 bytes
+ images/sprites/terrains/city/city1.png             | Bin 3097 -> 0 bytes
+ images/sprites/terrains/city/city10.png            | Bin 3782 -> 0 bytes
+ images/sprites/terrains/city/city2.png             | Bin 3719 -> 0 bytes
+ images/sprites/terrains/city/city3.png             | Bin 3207 -> 0 bytes
+ images/sprites/terrains/city/city4.png             | Bin 3615 -> 0 bytes
+ images/sprites/terrains/city/city5.png             | Bin 3213 -> 0 bytes
+ images/sprites/terrains/city/city6.png             | Bin 3764 -> 0 bytes
+ images/sprites/terrains/city/city7.png             | Bin 3901 -> 0 bytes
+ images/sprites/terrains/city/city8.png             | Bin 3582 -> 0 bytes
+ images/sprites/terrains/city/city9.png             | Bin 3213 -> 0 bytes
+ images/sprites/terrains/forest/forest1.png         | Bin 3889 -> 0 bytes
+ images/sprites/terrains/forest/forest10.png        | Bin 3870 -> 0 bytes
+ images/sprites/terrains/forest/forest2.png         | Bin 3587 -> 0 bytes
+ images/sprites/terrains/forest/forest3.png         | Bin 3824 -> 0 bytes
+ images/sprites/terrains/forest/forest4.png         | Bin 3897 -> 0 bytes
+ images/sprites/terrains/forest/forest5.png         | Bin 3826 -> 0 bytes
+ images/sprites/terrains/forest/forest6.png         | Bin 3431 -> 0 bytes
+ images/sprites/terrains/forest/forest7.png         | Bin 3725 -> 0 bytes
+ images/sprites/terrains/forest/forest8.png         | Bin 3772 -> 0 bytes
+ images/sprites/terrains/forest/forest9.png         | Bin 3787 -> 0 bytes
+ images/sprites/terrains/impassable/impassable1.png | Bin 3339 -> 0 bytes
+ images/sprites/terrains/impassable/impassable2.png | Bin 2131 -> 0 bytes
+ images/sprites/terrains/impassable/impassable3.png | Bin 2331 -> 0 bytes
+ images/sprites/terrains/impassable/impassable4.png | Bin 2453 -> 0 bytes
+ images/sprites/terrains/impassable/impassable5.png | Bin 2851 -> 0 bytes
+ images/sprites/terrains/impassable/impassable6.png | Bin 2799 -> 0 bytes
+ images/sprites/terrains/mountain/mountain1.png     | Bin 3206 -> 0 bytes
+ images/sprites/terrains/mountain/mountain10.png    | Bin 3434 -> 0 bytes
+ images/sprites/terrains/mountain/mountain2.png     | Bin 3433 -> 0 bytes
+ images/sprites/terrains/mountain/mountain3.png     | Bin 3662 -> 0 bytes
+ images/sprites/terrains/mountain/mountain4.png     | Bin 3618 -> 0 bytes
+ images/sprites/terrains/mountain/mountain5.png     | Bin 3430 -> 0 bytes
+ images/sprites/terrains/mountain/mountain6.png     | Bin 3052 -> 0 bytes
+ images/sprites/terrains/mountain/mountain7.png     | Bin 2976 -> 0 bytes
+ images/sprites/terrains/mountain/mountain8.png     | Bin 3095 -> 0 bytes
+ images/sprites/terrains/mountain/mountain9.png     | Bin 3106 -> 0 bytes
+ images/sprites/terrains/plain/plain1.png           | Bin 2798 -> 0 bytes
+ images/sprites/terrains/plain/plain10.png          | Bin 2712 -> 0 bytes
+ images/sprites/terrains/plain/plain2.png           | Bin 3292 -> 0 bytes
+ images/sprites/terrains/plain/plain3.png           | Bin 3264 -> 0 bytes
+ images/sprites/terrains/plain/plain4.png           | Bin 2680 -> 0 bytes
+ images/sprites/terrains/plain/plain5.png           | Bin 2785 -> 0 bytes
+ images/sprites/terrains/plain/plain6.png           | Bin 2681 -> 0 bytes
+ images/sprites/terrains/plain/plain7.png           | Bin 3545 -> 0 bytes
+ images/sprites/terrains/plain/plain8.png           | Bin 3194 -> 0 bytes
+ images/sprites/terrains/plain/plain9.png           | Bin 3070 -> 0 bytes
+ images/sprites/terrains/sea/sea1.png               | Bin 1983 -> 0 bytes
+ images/sprites/terrains/sea/sea2.png               | Bin 1400 -> 0 bytes
+ images/sprites/terrains/sea/sea3.png               | Bin 1687 -> 0 bytes
+ images/sprites/terrains/sea/sea4.png               | Bin 2016 -> 0 bytes
+ images/sprites/terrains/sea/sea5.png               | Bin 1171 -> 0 bytes
+ images/sprites/terrains/sea/sea6.png               | Bin 3112 -> 0 bytes
+ images/sprites/terrains/sea/sea7.png               | Bin 2142 -> 0 bytes
+ images/terrains/city/city1.png                     | Bin 0 -> 3097 bytes
+ images/terrains/city/city10.png                    | Bin 0 -> 3782 bytes
+ images/terrains/city/city2.png                     | Bin 0 -> 3719 bytes
+ images/terrains/city/city3.png                     | Bin 0 -> 3207 bytes
+ images/terrains/city/city4.png                     | Bin 0 -> 3615 bytes
+ images/terrains/city/city5.png                     | Bin 0 -> 3213 bytes
+ images/terrains/city/city6.png                     | Bin 0 -> 3764 bytes
+ images/terrains/city/city7.png                     | Bin 0 -> 3901 bytes
+ images/terrains/city/city8.png                     | Bin 0 -> 3582 bytes
+ images/terrains/city/city9.png                     | Bin 0 -> 3213 bytes
+ images/terrains/forest/forest1.png                 | Bin 0 -> 3889 bytes
+ images/terrains/forest/forest10.png                | Bin 0 -> 3870 bytes
+ images/terrains/forest/forest2.png                 | Bin 0 -> 3587 bytes
+ images/terrains/forest/forest3.png                 | Bin 0 -> 3824 bytes
+ images/terrains/forest/forest4.png                 | Bin 0 -> 3897 bytes
+ images/terrains/forest/forest5.png                 | Bin 0 -> 3826 bytes
+ images/terrains/forest/forest6.png                 | Bin 0 -> 3431 bytes
+ images/terrains/forest/forest7.png                 | Bin 0 -> 3725 bytes
+ images/terrains/forest/forest8.png                 | Bin 0 -> 3772 bytes
+ images/terrains/forest/forest9.png                 | Bin 0 -> 3787 bytes
+ images/terrains/impassable/impassable1.png         | Bin 0 -> 3339 bytes
+ images/terrains/impassable/impassable2.png         | Bin 0 -> 2131 bytes
+ images/terrains/impassable/impassable3.png         | Bin 0 -> 2331 bytes
+ images/terrains/impassable/impassable4.png         | Bin 0 -> 2453 bytes
+ images/terrains/impassable/impassable5.png         | Bin 0 -> 2851 bytes
+ images/terrains/impassable/impassable6.png         | Bin 0 -> 2799 bytes
+ images/terrains/mountain/mountain1.png             | Bin 0 -> 3206 bytes
+ images/terrains/mountain/mountain10.png            | Bin 0 -> 3434 bytes
+ images/terrains/mountain/mountain2.png             | Bin 0 -> 3433 bytes
+ images/terrains/mountain/mountain3.png             | Bin 0 -> 3662 bytes
+ images/terrains/mountain/mountain4.png             | Bin 0 -> 3618 bytes
+ images/terrains/mountain/mountain5.png             | Bin 0 -> 3430 bytes
+ images/terrains/mountain/mountain6.png             | Bin 0 -> 3052 bytes
+ images/terrains/mountain/mountain7.png             | Bin 0 -> 2976 bytes
+ images/terrains/mountain/mountain8.png             | Bin 0 -> 3095 bytes
+ images/terrains/mountain/mountain9.png             | Bin 0 -> 3106 bytes
+ images/terrains/plain/plain1.png                   | Bin 0 -> 2798 bytes
+ images/terrains/plain/plain10.png                  | Bin 0 -> 2712 bytes
+ images/terrains/plain/plain2.png                   | Bin 0 -> 3292 bytes
+ images/terrains/plain/plain3.png                   | Bin 0 -> 3264 bytes
+ images/terrains/plain/plain4.png                   | Bin 0 -> 2680 bytes
+ images/terrains/plain/plain5.png                   | Bin 0 -> 2785 bytes
+ images/terrains/plain/plain6.png                   | Bin 0 -> 2681 bytes
+ images/terrains/plain/plain7.png                   | Bin 0 -> 3545 bytes
+ images/terrains/plain/plain8.png                   | Bin 0 -> 3194 bytes
+ images/terrains/plain/plain9.png                   | Bin 0 -> 3070 bytes
+ images/terrains/sea/sea1.png                       | Bin 0 -> 1983 bytes
+ images/terrains/sea/sea2.png                       | Bin 0 -> 1400 bytes
+ images/terrains/sea/sea3.png                       | Bin 0 -> 1687 bytes
+ images/terrains/sea/sea4.png                       | Bin 0 -> 2016 bytes
+ images/terrains/sea/sea5.png                       | Bin 0 -> 1171 bytes
+ images/terrains/sea/sea6.png                       | Bin 0 -> 3112 bytes
+ images/terrains/sea/sea7.png                       | Bin 0 -> 2142 bytes
+ 124 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 3646a29e11437d0018530fe303c5b6b7f53bcd62
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 30 23:32:15 2015 -0500
+
+    fixed issue with ranges
+
+ gameMechanics.ml | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit 39c585396b17104e5514d8ca5095addfe200bd0b
+Author: leotrj <lt342@cornell.edu>
+Date:   Mon Nov 30 23:25:29 2015 -0500
+
+    Fixed Attack
+
+ ai.ml | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+commit d9f39048b214ad7c11dceebad877eb628a96ee29
+Merge: 92787bb c6b2c8b
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 30 23:24:40 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 92787bb95b073855aa46daafcb0aaf536bd5c574
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 30 23:24:35 2015 -0500
+
+    fixing merge conflicts
+
+ gameMechanics.ml | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit c6b2c8b0cc03b937b7326fedc27f448d7b794dc1
+Merge: ddd3e6c 250aa8f
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 30 23:14:49 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit ddd3e6c1e19b6e26efd758a931696bf093ef4ffc
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 30 23:14:38 2015 -0500
+
+    using path finder
+
+ pathFinder.mli | 5 ++++-
+ player.ml      | 6 ++++--
+ 2 files changed, 8 insertions(+), 3 deletions(-)
+
+commit 250aa8f180162b2e1701216bbbb3764724709c93
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 30 23:13:21 2015 -0500
+
+    wrote some basic levels, fixed hub display for unit stats
+
+ hub.ml      |   3 +-
+ levels.json | 199 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ test.json   |   7 +++
+ 3 files changed, 208 insertions(+), 1 deletion(-)
+
+commit bc10e5a8d714da467d8dc455ae18ea6c29c560d6
+Author: leotrj <lt342@cornell.edu>
+Date:   Mon Nov 30 22:36:37 2015 -0500
+
+    Added find_attack
+
+ ai.ml            |  3 ++-
+ gameMechanics.ml |  2 +-
+ pathFinder.ml    | 49 ++++++++++++++++++++++++++++++++++++++++++++-----
+ pathFinder.mli   |  7 ++++---
+ 4 files changed, 51 insertions(+), 10 deletions(-)
+
+commit e2267b1c5dc83143eab177c6ecf383c7ec608327
+Merge: 65bba8f bc10e5a
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 30 22:30:34 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 65bba8f0ea1ccc8065c1a7dbc5627a2261955146
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 30 22:30:30 2015 -0500
+
+    merge conflict
+
+ gameMechanics.ml | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+commit bc7403e95892839ee1295fe1eb35daf6ad16cdb8
+Merge: 38551d8 3a43f05
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 30 22:24:02 2015 -0500
+
+    resolve conflicts
+
+commit 38551d8ca35f1fe8b3b6c0f83af26f81f7e978a2
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 30 22:21:10 2015 -0500
+
+    changed move functionality
+
+ feunit.mli       | 1 +
+ gameMechanics.ml | 4 ++++
+ 2 files changed, 5 insertions(+)
+
+commit d0b92358c2c75a594409e0c16df6627bdee4cd78
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Mon Nov 30 22:09:48 2015 -0500
+
+    Add cursor sprites
+
+ images/sprites/cursors/deselectCursor.png | Bin 0 -> 277 bytes
+ images/sprites/cursors/moveCursor.png     | Bin 0 -> 234 bytes
+ images/sprites/cursors/selectCursor.png   | Bin 0 -> 289 bytes
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit ab1e60011628bacd4fed95508028a1d0a51fa9d9
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Mon Nov 30 22:09:25 2015 -0500
+
+    Add terrain sprites
+
+ images/sprites/terrains/city/city1.png             | Bin 0 -> 3097 bytes
+ images/sprites/terrains/city/city10.png            | Bin 0 -> 3782 bytes
+ images/sprites/terrains/city/city2.png             | Bin 0 -> 3719 bytes
+ images/sprites/terrains/city/city3.png             | Bin 0 -> 3207 bytes
+ images/sprites/terrains/city/city4.png             | Bin 0 -> 3615 bytes
+ images/sprites/terrains/city/city5.png             | Bin 0 -> 3213 bytes
+ images/sprites/terrains/city/city6.png             | Bin 0 -> 3764 bytes
+ images/sprites/terrains/city/city7.png             | Bin 0 -> 3901 bytes
+ images/sprites/terrains/city/city8.png             | Bin 0 -> 3582 bytes
+ images/sprites/terrains/city/city9.png             | Bin 0 -> 3213 bytes
+ images/sprites/terrains/forest/forest1.png         | Bin 0 -> 3889 bytes
+ images/sprites/terrains/forest/forest10.png        | Bin 0 -> 3870 bytes
+ images/sprites/terrains/forest/forest2.png         | Bin 0 -> 3587 bytes
+ images/sprites/terrains/forest/forest3.png         | Bin 0 -> 3824 bytes
+ images/sprites/terrains/forest/forest4.png         | Bin 0 -> 3897 bytes
+ images/sprites/terrains/forest/forest5.png         | Bin 0 -> 3826 bytes
+ images/sprites/terrains/forest/forest6.png         | Bin 0 -> 3431 bytes
+ images/sprites/terrains/forest/forest7.png         | Bin 0 -> 3725 bytes
+ images/sprites/terrains/forest/forest8.png         | Bin 0 -> 3772 bytes
+ images/sprites/terrains/forest/forest9.png         | Bin 0 -> 3787 bytes
+ images/sprites/terrains/impassable/impassable1.png | Bin 0 -> 3339 bytes
+ images/sprites/terrains/impassable/impassable2.png | Bin 0 -> 2131 bytes
+ images/sprites/terrains/impassable/impassable3.png | Bin 0 -> 2331 bytes
+ images/sprites/terrains/impassable/impassable4.png | Bin 0 -> 2453 bytes
+ images/sprites/terrains/impassable/impassable5.png | Bin 0 -> 2851 bytes
+ images/sprites/terrains/impassable/impassable6.png | Bin 0 -> 2799 bytes
+ images/sprites/terrains/mountain/mountain1.png     | Bin 0 -> 3206 bytes
+ images/sprites/terrains/mountain/mountain10.png    | Bin 0 -> 3434 bytes
+ images/sprites/terrains/mountain/mountain2.png     | Bin 0 -> 3433 bytes
+ images/sprites/terrains/mountain/mountain3.png     | Bin 0 -> 3662 bytes
+ images/sprites/terrains/mountain/mountain4.png     | Bin 0 -> 3618 bytes
+ images/sprites/terrains/mountain/mountain5.png     | Bin 0 -> 3430 bytes
+ images/sprites/terrains/mountain/mountain6.png     | Bin 0 -> 3052 bytes
+ images/sprites/terrains/mountain/mountain7.png     | Bin 0 -> 2976 bytes
+ images/sprites/terrains/mountain/mountain8.png     | Bin 0 -> 3095 bytes
+ images/sprites/terrains/mountain/mountain9.png     | Bin 0 -> 3106 bytes
+ images/sprites/terrains/plain/plain1.png           | Bin 0 -> 2798 bytes
+ images/sprites/terrains/plain/plain10.png          | Bin 0 -> 2712 bytes
+ images/sprites/terrains/plain/plain2.png           | Bin 0 -> 3292 bytes
+ images/sprites/terrains/plain/plain3.png           | Bin 0 -> 3264 bytes
+ images/sprites/terrains/plain/plain4.png           | Bin 0 -> 2680 bytes
+ images/sprites/terrains/plain/plain5.png           | Bin 0 -> 2785 bytes
+ images/sprites/terrains/plain/plain6.png           | Bin 0 -> 2681 bytes
+ images/sprites/terrains/plain/plain7.png           | Bin 0 -> 3545 bytes
+ images/sprites/terrains/plain/plain8.png           | Bin 0 -> 3194 bytes
+ images/sprites/terrains/plain/plain9.png           | Bin 0 -> 3070 bytes
+ images/sprites/terrains/sea/sea1.png               | Bin 0 -> 1983 bytes
+ images/sprites/terrains/sea/sea2.png               | Bin 0 -> 1400 bytes
+ images/sprites/terrains/sea/sea3.png               | Bin 0 -> 1687 bytes
+ images/sprites/terrains/sea/sea4.png               | Bin 0 -> 2016 bytes
+ images/sprites/terrains/sea/sea5.png               | Bin 0 -> 1171 bytes
+ images/sprites/terrains/sea/sea6.png               | Bin 0 -> 3112 bytes
+ images/sprites/terrains/sea/sea7.png               | Bin 0 -> 2142 bytes
+ 53 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 3a43f0521bce59270b0adfefada2545c00330332
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 30 22:06:32 2015 -0500
+
+    removed redundent offsetting
+
+ gameMechanics.ml | 18 +++++++-----------
+ player.ml        | 48 ++++++++++++++++++++++--------------------------
+ 2 files changed, 29 insertions(+), 37 deletions(-)
+
+commit eb8258319f77d78289f061ccb0f79cc8b1a78de7
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 30 21:43:55 2015 -0500
+
+    changed handling of errors in gameMechanics, added support for different sprites for enemy/ally
+
+ feunit.ml        | 2 ++
+ gameMechanics.ml | 4 ++--
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+commit d6843663955a64899d1884732f906966897e10d1
+Author: leotrj <lt342@cornell.edu>
+Date:   Mon Nov 30 21:13:35 2015 -0500
+
+    I want to go to Hawaii pt2
+
+ pathFinder.ml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 35c438f2e43606a082ff1c2cb0052e10e7b371c0
+Author: leotrj <lt342@cornell.edu>
+Date:   Mon Nov 30 21:09:28 2015 -0500
+
+    I want to go to Hawaii
+
+ pathFinder.ml | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+commit 350a3e312e9f779c57103238958c608b691a5b34
+Merge: 9299bb5 f746345
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 30 21:13:34 2015 -0500
+
+    added player ability to move and attack
+
+commit f74634546fddc145701a7372e86c5fc590ce5d60
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 30 21:14:35 2015 -0500
+
+    made attack better
+
+ feunit.ml        |  2 +-
+ gameMechanics.ml | 13 +++++++------
+ 2 files changed, 8 insertions(+), 7 deletions(-)
+
+commit 9299bb5d4127fdd10ccce866a3fe92faa8df08b7
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 30 21:12:32 2015 -0500
+
+    added player ability to move and attack
+
+ constants.ml |   4 ---
+ player.ml    | 104 ++++++++++++++++++++++++++++++++++++++++++-----------------
+ player.mli   |   2 +-
+ sprite.ml    |   2 +-
+ test.json    |  10 ++++--
+ 5 files changed, 84 insertions(+), 38 deletions(-)
+
+commit f0561c39205c5723c41bca04096276c32b17b4cc
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 30 20:38:34 2015 -0500
+
+    attack works
+
+ feunit.ml        | 14 +++++++++++---
+ gameMechanics.ml | 22 ++++++++++++----------
+ test.json        |  6 +++---
+ 3 files changed, 26 insertions(+), 16 deletions(-)
+
+commit 26d6a5d2b93fe1f59c867ca32c33d3637bae5f4d
+Author: leotrj <lt342@cornell.edu>
+Date:   Mon Nov 30 20:26:52 2015 -0500
+
+    AI: Fixed wait
+
+ ai.ml | 17 ++++++++++-------
+ 1 file changed, 10 insertions(+), 7 deletions(-)
+
+commit 201972d18be6467284d6c5087b61fd8ab219db25
+Author: leotrj <lt342@cornell.edu>
+Date:   Mon Nov 30 20:10:12 2015 -0500
+
+    AI: Fixed Attack
+
+ ai.ml | 3 +++
+ 1 file changed, 3 insertions(+)
+
+commit f4ef41c078498b7a5b05d04d5a39ec48df329481
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 30 10:45:18 2015 -0500
+
+    ai doesn't chain many moves at once anymore
+
+ gameMechanics.ml | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
+
+commit 1beaac3b90b7548b1c8bbab4e3fe2ed8cefe4d89
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 30 02:01:15 2015 -0500
+
+    fixed move
+
+ feunit.ml        |  8 ++++----
+ gameMechanics.ml | 50 ++++++++++++++++++++++++++++++++++++--------------
+ 2 files changed, 40 insertions(+), 18 deletions(-)
+
+commit 0dd6bdda31c891b919f223c4feb6236ee6fda154
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 30 00:37:04 2015 -0500
+
+    merging all the code so it works effort
+
+ gameMechanics.ml    |  18 +++--
+ gameStateManager.ml |   2 +-
+ hub.ml              |  46 +++++++----
+ pathFinder.ml       |   2 +-
+ player.ml           | 214 ++++++++++++++++++++++++++++++++++++----------------
+ terrain.ml          |  51 +++++--------
+ terrain.mli         |   2 +-
+ 7 files changed, 215 insertions(+), 120 deletions(-)
+
+commit 49064b41ec8e94d218b65d4a78c030e832f8b69f
+Author: Houka <cl795@cornell.edu>
+Date:   Sun Nov 29 04:21:41 2015 -0500
+
+    almost playable state.
+
+ README.md                    |  15 +------
+ constants.ml                 |   5 ++-
+ example.json                 |   2 +-
+ gameMechanics.ml             |  48 ++++++++++++---------
+ gameStateManager.ml          |   1 +
+ hub.ml                       |  59 ++++++++++++++-----------
+ hub.mli                      |   7 ++-
+ images/city.png              | Bin 492 -> 0 bytes
+ images/forest.png            | Bin 568 -> 0 bytes
+ images/mountain.png          | Bin 495 -> 0 bytes
+ images/plain.png             | Bin 414 -> 0 bytes
+ images/rock.png              | Bin 455 -> 0 bytes
+ images/sea.png               | Bin 274 -> 0 bytes
+ images/terrains/city.png     | Bin 0 -> 492 bytes
+ images/terrains/forest.png   | Bin 0 -> 568 bytes
+ images/terrains/mountain.png | Bin 0 -> 495 bytes
+ images/terrains/plain.png    | Bin 0 -> 414 bytes
+ images/terrains/rock.png     | Bin 0 -> 455 bytes
+ images/terrains/sea.png      | Bin 0 -> 274 bytes
+ inputManager.ml              |  25 ++++++++---
+ inputManager.mli             |   9 +++-
+ jsonparser.ml                |   8 +---
+ main.ml                      |   2 +-
+ player.ml                    |  28 ++++++------
+ terrain.ml                   |  46 ++++++++++++--------
+ terrain.mli                  |  12 +++---
+ test.json                    | 100 +++++++++++++++++++++++++++++++++++++++++++
+ 27 files changed, 256 insertions(+), 111 deletions(-)
+
+commit 95b2e6b6e8877d860b447f53e5014a894296c019
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Fri Nov 27 03:49:45 2015 -0500
+
+    Implement functions in hub.ml
+
+ constants.ml     |  1 +
+ gameMechanics.ml |  6 +++---
+ hub.ml           | 57 ++++++++++++++++++++++++++++++++++++++++++++++++++++----
+ hub.mli          |  8 +++++---
+ 4 files changed, 62 insertions(+), 10 deletions(-)
+
+commit b451d6e660d87c2fe0711e121fc0841cd75ea236
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Nov 26 22:29:00 2015 -0500
+
+    added images for some tiles
+
+ images/city.png     | Bin 0 -> 492 bytes
+ images/forest.png   | Bin 0 -> 568 bytes
+ images/mountain.png | Bin 0 -> 495 bytes
+ images/plain.png    | Bin 0 -> 414 bytes
+ images/rock.png     | Bin 0 -> 455 bytes
+ images/sea.png      | Bin 0 -> 274 bytes
+ main.ml             |   1 -
+ 7 files changed, 1 deletion(-)
+
+commit 2d2f822cc1a834ee1995e2024ecd5996202e9a28
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Wed Nov 25 12:07:11 2015 -0500
+
+    minor changes
+
+ gameMechanics.ml | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+commit 19ec6a47b35256edbd150362e7a398d827db55c8
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Wed Nov 25 12:05:06 2015 -0500
+
+    fixed a bug in gameMechanics where turn kept incrementing by two. Somehow this got fixed by me adding line 257. If this is removed program fails when it runs by repeatedly drawing over and over and not taking user input.
+
+ example.json     |   8 ++--
+ gameMechanics.ml | 132 ++++++++++++++++++++++++++++++++++---------------------
+ 2 files changed, 85 insertions(+), 55 deletions(-)
+
+commit 51436d3ddde2c17c3fb60a0bd8ee0054b4adf221
+Merge: be79d62 67ad09f
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 23 19:10:09 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit be79d6228627725bb7640bdd590b6292fd3a3f9e
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 23 19:09:58 2015 -0500
+
+    adding in player and fixing gamemechanics
+
+ constants.ml     |  4 ++++
+ example.json     |  4 ++--
+ gameMechanics.ml | 34 +++++++++++++++++++++-------------
+ main.ml          |  3 +--
+ player.ml        | 51 +++++++++++++++++++++++++++++++++++++++------------
+ 5 files changed, 67 insertions(+), 29 deletions(-)
+
+commit 67ad09f5f94aeeac180acc57f574a216cf76c417
+Author: leotrj <lt342@cornell.edu>
+Date:   Mon Nov 23 18:35:05 2015 -0500
+
+    Changed AI and PathFinder
+
+ ai.ml         | 91 ++++++++++++++++++++++++++++++++++++++---------------------
+ pathFinder.ml |  2 +-
+ 2 files changed, 60 insertions(+), 33 deletions(-)
+
+commit aa26e69edb839a8467ddb9a56d9bf3c9a5f11141
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 23 18:23:45 2015 -0500
+
+    implemented REPL in gamemechanics
+
+ gameMechanics.ml    | 92 ++++++++++++++++++++++++++++++++++++++---------------
+ gameStateManager.ml |  2 +-
+ 2 files changed, 67 insertions(+), 27 deletions(-)
+
+commit 587f14ed58cca9e0e764cfcdc946cca24036f2c4
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 23 04:00:29 2015 -0500
+
+    added support for pngs with alpha=0 or in other words we have transparent images!
+
+ sprite.ml | 34 ++++++++++++++++++++++++++++------
+ 1 file changed, 28 insertions(+), 6 deletions(-)
+
+commit 77df864426a9b87ea0facf1335a762c05c421af1
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 23 03:23:47 2015 -0500
+
+    drawing of level works. player cursor works. next step is to allow drawing of transparent images
+
+ constants.ml        |  14 ++++++--
+ example.json        |   2 +-
+ feunit.ml           |  13 ++++---
+ feunit.mli          |   5 +--
+ gameMechanics.ml    |  21 +++++------
+ gameStateManager.ml |  31 ++++++++++++++--
+ hub.mli             |   2 +-
+ main.ml             |  33 +++++++++--------
+ player.ml           | 100 +++++++++++++++++++++++++++++++++++-----------------
+ terrain.ml          |  17 +++++----
+ terrain.mli         |   4 +--
+ 11 files changed, 158 insertions(+), 84 deletions(-)
+
+commit 70342d90843e70edb821d38f32b9da537474936a
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 23 02:05:03 2015 -0500
+
+    add checker for if the turn is over
+
+ gameMechanics.ml  | 107 +++++++++++++++++++++++++++++++++++++++---------------
+ gameMechanics.mli |   6 +--
+ 2 files changed, 81 insertions(+), 32 deletions(-)
+
+commit 15a06c994c40b2ef8969c6ce68abf41e467dbb58
+Merge: c71ee34 aa2cfdb
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 23 01:25:47 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit c71ee34ec6264464959cb78e1dca09fe469c4a36
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 23 01:25:43 2015 -0500
+
+    endturns
+
+ gameMechanics.ml | 22 +++++++++++++++++-----
+ 1 file changed, 17 insertions(+), 5 deletions(-)
+
+commit aa2cfdb23f5e0bf5517b23ff32915a7d9f656ab6
+Merge: cde0cbf ce1a092
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 23 01:17:54 2015 -0500
+
+    merge conflict resolve
+
+commit cde0cbf7110b9b3e24e4fea36139880239cc4b28
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 23 01:15:12 2015 -0500
+
+    merge issue resolution
+
+ gameMechanics.ml | 59 ++++++++++++++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 55 insertions(+), 4 deletions(-)
+
+commit ce1a092da41e847d4e0fe58f13e057d64d394aee
+Merge: eca1df5 f4dc1ae
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 23 01:10:25 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit eca1df5ece37bce20ee039f75dd6dbfb90acfc74
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 23 01:10:22 2015 -0500
+
+    implemented attacking
+
+ gameMechanics.ml  | 57 +++++++++++++++++++++++++++++++++++++++++++++++++++++--
+ gameMechanics.mli | 27 ++++++++++++++------------
+ terrain.ml        | 18 ++++++++++++++++++
+ terrain.mli       |  4 ++++
+ 4 files changed, 92 insertions(+), 14 deletions(-)
+
+commit 938908ca45eb5108d065e4062c42a7197e992e3a
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 23 01:04:25 2015 -0500
+
+    added hasMoved field
+
+ feunit.ml  | 18 ++++++++++++++++--
+ feunit.mli |  5 ++++-
+ 2 files changed, 20 insertions(+), 3 deletions(-)
+
+commit 27483d7d1e581241df0b1cb193566304aa3e117b
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 23 00:59:28 2015 -0500
+
+    added attack in feunit
+
+ feunit.ml  | 31 ++++++++++++++++++++++++++++++-
+ feunit.mli |  6 +++++-
+ 2 files changed, 35 insertions(+), 2 deletions(-)
+
+commit f4dc1ae1fe7d1c1d35ef649070cc7b458d8f8065
+Author: leotrj <lt342@cornell.edu>
+Date:   Mon Nov 23 00:57:05 2015 -0500
+
+    abstracted ai functions out and updated ai
+
+ ai.ml            | 113 ++++++++++---------------------------------------------
+ gameMechanics.ml |   2 +-
+ pathFinder.ml    | 103 ++++++++++++++++++++++++++++++++++++++++++++++++++
+ pathFinder.mli   |  23 +++++++++++
+ 4 files changed, 147 insertions(+), 94 deletions(-)
+
+commit 9e56463a21ea7d2bd479debd56d6e757b840311d
+Author: Houka <cl795@cornell.edu>
+Date:   Sun Nov 22 22:57:28 2015 -0500
+
+    updated type of list list to matrix
+
+ constants.ml     |  8 +++-----
+ gameMechanics.ml | 12 ++++++------
+ jsonparser.ml    | 10 +++++-----
+ jsonparser.mli   |  6 +++---
+ level.ml         |  9 +++++----
+ level.mli        |  9 +++++----
+ player.ml        |  7 ++++---
+ player.mli       |  2 +-
+ 8 files changed, 32 insertions(+), 31 deletions(-)
+
+commit d4a74a7c6e2e51a9334d7b50f9290061f47179f5
+Merge: 88577f8 f2dd638
+Author: leotrj <lt342@cornell.edu>
+Date:   Sun Nov 22 22:25:46 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit f2dd6388a9d275c8db659ef7e3de540199b92f95
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Sun Nov 22 22:30:56 2015 -0500
+
+    wrote wait in gamemechanics.ml
+
+ feunit.ml         | 2 +-
+ feunit.mli        | 2 +-
+ gameMechanics.ml  | 7 ++++---
+ gameMechanics.mli | 7 +++----
+ 4 files changed, 9 insertions(+), 9 deletions(-)
+
+commit 88577f80090cff61f86579c94f84d5964e9daf2b
+Author: leotrj <lt342@cornell.edu>
+Date:   Sun Nov 22 22:25:30 2015 -0500
+
+    constants changed
+
+ constants.ml | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+commit 637e8f8d6333a2a2d39d6d5065c7000aa685aff5
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Sun Nov 22 21:53:04 2015 -0500
+
+    added method to feunit to get endturn
+
+ feunit.ml        | 6 ++++++
+ feunit.mli       | 2 +-
+ gameMechanics.ml | 2 +-
+ 3 files changed, 8 insertions(+), 2 deletions(-)
+
+commit e2ffcb33ddfd735b1a651d2184828fd68bfab492
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Sun Nov 22 21:47:06 2015 -0500
+
+    modified some function arguments and mli files
+
+ feunit.ml         |  8 +++++++-
+ feunit.mli        |  3 ++-
+ gameMechanics.ml  |  4 ++--
+ gameMechanics.mli | 19 ++++++++++---------
+ 4 files changed, 21 insertions(+), 13 deletions(-)
+
+commit 4d242ea935a47b14230b9cec29d7d94f5b94eaba
+Author: Houka <cl795@cornell.edu>
+Date:   Sat Nov 21 17:47:03 2015 -0500
+
+    major restructuring.
+
+ constants.ml         |  5 ++++
+ example.json         | 10 -------
+ feunit.ml            | 37 ++++++++++++++----------
+ feunit.mli           |  3 ++
+ gameMechanics.ml     | 80 ++++++++++++++++++++++++++++++++++++----------------
+ gameMechanics.mli    |  3 --
+ gameStateManager.ml  | 13 ++-------
+ gameStateManager.mli |  3 --
+ hub.ml               |  4 +--
+ hub.mli              |  8 +++---
+ main.ml              | 34 +++++++++-------------
+ player.ml            | 64 +++++++++++++++++++++++------------------
+ player.mli           |  3 +-
+ sprite.ml            |  8 ++++--
+ terrain.ml           | 38 ++++++++++++++++---------
+ terrain.mli          |  3 ++
+ 16 files changed, 179 insertions(+), 137 deletions(-)
+
+commit 21da2d48d9f3fd96aff3ecd8379e1ece668bd927
+Author: leotrj <lt342@cornell.edu>
+Date:   Sat Nov 21 16:06:01 2015 -0500
+
+    Finished Ai
+
+ ai.ml        | 234 +++++++++++++++++++++++++++++++++++++++++++++++++++++++----
+ ai.mli       |   5 +-
+ constants.ml |   1 +
+ 3 files changed, 225 insertions(+), 15 deletions(-)
+
+commit dc71efb48f2a431b53e30e6d60928613ea2685f2
+Author: Houka <cl795@cornell.edu>
+Date:   Sat Nov 21 15:43:10 2015 -0500
+
+    changes to feunit and sprite. sprite not finished
+
+ feunit.ml           | 20 +++++++++++++++++---
+ feunit.mli          |  2 +-
+ gameMechanics.mli   |  4 ++--
+ gameStateManager.ml |  4 ++--
+ main.ml             |  2 ++
+ sprite.ml           | 20 ++++----------------
+ sprite.mli          |  3 ---
+ 7 files changed, 28 insertions(+), 27 deletions(-)
+
+commit 5fee3bb6d8a108807de84aeeedda2cf70b7e534f
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Sat Nov 21 14:20:21 2015 -0500
+
+    fixed json
+
+ example.json | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit b2763f3ccff1911bbddcd344bcd46c3a57252edc
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Sat Nov 21 01:39:09 2015 -0500
+
+    completed feunit and terrain
+
+ example.json   |  1 +
+ feunit.ml      | 71 ++++++++++++++++++++++++++++++++++++++++++++++------------
+ feunit.mli     | 16 ++++++-------
+ jsonparser.ml  | 37 ++++++++++++++++++++----------
+ jsonparser.mli | 10 +++++----
+ level.ml       | 10 ++++-----
+ level.mli      |  2 +-
+ terrain.ml     | 20 +++++++++++++++--
+ terrain.mli    |  2 +-
+ tests.ml       |  1 +
+ 10 files changed, 123 insertions(+), 47 deletions(-)
+
+commit 5f31dcf22a74866ebf983cb50bcca26cb819aa7d
+Author: Houka <cl795@cornell.edu>
+Date:   Fri Nov 20 03:58:17 2015 -0500
+
+    example json now deals with next level progression
+
+ example.json | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+commit 31ce9f153dd56dd5f048b2201207d152ce657d10
+Author: Houka <cl795@cornell.edu>
+Date:   Fri Nov 20 03:53:21 2015 -0500
+
+    reverted example to simpler file
+
+ example.json | 200 -----------------------------------------------------------
+ 1 file changed, 200 deletions(-)
+
+commit 53de357382dd2f48dff749c1948cda51949ce237
+Author: Houka <cl795@cornell.edu>
+Date:   Fri Nov 20 03:55:36 2015 -0500
+
+    adding some images for testing
+
+ images/ally_sprites.png  | Bin 0 -> 16864 bytes
+ images/enemy_sprites.png | Bin 0 -> 17256 bytes
+ images/loaded.png        | Bin 0 -> 283723 bytes
+ images/loading.png       | Bin 12252 -> 284323 bytes
+ images/terrainsheet.PNG  | Bin 0 -> 65446 bytes
+ images/tilemap.png       | Bin 0 -> 166597 bytes
+ 6 files changed, 0 insertions(+), 0 deletions(-)
+
+commit f56fe0fd00536310a973e78a6aee551c561eaee0
+Author: Houka <cl795@cornell.edu>
+Date:   Fri Nov 20 03:34:52 2015 -0500
+
+    added loading capabilities using Asyc
+
+ README.md            |   9 ++-
+ example.json         | 214 +++++++++++++++++++++++++++++++++++++++++++++++++--
+ feunit.ml            |   7 +-
+ feunit.mli           |  14 +---
+ gameMechanics.ml     |  38 ++++++---
+ gameMechanics.mli    |   9 ++-
+ gameStateManager.ml  |  38 ++++++++-
+ gameStateManager.mli |   3 +
+ images/grass.png     | Bin 0 -> 12252 bytes
+ images/loading.png   | Bin 0 -> 12252 bytes
+ images/null.png      | Bin 0 -> 12252 bytes
+ images/swordsman.png | Bin 0 -> 12252 bytes
+ images/test.png      | Bin 0 -> 12252 bytes
+ jsonparser.ml        |   3 +
+ jsonparser.mli       |   3 +
+ main.ml              |  50 ++++++++----
+ sprite.ml            |  33 +++++---
+ sprite.mli           |  20 ++++-
+ terrain.ml           |   9 +--
+ terrain.mli          |  19 ++---
+ test.png             | Bin 12252 -> 0 bytes
+ 21 files changed, 386 insertions(+), 83 deletions(-)
+
+commit 9f588e3c6bdf2fcd04ceb9c0b19c3a33cf4ca03e
+Merge: 96793a1 af4f861
+Author: Houka <cl795@cornell.edu>
+Date:   Thu Nov 19 23:43:24 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 96793a1a8d5dc62e11313645a090cdac78153e9a
+Author: Houka <cl795@cornell.edu>
+Date:   Thu Nov 19 23:43:13 2015 -0500
+
+    Sprite completed
+
+ sprite.ml  |  36 ++++++++++++++++++++++++++++++------
+ sprite.mli |  18 +++++++++++++-----
+ test.png   | Bin 0 -> 12252 bytes
+ 3 files changed, 43 insertions(+), 11 deletions(-)
+
+commit af4f861e3830daba9d6659c58837d958b2d62655
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Nov 19 23:22:53 2015 -0500
+
+    wrote level.ml
+
+ jsonparser.ml  | 11 +++++------
+ jsonparser.mli |  8 ++++----
+ level.ml       | 22 +++++++++++++++++-----
+ 3 files changed, 26 insertions(+), 15 deletions(-)
+
+commit fdc0cb652d3ed14e08c128ea0a89d50075a6e9a0
+Author: Houka <cl795@cornell.edu>
+Date:   Tue Nov 17 22:46:33 2015 -0500
+
+    restructuring of how player and ai interact with gamestatemanager. Now has a module that enforces game rules
+
+ constants.ml         |  1 +
+ feunit.ml            |  6 ++----
+ feunit.mli           |  6 ++----
+ gameMachanics.ml     |  9 ---------
+ gameMachanics.mli    | 43 -----------------------------------------
+ gameMechanics.ml     | 27 ++++++++++++++++++++++++++
+ gameMechanics.mli    | 54 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ gameStateManager.ml  | 13 +++++--------
+ gameStateManager.mli |  8 +-------
+ inputManager.ml      |  7 +++++++
+ inputManager.mli     | 10 ++++++++++
+ main.ml              |  6 ++++--
+ player.ml            |  4 ++--
+ player.mli           |  2 +-
+ 14 files changed, 116 insertions(+), 80 deletions(-)
+
+commit 3d8c3e1c641c583870041c36a0f706a0d88d3de1
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Tue Nov 17 17:25:44 2015 -0500
+
+    finished jsonparser and tested
+
+ example.json  | 14 ++-------
+ jsonparser.ml | 96 ++++++++++++++++++++++++++++++++++++++++++++++++++++++-----
+ 2 files changed, 91 insertions(+), 19 deletions(-)
+
+commit b322791c438ee7878d43e73bec8e6e23d4632744
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Tue Nov 17 14:14:44 2015 -0500
+
+    changed some record fields to store more data
+
+ feunit.ml      |  4 ++--
+ feunit.mli     |  5 +++--
+ jsonparser.ml  | 24 ++++++++++++++----------
+ jsonparser.mli |  3 ++-
+ 4 files changed, 21 insertions(+), 15 deletions(-)
+
+commit 5c15b118d121e09c2c836dbe350828c7dffccdea
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 16 23:56:44 2015 -0500
+
+    updated example json
+
+ example.json  | 2 +-
+ jsonparser.ml | 7 ++++++-
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+commit ff2dbb259f66df87d69a1be0e9b13052d74ec874
+Merge: 48b8232 52776d4
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 16 23:48:48 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+    
+    Conflicts:
+    	feunit.ml
+
+commit 48b8232f4102496ed0a070bba51d17b176413336
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Mon Nov 16 23:46:25 2015 -0500
+
+    changed feunit, terrain, level, and started jsonparser.ml
+
+ example.json   |  15 +++++---
+ feunit.ml      |   4 +-
+ jsonparser.ml  | 120 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ jsonparser.mli |  13 +++++--
+ level.ml       |   4 +-
+ level.mli      |   4 +-
+ 6 files changed, 145 insertions(+), 15 deletions(-)
+
+commit 52776d423b5dc13f59c568d0722cb14fd7602f99
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 16 18:02:27 2015 -0500
+
+    added gameMachanics.ml to handle enforcing the rules of the game. Player and AI should only use the methods in this class to alter the list of units and feunits
+
+ feunit.ml         |  2 +-
+ feunit.mli        |  2 +-
+ gameMachanics.ml  |  9 +++++++++
+ gameMachanics.mli | 43 +++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 54 insertions(+), 2 deletions(-)
+
+commit 04d115e5a48f841da598646ba4af9dc469cc724a
+Author: Houka <cl795@cornell.edu>
+Date:   Sun Nov 15 23:22:39 2015 -0500
+
+    updates to json example. Base understanding of that it should be
+
+ example.json | 81 ++++++++++++++++++++++++++++++++++++++++--------------------
+ 1 file changed, 54 insertions(+), 27 deletions(-)
+
+commit a8bc89b360a48850f72dfc959bd2f79fad17f1bb
+Merge: 2bcdd41 ec381fe
+Author: leotrj <lt342@cornell.edu>
+Date:   Sun Nov 15 22:51:54 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 2bcdd410122fc06c1798ac4b549e6985c3803c4a
+Author: leotrj <lt342@cornell.edu>
+Date:   Sun Nov 15 22:51:49 2015 -0500
+
+    Changed ref list to array
+
+ README.md | 1 +
+ hub.ml    | 2 +-
+ main.ml   | 2 +-
+ player.ml | 2 +-
+ 4 files changed, 4 insertions(+), 3 deletions(-)
+
+commit 687d1f5c0ed465aba1d8c8646a169a31439bf96e
+Author: leotrj <lt342@cornell.edu>
+Date:   Sun Nov 15 22:49:37 2015 -0500
+
+    changed list ref to array
+
+ ai.ml                | 8 ++++----
+ ai.mli               | 2 +-
+ gameStateManager.ml  | 8 ++++----
+ gameStateManager.mli | 4 ++--
+ player.ml            | 6 ++++--
+ player.mli           | 2 +-
+ 6 files changed, 16 insertions(+), 14 deletions(-)
+
+commit ec381fe3f5eac234758968a86e0c35fe27269f4d
+Author: Houka <cl795@cornell.edu>
+Date:   Sun Nov 15 22:37:57 2015 -0500
+
+    fixed hub typo
+
+ hub.ml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 6b58708b39e5df5e85bcc6570a89bede987e86ef
+Merge: 8cfd5f2 83d2af8
+Author: Houka <cl795@cornell.edu>
+Date:   Sun Nov 15 22:06:04 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 83d2af8c9755d3219acc4013d812108e380af14c
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Sun Nov 15 22:16:59 2015 -0500
+
+    updated README
+
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 8cfd5f265f6124bf061974993e73420354b4ac2a
+Author: Houka <cl795@cornell.edu>
+Date:   Sun Nov 15 22:05:43 2015 -0500
+
+    resizing window
+
+ main.ml   | 2 +-
+ player.ml | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 39ea8a0aa539eeb074902fc5a1ba324e829a7ff6
+Author: Houka <cl795@cornell.edu>
+Date:   Sun Nov 15 21:57:33 2015 -0500
+
+    pixed player function naming
+
+ player.ml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 599922d0dfc7d727c289a5ab3c847b13ed0bbf33
+Author: Houka <cl795@cornell.edu>
+Date:   Sun Nov 15 04:55:05 2015 -0500
+
+    constructed barebones testing framework. Player can now manipulate gui.
+
+ gameStateManager.ml  |  8 ++++++--
+ gameStateManager.mli |  4 ++--
+ hub.ml               |  4 +++-
+ hub.mli              |  2 +-
+ main.ml              | 17 +++--------------
+ main.mli             |  7 -------
+ player.ml            | 41 ++++++++++++++++++++++++++++++++++++++---
+ player.mli           |  2 +-
+ 8 files changed, 54 insertions(+), 31 deletions(-)
+
+commit bc9d4ab0fb4f1fc216a3584241ae89818a750818
+Author: Houka <cl795@cornell.edu>
+Date:   Fri Nov 13 18:37:47 2015 -0500
+
+    updates to readme to include overall summery of project and how to compile and run this code. main update to put gui init parameters on top of file
+
+ README.md | 26 +++++++++++++++++++++++---
+ main.ml   | 10 ++++++++--
+ 2 files changed, 31 insertions(+), 5 deletions(-)
+
+commit c03bc2d50cbc289184e33ff316bd37e915d8442f
+Author: Houka <cl795@cornell.edu>
+Date:   Fri Nov 13 18:03:08 2015 -0500
+
+    set up of all ml files to be used for the project. Updated the structure of some mli files to implement a simplier design idea
+
+ ai.ml                | 20 ++++++++++++++++++++
+ ai.mli               |  5 +----
+ feunit.ml            | 34 ++++++++++++++++++++++++++++++++++
+ feunit.mli           | 10 +++++-----
+ gameStateManager.ml  | 27 +++++++++++++++++++++++++++
+ gameStateManager.mli | 13 ++++++++++---
+ hub.ml               | 10 ++++++++++
+ jsonparser.mli       |  9 ++-------
+ level.ml             | 11 +++++++++++
+ level.mli            | 14 ++++++++++++--
+ main.ml              | 11 ++++++-----
+ player.ml            | 19 +++++++++++++++++++
+ player.mli           |  9 ++++-----
+ sprite.ml            | 10 ++++++++++
+ terrain.ml           | 26 +++++++-------------------
+ terrain.mli          | 15 ++++++++-------
+ 16 files changed, 186 insertions(+), 57 deletions(-)
+
+commit 68d3838a86469f248d6ef8e2df061684b6237692
+Author: Houka <cl795@cornell.edu>
+Date:   Thu Nov 12 21:25:42 2015 -0500
+
+    zipping up mli for submission
+
+ game.ml          |  13 -------------
+ game.mli         |   1 -
+ interfaces.zip   | Bin 0 -> 5374 bytes
+ testing/game.ml  |  13 +++++++++++++
+ testing/game.mli |   1 +
+ 5 files changed, 14 insertions(+), 14 deletions(-)
+
+commit a2315fc16d0954cd65261bbc748e9e9db5350ee7
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Nov 12 21:24:16 2015 -0500
+
+    untracked file
+
+ terrain.ml | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+commit 05699e247ab9145eee05dfceb7685c1746287b8e
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Nov 12 21:23:54 2015 -0500
+
+    edited gamestatemanager
+
+ gameStateManager.mli | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 188d54f2a08c98631f1f3b830d65ec869f0f6865
+Merge: 918ac0b 926593e
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Nov 12 21:20:04 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 918ac0bc325807a8e961830ab390edee28b890b7
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Nov 12 21:20:00 2015 -0500
+
+    fixing merge conflicts
+
+ gameStateManager.mli | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 926593ec7f15b89431984e64e6475ea7f8533949
+Author: Houka <cl795@cornell.edu>
+Date:   Thu Nov 12 21:19:15 2015 -0500
+
+    changed function names to conform to style guide
+
+ ai.mli               |  5 ++---
+ feunit.mli           | 24 ++++++++++++------------
+ gameStateManager.mli |  4 ++--
+ hub.mli              |  8 ++++----
+ jsonparser.mli       | 10 +++++-----
+ level.mli            |  2 +-
+ main.mli             |  4 ++--
+ player.mli           |  5 ++---
+ sprite.mli           |  2 +-
+ terrain.mli          |  4 ++--
+ 10 files changed, 33 insertions(+), 35 deletions(-)
+
+commit 07cc00d9288351e7e80f8e90f48c445dce799af3
+Merge: 5660a2c 4c3da7d
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Nov 12 21:16:44 2015 -0500
+
+    fixed typos
+
+commit 5660a2c9770a7057ac801a9c7f25a46140ad4a25
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Nov 12 21:12:37 2015 -0500
+
+    fixed typo
+
+ level.mli | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 4c3da7df05d8e18fdfa0881e6094956364776057
+Author: Houka <cl795@cornell.edu>
+Date:   Thu Nov 12 21:08:21 2015 -0500
+
+    updated ai and level
+
+ ai.mli    | 3 +++
+ level.mli | 3 ++-
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+commit ac099ee15ed4c02553fd46551478d3a1858e025c
+Merge: 5d029e5 03619d4
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Thu Nov 12 20:56:04 2015 -0500
+
+    Make changes to player mli
+
+commit 5d029e589c30caefbcac5a2e46e7cc61b4ca2b86
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Thu Nov 12 20:54:53 2015 -0500
+
+    add cursor to player mli file
+
+ player.mli | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+commit 03619d4af029624c706375f51943c4d696484318
+Merge: a284117 8561225
+Author: Houka <cl795@cornell.edu>
+Date:   Thu Nov 12 20:50:58 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit a2841176edec7685afcfeed60b3c7798367e35b1
+Author: Houka <cl795@cornell.edu>
+Date:   Thu Nov 12 20:50:42 2015 -0500
+
+    updates to some mli to conform to style
+
+ jsonparser.mli | 26 ++++++++++++--------------
+ level.mli      | 11 ++++-------
+ player.mli     |  1 -
+ 3 files changed, 16 insertions(+), 22 deletions(-)
+
+commit 85612259ef675776e6064c05e575c7e82a50cbe2
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Thu Nov 12 20:48:37 2015 -0500
+
+    Add draw to player mli file
+
+ player.mli | 3 +++
+ 1 file changed, 3 insertions(+)
+
+commit 274597e17fd7973c840949fdbd72780dd12739c6
+Merge: 9a922dd 1a1a146
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Thu Nov 12 20:36:39 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 9a922dd5dd7680478440826bac2eb546615abf21
+Author: Annie Cheng <ac962@cornell.edu>
+Date:   Thu Nov 12 20:34:40 2015 -0500
+
+    Add player mli file
+
+ player.ml  |  0
+ player.mli | 18 ++++++++++++++++++
+ 2 files changed, 18 insertions(+)
+
+commit 1a1a14647f462db3e9837dedbdac80fa6d51f5e4
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Nov 12 20:28:46 2015 -0500
+
+    level.mli
+
+ level.mli | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+commit 8f979417a617dd6d4dd2dcc07fa30680de7b13d6
+Author: Houka <cl795@cornell.edu>
+Date:   Thu Nov 12 20:24:56 2015 -0500
+
+    modified ai
+
+ ai.mli     |  8 ++++----
+ terrain.ml | 22 ----------------------
+ 2 files changed, 4 insertions(+), 26 deletions(-)
+
+commit e930ce11f281423f86bf4fddba18c8a44b8e0ceb
+Merge: 36fdda2 2443380
+Author: Houka <cl795@cornell.edu>
+Date:   Thu Nov 12 20:07:37 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 36fdda2767987ccf9a66fea8cf6837fa4e5fafb6
+Author: Houka <cl795@cornell.edu>
+Date:   Thu Nov 12 20:07:15 2015 -0500
+
+    added up mli for main hub gamestatemanager feunit terrain sprite
+
+ feunit.mli  |  9 +++------
+ sprite.mli  | 26 ++++++++++++++++++++++++++
+ terrain.mli | 25 +++++++++++++++++++++++++
+ 3 files changed, 54 insertions(+), 6 deletions(-)
+
+commit 2443380f81c07dcbf1278d73d2077d4139995beb
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Nov 12 00:41:48 2015 -0500
+
+    ai and jsonparser mli files
+
+ ai.mli         | 14 ++++++++++++++
+ jsonparser.mli | 23 +++++++++++++++++++++++
+ 2 files changed, 37 insertions(+)
+
+commit e476eddf4f6996273dd8f4d246127850f72b966c
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 9 23:36:32 2015 -0500
+
+    add mli for terrain, gamestatemanager, hub, and feunit
+
+ feunit.mli           | 43 +++++++++++++++++++++++++++++++++++++++++++
+ gameStateManager.mli | 30 ++++++++++++++++++++++++++++++
+ hub.mli              | 25 ++++++++++++++++++++-----
+ main.mli             |  4 ++--
+ terrain.ml           | 22 ++++++++++++++++++++++
+ 5 files changed, 117 insertions(+), 7 deletions(-)
+
+commit 00c5d520f2aa9165e7621792915784b883333133
+Merge: 21499b9 c02db0d
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 9 21:41:58 2015 -0500
+
+    Merge branch 'master' of https://github.com/Houka/CS_3110_Final_Project
+
+commit 21499b9dd1da178e37da830e67d03c5cbe155430
+Author: Houka <cl795@cornell.edu>
+Date:   Mon Nov 9 21:41:21 2015 -0500
+
+    starting on making module architecture. main.mli finished.
+
+ game.ml  |  2 ++
+ hub.mli  |  7 +++++++
+ main.ml  | 20 ++++++++++++++++++--
+ main.mli | 16 ++++++++++++++++
+ 4 files changed, 43 insertions(+), 2 deletions(-)
+
+commit c02db0dc5b317561d0b0024e8e52c21d7919beea
+Author: alexxu1 <ax35@cornell.edu>
+Date:   Thu Nov 5 02:44:14 2015 -0500
+
+    added tentative schema and json files
+
+ example.json |  35 +++++++++++++++
+ schema.json  | 143 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 178 insertions(+)
+
+commit e4c3540d4ba6cff1141be5ca3be7a22e7b6b4157
+Author: Houka <cl795@cornell.edu>
+Date:   Wed Nov 4 15:08:17 2015 -0500
+
+    setup of gui and basic game starter
+
+ README.md    |  5 ++++-
+ game.ml      | 11 +++++++++++
+ game.mli     |  1 +
+ loadBuild.ml |  8 ++++++++
+ main.ml      | 25 +++++++++++++++++++++++++
+ 5 files changed, 49 insertions(+), 1 deletion(-)
+
+commit 8659bfbee7a3ffdb4b05d1bb12963e07c2934f53
+Author: Changxu Lu <Houka@users.noreply.github.com>
+Date:   Mon Nov 2 00:48:56 2015 -0500
+
+    Initial commit
+
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
