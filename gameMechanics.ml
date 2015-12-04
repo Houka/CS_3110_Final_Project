@@ -262,9 +262,14 @@ let draw () : unit =
   Hub.draw_current_turn !turn;
   Graphics.auto_synchronize true
 
+let dequeue_keys () : unit =
+  while Graphics.key_pressed () do
+    ignore(Graphics.read_key ())
+  done
+
 let rec update () : int =
   (*if turn is odd it is Player's turn; if it is even it is enemy turn*)
-  flush_all();
+
   if !turn mod 2 = 1
   then
       (ignore(player_turn ());
@@ -301,6 +306,8 @@ and ai_turn ():int =
         (start_turns "Ally";
         inc_turn ();
         num_usable_units := !num_allies;
+        (* flush_kp : unit -> unit *)
+        dequeue_keys ();
         Printf.printf "Turn %i: Player turn\n" !turn;
         draw ();
         0

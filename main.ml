@@ -8,17 +8,20 @@ let rec update input =
   match input.key with
   | 'q' ->  (* quit qui *)
             close_graph ()
-  | x -> flush_all ();
+  | x ->
           (* keyboard input updates *)
           InputManager.set_keypressed input.keypressed input.key;
 
           (* game updates *)
           GameStateManager.update ();
+          flush_all ();
+          (* Game draw *)
           Graphics.auto_synchronize false;
           Graphics.clear_graph();
           GameStateManager.draw ();
           Graphics.auto_synchronize true;
           update (wait_next_event [Button_down; Button_up; Key_pressed])
+
 
 let init () =
   let input = wait_next_event [Button_down; Button_up; Key_pressed] in

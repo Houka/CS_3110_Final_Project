@@ -47,6 +47,6 @@ Our goal is to replicate the battle system in Fire Emblem for the GameBoy Advanc
   Your archers can attack other short-ranged units without fear of counterattack, so use them to soften up your enemy before killing them.
 
 ## Known bugs/issues:
-
-
+- Laggy user input response times
+- AI can be slow at times
 
