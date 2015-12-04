@@ -185,10 +185,17 @@ let update (units:feunit matrix) (terrains: terrain matrix)
         else
           (*Move towards closest Unit*)
           if List.length paths > 0 then
-            let unit = List.nth paths (List.length paths - 1) in
-            let closest = shortest_path enemy unit.destination 20 units terrains in
-            let actions = move closest (grab units enemy) in
-            actions
+            let rec closest p =
+              match p with
+              | [] -> []
+              | hd::tl ->
+                  let closest_dest = shortest_path enemy hd.destination 20 units
+                                     terrains
+                  in
+                  (match List.length closest_dest.path = 0 with
+                   | true -> closest tl
+                   | false -> move closest_dest (grab units enemy))
+            in closest paths
           else
             [Wait enemy]
 

@@ -1,8 +1,8 @@
 {
   "levels": [
     {
-      "name" : "asdf",
-      "next" : "level 1",
+      "name" : "tutorial2",
+      "next" : "level1",
       "units_matrix":
         [
           [0,0,0,0,0,0,0,0,0,0,0],
