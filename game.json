@@ -1,7 +1,7 @@
 {
   "levels": [
     {
-      "name" : "tutorial2",
+      "name" : "tutorial",
       "next" : "level 1",
       "units_matrix":
         [
@@ -93,7 +93,7 @@
         ]
     },
      {
-     "name" : "tutorial",
+     "name" : "level 3",
       "next" : "final level",
       "units_matrix":
         [

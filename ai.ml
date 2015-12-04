@@ -136,6 +136,51 @@ let find_effective (units: feunit matrix) (weapon: string)
            a
   ) fst_w dl
 
+
+let denied_paths (u: feunit) ((x,y): int*int) (dest: int*int) =
+  let s = match u with | Enemy s | Ally s -> s | _ -> failwith "No Unit" in
+  let mov4 = [(0, 4); (1, 3); (0, 3); (-1, 3); (2, 2); (1, 2); (0, 2); (-1, 2);
+              (-2, 2); (3, 1); (2, 1); (1, 1); (0, 1); (-1, 1); (-2, 1); (-3, 1);
+              (3, 0); (2, 0); (1, 0); (-1, 0); (-2, 0); (-3, 0); (-4, 0); (3, -1);
+              (2, -1); (1, -1); (0, -1); (-1, -1); (-2, -1); (-3, -1); (2, -2);
+              (1, -2); (0, -2); (-1, -2); (-2, -2); (1, -3); (0, -3); (-1, -3);
+              (0, -4)]
+  in
+  let mov5 = [(0, 5); (1, 4); (0, 4); (-1, 4); (2, 3); (1, 3); (0, 3); (-1, 3);
+              (-2, 3);(3, 2); (2, 2); (1, 2); (0, 2); (-1, 2); (-2, 2); (-3, 2);
+              (3, 1); (2, 1); (1, 1); (0, 1); (-1, 1); (-2, 1); (-3, 1); (-4, 1);
+              (3, 0); (2, 0); (1, 0); (-1, 0); (-2, 0); (-3, 0); (-4, 0); (-5, 0);
+              (3, -1); (2, -1); (1, -1); (0, -1); (-1, -1); (-2, -1); (-3, -1);
+              (-4, -1); (3, -2); (2, -2); (1, -2); (0, -2); (-1, -2); (-2, -2);
+              (-3, -2); (2, -3); (1, -3); (0, -3); (-1, -3); (-2, -3); (1, -4);
+              (0, -4); (-1, -4); (0, -5)]
+  in
+  let mov6 = [(0, 6); (1, 5); (0, 5); (-1, 5); (2, 4); (1, 4); (0, 4); (-1, 4);
+              (-2, 4); (3, 3); (2, 3); (1, 3); (0, 3); (-1, 3); (-2, 3); (-3, 3);
+              (4, 2); (3, 2);(2, 2); (1, 2); (0, 2); (-1, 2); (-2, 2); (-3, 2);
+              (-4, 2); (5, 1); (4, 1); (3, 1); (2, 1); (1, 1); (0, 1); (-1, 1);
+              (-2, 1); (-3, 1); (-4, 1); (-5, 1); (6, 0); (5, 0); (4, 0); (3, 0);
+              (2, 0); (1, 0); (-1, 0); (-2, 0); (-3, 0); (-4, 0); (-5, 0);
+              (-6, 0); (5, -1); (4, -1); (3, -1); (2, -1); (1, -1); (0, -1);
+              (-1, -1); (-2, -1); (-3, -1); (-4, -1); (-5, -1); (4, -2); (3, -2);
+              (2, -2); (1, -2); (0, -2); (-1, -2); (-2, -2); (-3, -2); (-4, -2);
+              (3, -3); (2, -3); (1, -3); (0, -3); (-1, -3); (-2, -3); (-3, -3);
+              (2, -4); (1, -4); (0, -4); (-1, -4); (-2, -4); (1, -5); (0, -5);
+              (-1, -5); (0, -6)]
+  in
+  match (s.movRange + s.atkRange) with
+  | 4 ->
+      let possible = List.map (fun (i,j) -> (x + i, y + j)) mov4 in
+      List.mem dest possible
+  | 5 ->
+      let possible = List.map (fun (i,j) -> (x + i, y + j)) mov5 in
+      List.mem dest possible
+  | _ ->
+      let possible = List.map (fun (i,j) -> (x + i, y + j)) mov6 in
+      List.mem dest possible
+
+
+
 (*Returns a list of action given a unit matrix and terrain matrix*)
 let update (units:feunit matrix) (terrains: terrain matrix)
 : action list  =
@@ -148,12 +193,13 @@ let update (units:feunit matrix) (terrains: terrain matrix)
     (*Loop through enemy feunit *)
     let rec create_action enemy =
         let paths =
-          List.map (fun x -> shortest_path enemy x 7 units terrains)
+          List.map (fun x -> shortest_path enemy x 6 units terrains)
           players in
         let e = match (grab units enemy) with
                 | Enemy s | Ally s -> s | _ -> failwith "invalid" in
         let within =
-          List.filter (fun d -> d.cost <= (e.atkRange + e.movRange)) paths in
+          List.filter (fun d -> (d.cost <= (e.atkRange + e.movRange)) &&
+                       List.length d.path > 0) paths in
         if List.length within > 1 then
           let adj = List.filter (fun d -> d.cost = 1) paths in
           if List.length adj > 0 then
@@ -188,6 +234,13 @@ let update (units:feunit matrix) (terrains: terrain matrix)
           in
           actions
         else
+          let ignore =
+            List.map (fun d -> d.destination)
+            (List.filter (fun d -> denied_paths (grab units enemy)
+                          enemy d.destination) paths) in
+          let trim =
+            List.fold_left (fun l c -> if List.mem c ignore then l else c::l)
+            [] players in
           let (ex, ey) = match enemy with
                          | (x,y) -> (float_of_int x, float_of_int y) in
           let compare (x1, y1) (x2, y2) =
@@ -197,7 +250,7 @@ let update (units:feunit matrix) (terrains: terrain matrix)
           with
           | (d1, d2) -> if d1 = d2 then 0 else if d1 > d2 then 1 else -1
           in
-          let closest = List.sort compare players in
+          let closest = List.sort compare trim in
           let rec move_closest c i =
             match c with
             | [] -> [Wait enemy]
