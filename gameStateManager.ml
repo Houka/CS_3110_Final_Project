@@ -66,17 +66,22 @@ let set_level_data (levelname: string) : unit =
 
 let update () : unit =
   match GameMechanics.update () with
-  | 1 -> if (snd !state) = "credits" then
-           Sprite.(draw (get_image "credits") (0,0))
+  | 1 -> if (snd !state ) = "credits" then
+           set_level_data (snd !state)
          else
            (Sprite.(draw (get_image "next_level") (0,0));
            set_level_data (snd !state);
            ignore(Graphics.(wait_next_event [Key_pressed])))
-  | 0 -> ()
+  | 0 -> if (fst !state) = "credits" then
+           set_level_data (snd !state)
+         else ()
   | -1 -> Sprite.(draw (get_image "lose") (0,0));
           set_level_data (fst !state)
   | _ -> ()
 
 let draw () : unit =
-  GameMechanics.draw();
+  if (fst !state) = "credits" then
+    Sprite.(draw (get_image "credits") (0,0))
+  else
+    GameMechanics.draw()
 
