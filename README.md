@@ -39,12 +39,14 @@ Our goal is to replicate the battle system in Fire Emblem for the GameBoy Advanc
 - Keep the command prompt open to see whose turn it is and view other information on the state of the game. It will also tell you if you attempt to perform an illegal move (in which case nothing happens).
 
 ## Hints:
-- Level 2:
+- Level 1:
   Use the weapon triangle to your advantage. Swords beat axes, lances beat swords, axes beat lances.
   Your archers can attack other short-ranged units without fear of counterattack, so use them to soften up your enemy before killing them.
-- Level 3:
+
+- Level 2:
   Occupy the cities for a huge terrain advantage.
-  Your archers can attack other short-ranged units without fear of counterattack, so use them to soften up your enemy before killing them.
+
+- Final: Use terrain wisely, and eliminate smaller units first.
 
 ## Known bugs/issues:
 - Laggy user input response times
