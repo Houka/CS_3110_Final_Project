@@ -148,29 +148,37 @@ let update (units:feunit matrix) (terrains: terrain matrix)
     (*Loop through enemy feunit *)
     let rec create_action enemy =
         let paths =
-          List.map (fun x -> shortest_path enemy x 10 units terrains)
+          List.map (fun x -> shortest_path enemy x 7 units terrains)
           players in
         let e = match (grab units enemy) with
                 | Enemy s | Ally s -> s | _ -> failwith "invalid" in
         let within =
           List.filter (fun d -> d.cost <= (e.atkRange + e.movRange)) paths in
         if List.length within > 1 then
-          (*Check healths, if more than one target then finds most effectiveness*)
-          let targets = find_lowest units within in
-          if List.length targets > 1 then
-            let weapon = match (grab units enemy) with
-                         | Enemy s | Ally s -> s.weapon
-                         | _ -> failwith "invalid" in
-            let target = find_effective units weapon targets in
-            let actions = move_attack target (grab units enemy) in
-            actions
-          else
+          let adj = List.filter (fun d -> d.cost = 1) paths in
+          if List.length adj > 0 then
             let actions =
-              match targets with
+              match adj with
               | [] -> []
               | dh::_ -> move_attack dh (grab units enemy)
-            in
-            actions
+            in actions
+          else
+            (*Check healths, if more than one target then finds most effectiveness*)
+            let targets = find_lowest units within in
+            if List.length targets > 1 then
+              let weapon = match (grab units enemy) with
+                           | Enemy s | Ally s -> s.weapon
+                           | _ -> failwith "invalid" in
+              let target = find_effective units weapon targets in
+              let actions = move_attack target (grab units enemy) in
+              actions
+            else
+              let actions =
+                match targets with
+                | [] -> []
+                | dh::_ -> move_attack dh (grab units enemy)
+              in
+              actions
         else if List.length within = 1 then
           (*Atack closest Unit*)
           let actions =
@@ -180,27 +188,28 @@ let update (units:feunit matrix) (terrains: terrain matrix)
           in
           actions
         else
-          (*Move towards closest Unit*)
-          if List.length paths > 0 then
-            let rec closest p =
-              match p with
-              | [] -> [Wait enemy]
-              | hd::tl ->
-                  let closest_dest = shortest_path enemy hd.destination 15 units
-                                     terrains
-                  in
-                  (match List.length closest_dest.path = 0 with
-                   | true -> closest tl
-                   | false -> move closest_dest (grab units enemy))
-            in
-            let calculated =
-                    List.filter (fun d -> List.length d.path > 0) paths in
-            if List.length calculated > 0 then
-              move (List.nth calculated 0) (grab units enemy)
-            else
-              closest paths
-          else
-            [Wait enemy]
-
+          let (ex, ey) = match enemy with
+                         | (x,y) -> (float_of_int x, float_of_int y) in
+          let compare (x1, y1) (x2, y2) =
+          match
+            (sqrt((float_of_int x1 -. ex)**2. +. (float_of_int y1 -. ey)**2.),
+            sqrt((float_of_int x2 -. ex)**2. +. (float_of_int y2 -. ey)**2.))
+          with
+          | (d1, d2) -> if d1 = d2 then 0 else if d1 > d2 then 1 else -1
+          in
+          let closest = List.sort compare players in
+          let rec move_closest c i =
+            match c with
+            | [] -> [Wait enemy]
+            | hd::tl ->
+                if i <= 0 then
+                  [Wait enemy]
+                else
+                  let c_path = shortest_path enemy hd 15 units terrains in
+                  if List.length c_path.path = 0 then
+                    move_closest tl (i - 1)
+                  else
+                    move c_path (grab units enemy)
+          in move_closest closest 4
     in
     create_action enemy
