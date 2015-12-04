@@ -1,7 +1,7 @@
 {
   "levels": [
     {
-      "name" : "menu",
+      "name" : "tutorial",
       "next" : "level1",
       "units_matrix":
         [
@@ -93,8 +93,8 @@
         ]
     },
     {
-      "name" : "end",
-      "next" : "menu",
+      "name" : "credits",
+      "next" : "tutorial",
       "units_matrix":
         [
           [0,0,0,0,0,0,0,0,0,0,0],
@@ -269,6 +269,16 @@
         "range": 1,
         "weapon": "claw",
         "image": "invis.png"
+    },
+    {   "name":"Dragon",
+        "class": 16,
+        "maxhp": 50,
+        "attack": 15,
+        "defense": 2,
+        "move": 5,
+        "range": 1,
+        "weapon": "claw",
+        "image": "dragon.png"
     }
   ],
   "terrain": [
