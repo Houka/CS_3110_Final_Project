@@ -309,7 +309,7 @@
         "class": 13,
         "maxhp": 40,
         "attack": 13,
-        "defense": 5,
+        "defense": 3,
         "move": 5,
         "range": 1,
         "weapon": "sword",
