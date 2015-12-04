@@ -31,9 +31,6 @@ let find_first_units (units: feunit matrix) : ((int*int) * (int*int) list) =
 (*Returns list of move action given an unit. Move action is limited by the given
   unit's movRange*)
 let move (d: dest_path) (enemy: feunit) : action list =
-  if d.cost = 10 then
-    [Wait d.start]
-  else
     let es = match enemy with | Enemy s | Ally s -> s | _ -> failwith "invalid" in
     let path = d.path in
     let rec loop p actions c =
@@ -185,10 +182,23 @@ let update (units:feunit matrix) (terrains: terrain matrix)
         else
           (*Move towards closest Unit*)
           if List.length paths > 0 then
-            let unit = List.nth paths (List.length paths - 1) in
-            let closest = shortest_path enemy unit.destination 20 units terrains in
-            let actions = move closest (grab units enemy) in
-            actions
+            let rec closest p =
+              match p with
+              | [] -> [Wait enemy]
+              | hd::tl ->
+                  let closest_dest = shortest_path enemy hd.destination 15 units
+                                     terrains
+                  in
+                  (match List.length closest_dest.path = 0 with
+                   | true -> closest tl
+                   | false -> move closest_dest (grab units enemy))
+            in
+            let calculated =
+                    List.filter (fun d -> List.length d.path > 0) paths in
+            if List.length calculated > 0 then
+              move (List.nth calculated 0) (grab units enemy)
+            else
+              closest paths
           else
             [Wait enemy]
 
