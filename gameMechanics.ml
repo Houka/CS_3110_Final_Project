@@ -273,7 +273,7 @@ let dequeue_keys () : unit =
 
 let rec update () : int =
   (*if turn is odd it is Player's turn; if it is even it is enemy turn*)
-
+  flush_all();
   if !turn mod 2 = 1
   then
       (ignore(player_turn ());
