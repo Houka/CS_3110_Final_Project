@@ -43,7 +43,7 @@ let move (d: dest_path) (enemy: feunit) : action list =
           if c >= (es.movRange - 1) then
             [Move (d.start, (x, y)); Wait (x, y)]
           else
-            loop tl actions (c + 1)
+            loop tl [Move (d.start, (x,y))] (c + 1)
     in loop path [] 0
 
 (*Returns list of move action ending with an attack action. List of action is

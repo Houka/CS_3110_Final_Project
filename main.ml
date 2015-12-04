@@ -35,7 +35,7 @@ let main () =
 
   (* inits *)
   Sprite.init ();
-  GameStateManager.set_level_data "menu";
+  GameStateManager.set_level_data "tutorial";
 
   (* loaded screen *)
   Sprite.(draw (resize (load_image "images/misc/loaded.png") gameWidth gameHeight) (0,0));

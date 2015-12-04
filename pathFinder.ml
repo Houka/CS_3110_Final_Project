@@ -42,15 +42,36 @@ let shortest_path (startc: (int * int)) (endc: (int * int)) (limit: int)
                  i < List.length (List.nth terrains 0) in
     let retrace = List.fold_left (fun a x -> not (x = (i, j)) && a) true
                   visited in
-    let unit_obstacle = if bounds then
-                          (match (grab units (i, j)) with
-                          | Null -> true
-                          | _ ->
-                            (i, j) = endc ||
-                            (match (grab units (startc),grab units (i,j)) with
-                             | (Ally _, Ally _) -> true
-                             | _ -> false))
-                        else false in
+    let unit_obstacle =
+      let u = match grab units startc with
+          | Enemy s | Ally s -> s
+          | _ -> failwith "invalid" in
+      let range1 = [(1,0); (0,1); (-1,0); (0,-1)] in
+      let range2 = [(1,0); (0,1); (-1,0); (0,-1); (2,0); (0,2); (-2,0); (0,-2);
+                    (1,1); (-1,-1); (1, -1); (-1,1)] in
+      let last_move (x1,y1) (x2,y2) = (x1 + x2, y1 + y2) = endc in
+      let passable (x,y) =
+          let last =
+            if u.atkRange = 1 then
+              not (List.fold_left (fun b m -> b || last_move (x,y) m) false
+              range1)
+            else
+              not (List.fold_left (fun b m -> b || last_move (x,y) m) false
+              range2)
+          in
+          last && c < u.movRange - 2
+      in
+      if bounds then
+        (match grab units (i, j) with
+        | Null -> true
+        | Ally _ -> (i, j) = endc || (match grab units (startc) with
+                                      | Ally _ -> true
+                                      | _ -> false)
+        | Enemy _ -> (i, j) = endc || (match grab units (startc) with
+                                      | Enemy _ -> passable (i, j)
+                                      | _ -> false))
+      else false
+    in
     let terrain_obstacle = if bounds then
                              (match (grab terrains (i, j)) with
                              | Impassable _ -> false
