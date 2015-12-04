@@ -6,16 +6,20 @@ type cursor = {x: int; y: int; img: Sprite.image}
 
 (* cursor constants *)
 let cursorSelected =
-  Sprite.(resize (load_image "images/misc/cursors/selectCursor.png") gridSide gridSide)
+  Sprite.(resize
+    (load_image "images/misc/cursors/selectCursor.png") gridSide gridSide)
 let cursorNormal =
-  Sprite.(resize (load_image "images/misc/cursors/deselectCursor.png") gridSide gridSide)
+  Sprite.(resize
+    (load_image "images/misc/cursors/deselectCursor.png") gridSide gridSide)
 let cursorHighlight =
-  Sprite.(resize (load_image "images/misc/cursors/moveCursor.png") gridSide gridSide)
+  Sprite.(resize
+    (load_image "images/misc/cursors/moveCursor.png") gridSide gridSide)
 
 (* types of menus that player can have *)
 type menu = {mutable selections:string list; mutable selected:int}
 type menu_option = Null | Wait | End | Attack | Move
-let selection_menu = {selections = ["Wait";"End Turn";"Attack";"Move"]; selected = 0}
+let selection_menu =
+  {selections = ["Wait";"End Turn";"Attack";"Move"]; selected = 0}
 
 (* player vars *)
 let player_cursor = ref {x=0;y=0;img=cursorNormal}
@@ -64,9 +68,8 @@ let move_cursor_y cursor y : unit =
           cursor := {x=c.x; y=0; img=c.img})
     else cursor := {x=c.x; y=c.y+y; img=c.img}
 
-(* Returns a selection menu with all the possible actions you can do on the element
- *  that you have selected
- *)
+(* Returns a selection menu with all the possible actions you can do on the
+ * element that you have selected *)
 let construct_selection (u:feunit) : unit =
   match u with
   | Null | Enemy _ -> selection_menu.selections <- ["End Turn"]
@@ -220,8 +223,8 @@ let move (units :feunit matrix) (terrains: terrain matrix)
                             (destin.x+offX,destin.y+offY))])
                   else
                     (Printf.printf "Did not move (%i,%i) (%i,%i)\n"
-                      (origin.x+offX)(origin.y+offY)(destin.x+offX)(destin.y+offY);
-                      reset();
+                    (origin.x+offX)(origin.y+offY)(destin.x+offX)(destin.y+offY);
+                    reset();
                     [])
   | (true,'k') -> reset (); []
   | _ -> []
@@ -246,7 +249,7 @@ let attack (units :feunit matrix) (terrains: terrain matrix)
                           (destin.x+offX,destin.y+offY))])
                   else
                     (Printf.printf "Did not attack (%i,%i) (%i,%i)\n"
-                      (origin.x+offX)(origin.y+offY)(destin.x+offX)(destin.y+offY);
+                    (origin.x+offX)(origin.y+offY)(destin.x+offX)(destin.y+offY);
                     reset();
                     [])
   | (true,'k') -> reset (); []

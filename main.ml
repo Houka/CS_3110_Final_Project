@@ -37,14 +37,16 @@ let main () =
   set_window_title gameTitle;
 
   (* loading screen *)
-  Sprite.(draw (resize (load_image "images/misc/loading.png") gameWidth gameHeight) (0,0));
+  Sprite.(draw
+    (resize (load_image "images/misc/loading.png") gameWidth gameHeight) (0,0));
 
   (* inits *)
   Sprite.init ();
   GameStateManager.set_level_data "tutorial";
 
   (* loaded screen *)
-  Sprite.(draw (resize (load_image "images/misc/loaded.png") gameWidth gameHeight) (0,0));
+  Sprite.(draw
+    (resize (load_image "images/misc/loaded.png") gameWidth gameHeight) (0,0));
 
 
 
