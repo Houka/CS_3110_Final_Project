@@ -14,7 +14,10 @@ let rec update input =
 
           (* game updates *)
           GameStateManager.update ();
+          Graphics.auto_synchronize false;
+          Graphics.clear_graph();
           GameStateManager.draw ();
+          Graphics.auto_synchronize true;
           update (wait_next_event [Button_down; Button_up; Key_pressed])
 
 let init () =
