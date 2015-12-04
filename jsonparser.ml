@@ -89,17 +89,6 @@ let get_all_unit_data (): (int*feunit_info) list =
     | _ -> failwith "Invalid json"
   in make_list names classes maxhp attack defense move ranges weapons images
 
-(* TEST_UNIT = let data = get_all_unit_data () in
-            assert (data =
-              [(0, {name = "null"; maxHp = 9999; atk = 0 ;
-              def = 0; movRange = 1; atkRange = 0; weapon = "null";
-              img = "null.png"});
-            (1, {name = "swordsman"; maxHp = 100; atk = 5 ;
-              def = 10; movRange = 3; atkRange = 1; weapon = "sword";
-              img = "swordsman.png"})] ) *)
-
-
-
 (*in this section are the functions used for getting terrain data*)
 let extract_terrain () =
   [json]
@@ -152,10 +141,6 @@ let get_all_terrain_data () : (int*terrain_info) list=
     | _ -> failwith "Invalid json"
   in make_list names classes atkBonus defBonus images types
 
-(*test getting terrain from examples.json*)
-(* TEST_UNIT = let data = get_all_terrain_data () in
-        assert (data = [(1, {name = "grass"; atkBonus = 1; defBonus = 1;
-                            img = "grass.jpg"; terrain_type = "plain"})]) *)
 
 
 (*below are the functions used for getting level data*)
@@ -213,8 +198,6 @@ let get_images () : string list =
   let enemy_images =
       List.map (fun x -> "images/sprites/enemies/"^x) unit_images in
   terrain_images@ally_images@enemy_images
-
-
 
 (*the code below is used to check the level data is correct*)
 (* let _ =
