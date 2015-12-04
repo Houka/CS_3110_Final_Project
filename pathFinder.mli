@@ -6,6 +6,7 @@ open Terrain
  * The pathFinder Module:
  *   - Handles finding possible moves given a unit
  *   - Handles finding the shortest path given start and end
+ *   - Handles finding possible attack given a unit
  *)
 
 type dest_path = {start: (int * int);

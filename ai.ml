@@ -31,7 +31,8 @@ let find_first_units (units: feunit matrix) : ((int*int) * (int*int) list) =
 (*Returns list of move action given an unit. Move action is limited by the given
   unit's movRange*)
 let move (d: dest_path) (enemy: feunit) : action list =
-    let es = match enemy with | Enemy s | Ally s -> s | _ -> failwith "invalid" in
+    let es = match enemy with | Enemy s | Ally s -> s
+             | _ -> failwith "invalid" in
     let path = d.path in
     let rec loop p actions c =
       match p with
@@ -136,8 +137,9 @@ let find_effective (units: feunit matrix) (weapon: string)
            a
   ) fst_w dl
 
-
-let denied_paths (u: feunit) ((x,y): int*int) (dest: int*int) =
+(* Checks whether or not a given destination is unreachable because it is
+blocked by impassable or other units*)
+let denied_paths (u: feunit) ((x,y): int*int) (dest: int*int) : bool =
   let s = match u with | Enemy s | Ally s -> s | _ -> failwith "No Unit" in
   let mov4 = [(0, 4); (1, 3); (0, 3); (-1, 3); (2, 2); (1, 2); (0, 2); (-1, 2);
               (-2, 2); (3, 1); (2, 1); (1, 1); (0, 1); (-1, 1); (-2, 1); (-3, 1);
@@ -179,18 +181,14 @@ let denied_paths (u: feunit) ((x,y): int*int) (dest: int*int) =
       let possible = List.map (fun (i,j) -> (x + i, y + j)) mov6 in
       List.mem dest possible
 
-
-
 (*Returns a list of action given a unit matrix and terrain matrix*)
 let update (units:feunit matrix) (terrains: terrain matrix)
 : action list  =
-  (*Finds the index of enemy and ally unit in units*)
   let (enemy, a) = find_first_units units in
   if enemy = (-1, -1) then
     []
   else
     let players = a in
-    (*Loop through enemy feunit *)
     let rec create_action enemy =
         let paths =
           List.map (fun x -> shortest_path enemy x 6 units terrains)
@@ -209,7 +207,6 @@ let update (units:feunit matrix) (terrains: terrain matrix)
               | dh::_ -> move_attack dh (grab units enemy)
             in actions
           else
-            (*Check healths, if more than one target then finds most effectiveness*)
             let targets = find_lowest units within in
             if List.length targets > 1 then
               let weapon = match (grab units enemy) with

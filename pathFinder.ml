@@ -113,8 +113,8 @@ let find_paths (units : feunit matrix) (terrains: terrain matrix)
                 match (x2 >= left && x2 <= right) with
                 | true -> let path = shortest_path (x,y) (x2, y1)
                           (s.movRange + 1) units terrains in
-                          if path.cost = (s.movRange + 1) || path.cost > s.movRange
-                          || obstruction (x2,y1) then
+                          if path.cost = (s.movRange + 1) ||
+                          path.cost > s.movRange || obstruction (x2,y1) then
                             loop2 (x2 + 1) l2
                           else
                             if (x2, y1) = (x, y) then

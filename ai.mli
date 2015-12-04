@@ -10,5 +10,5 @@ open Constants
  *        - Focus On Easiest Unit To Take Down
  *)
 
-(* Return a new game state by moving a unit *)
+(* Return a list of action for one unit *)
 val update : feunit list list -> terrain list list -> action list
