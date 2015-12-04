@@ -60,8 +60,10 @@ let attack_unit (x1,y1) (x2,y2): unit =
   let unit2_type = type_of unit2 in
   if (not (in_range (x1,y1) (x2, y2) (get_total_range unit1)))
     then  print_string "unit out of range, can't attack\n" else
-  if not (opposite_sides unit1 unit2) then print_string "units are allied, can't attack allies\n" else
-  if get_endturn unit1 then print_string "turn is over, unit cannot attack\n" else
+  if not (opposite_sides unit1 unit2)
+    then print_string "allied units, can't attack allies\n" else
+  if get_endturn unit1
+    then print_string "turn is over, unit cannot attack\n" else
 
     let (a,b) = attack unit1 unit2 in
     let () =

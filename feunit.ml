@@ -13,15 +13,18 @@ let get_unit (classnum: int) : feunit =
   if classnum = 0 then Null else
     let unit_list = get_all_unit_data () in
     let info = List.assoc (abs classnum) unit_list in
-    let image_name = if classnum > 0 then "images/sprites/allies/"^info.Jsonparser.img
-                                    else "images/sprites/enemies/"^info.Jsonparser.img in
+    let image_name = if classnum > 0 then
+      "images/sprites/allies/"^info.Jsonparser.img
+    else
+      "images/sprites/enemies/"^info.Jsonparser.img in
 
     let unit_stats = {name = info.Jsonparser.name; maxHp = info.Jsonparser.maxHp;
         atk = info.Jsonparser.atk; def = info.Jsonparser.def;
         atkRange = info.Jsonparser.atkRange; movRange = info.Jsonparser.movRange;
         hp = info.Jsonparser.maxHp; atkBonus = 0; defBonus = 0;
         atkRangeBonus = 0; movRangeBonus = 0; weapon = info.Jsonparser.weapon;
-        img = Sprite.(resize (get_image image_name) Constants.gridSide Constants.gridSide);
+        img = Sprite.(resize (get_image image_name)
+                      Constants.gridSide Constants.gridSide);
         endturn = true; hasMoved = true} in
     if classnum > 0
     then Ally unit_stats
@@ -55,14 +58,14 @@ let set_range_bonus (feunit:feunit) (bonus:int) : unit =
 let set_endturn (feunit:feunit) (b:bool) : unit =
   match feunit with
   | Null -> ()
-  | Ally stats -> (* Printf.printf "ally turn ended %b\n" b; *)stats.endturn <- b
-  | Enemy stats -> (* Printf.printf "enemy turn ended %b\n" b; *)stats.endturn <- b
+  | Ally stats -> stats.endturn <- b
+  | Enemy stats -> stats.endturn <- b
 
 let set_hasMoved (feunit:feunit) (b:bool) : unit =
   match feunit with
   | Null -> ()
-  | Ally stats -> (* Printf.printf "ally moved %b\n" b; *)stats.hasMoved<- b
-  | Enemy stats -> (* Printf.printf "enemy moved %b\n" b; *)stats.hasMoved<- b
+  | Ally stats -> stats.hasMoved<- b
+  | Enemy stats -> stats.hasMoved<- b
 
 let add_hp (feunit:feunit) (bonus:int) : unit =
   match feunit with
@@ -141,7 +144,8 @@ let draw u (x,y) : unit =
     Graphics.set_color 0xFFFFFF;
     Graphics.draw_rect (x'+4) (y'-1) (Constants.gridSide-8) 7;
     Graphics.set_color 0xFF0000;
-    Graphics.fill_rect (x'+5) y' ((Constants.gridSide-10)*(get_percent_hp u)/100) 5
+    Graphics.fill_rect
+      (x'+5) y' ((Constants.gridSide-10)*(get_percent_hp u)/100) 5
 
 let attack (unit1: feunit) (unit2:feunit) : feunit*feunit =
   (*weapon triangle*)

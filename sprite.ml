@@ -41,7 +41,8 @@ let draw (img: image) (x,y) : unit =
     (* constructing a bitmap array from image. Note Images/Graphic_image does
      *   not support Rgba32, so this is my solution base off of their src code.
      *
-     *   source: http://docs.camlcity.org/docs/godisrc/camlimages-2.2.tgz/camlimages-2.2/graphics/graphic_image.ml
+     *   source: http://docs.camlcity.org/docs/godisrc/camlimages-2.2.tgz/
+     *   camlimages-2.2/graphics/graphic_image.ml
      *)
     let img' =
       Array.init h (fun i ->
