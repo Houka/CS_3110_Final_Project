@@ -224,8 +224,10 @@ let turn_over s : bool =
 (* Goes through each terrain in currentTerrains and calls their draw functions *)
 let draw_terrain () : unit =
   let (offX, offY) = InputManager.get_map_offset () in
-  let minY = min (gameHeight/gridSide+offY) ((Array.length !currentTerrains)-1) in
-  let minX = min (gameWidth/gridSide+offX) ((Array.length !currentTerrains.(0))-1) in
+  let minY =
+    min (gameHeight/gridSide+offY) ((Array.length !currentTerrains)-1) in
+  let minX =
+    min (gameWidth/gridSide+offX) ((Array.length !currentTerrains.(0))-1) in
    for y = offY to minY do
       for x = offX to minX do
         Terrain.draw (!currentTerrains.(y).(x)) (x-offX,y-offY)
@@ -235,8 +237,10 @@ let draw_terrain () : unit =
 (* Goes through each unit in currentUnits and calls their draw functions *)
 let draw_unit () : unit =
   let (offX, offY) = InputManager.get_map_offset () in
-  let minY = min (gameHeight/gridSide+offY) ((Array.length !currentUnits)-1) in
-  let minX = min (gameWidth/gridSide+offX) ((Array.length !currentUnits.(0))-1) in
+  let minY =
+    min (gameHeight/gridSide+offY) ((Array.length !currentUnits)-1) in
+  let minX =
+    min (gameWidth/gridSide+offX) ((Array.length !currentUnits.(0))-1) in
   for y = offY to minY do
       for x = offX to minX do
         Feunit.draw (!currentUnits.(y).(x)) (x-offX,y-offY)
@@ -271,7 +275,7 @@ let dequeue_keys () : unit =
 
 let rec update () : int =
   (*if turn is odd it is Player's turn; if it is even it is enemy turn*)
-
+  flush_all();
   if !turn mod 2 = 1
   then
       (ignore(player_turn ());
